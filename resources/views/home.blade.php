@@ -9,7 +9,7 @@
 <header class="showcase">
     <!-- NAVBAR -->
     <nav class="showcase-top">
-        <img id="logo" src="{{ asset("assets/images/logo.png") }}">
+        <img id="logo" src="{{ asset("assets/images/logo.webp") }}">
         <button class="submit" type="submit">Sign In</button>
         <select>
             <option value="/kw-en/">English</option>

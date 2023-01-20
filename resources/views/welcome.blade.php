@@ -8,37 +8,47 @@
 <!-- HEADER SECTION STARTS -->
 <header class="showcase">
     <!-- NAVBAR -->
-    <nav class="showcase-top">
-        <img id="logo" src="{{ asset("assets/images/logo.png") }}">
-        <button class="submit" type="submit">Sign In</button>
-        <select>
-            <option value="/kw-en/">English</option>
-            <option value="/kw/"> Hindi </option>
-        </select>
-    </nav>
-    <!-- GET STARTED -->
-    <div class="get-started-container">
-        <h1>Unlimited movies, TV <br> shows, and more.</h1>
-        <p class="para-1">Watch anywhere. Cancel anytime.</p>
-        <p class="para-2">Ready to watch? Enter your email to create or restart your membership.</p>
-        <input type="text" name="email" placeholder="Email Address">
-        <button type="submit">Get Started ></button>
+    <nav class="showcase-top d-flex justify-content-between align-items-center">
+        <img id="logo" src="{{ asset("assets/images/logo.webp") }}">
+
+        <div class="right-side-button">
+            <button class="btn btn-outline-danger">Get Access</button>
+
+            <button class="submit ms-2" type="submit">Sign In</button>
+        </div>
+    </nav> 
+    <div class="get-started-container d-flex justify-content-center text-white">
+        <h1>
+            <span class="typewrite fw-bold" data-period="2000" data-type='[ "Enjoy Hermoinexxx.com", "Get access my premium video by one click" ]'>
+              <span class="wrap"></span>
+            </span>
+          </h1>
+    </div>
+
+    <div class="feature-video d-flex justify-content-around flex-wrap">
+        <div class="border shadow" style="width: 20rem; height: 20rem; background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url('{{ asset("assets/images/background/feature1.gif") }}') no-repeat center center/cover;">
+        </div>
+        <div class="border shadow d-sm-none d-md-block" style="width: 20rem; height: 20rem; background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url('{{ asset("assets/images/background/feature2.gif") }}') no-repeat center center/cover;"> 
+        </div>
+        <div class="border shadow d-sm-none d-md-block" style="width: 20rem; height: 20rem; background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url('{{ asset("assets/images/background/feature3.gif") }}') no-repeat center center/cover;">
+        </div>
     </div>
 </header>
 <!-- HEADER SECTION ENDS -->
-
 <!-- MAIN SECTION STARTS -->
 <section class="main-section">
     <!-- ENJOY ON YOUR TV -->
     <div class="section-container">
+
         <div class="left-column">
-            <h1>Enjoy on your TV.</h1>
-            <h3>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</h3>
+            <h1>Enjoy Hermoinexxx.com</h1>
+            <h3>Signup to watch high rated videos recorded by our sexy partner. and also get one to one video call with our horny partner.</h3>
+            <button class="btn btn-outline-danger rounded-0 mt-3" style="width: 200px;">Sign Up</button>
         </div>
         <div class="right-column">
             <img src="{{ asset("assets/images/tv.png") }}">
             <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                <source src="{{ asset("assets/videos/video1.m4v") }}" type="video/mp4">
+                <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
             </video>
         </div>
     </div>
@@ -228,4 +238,62 @@
 
 @section('js')
     <script src="assets/js/script.js"></script>
+    <script>
+       var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+    </script>
 @endsection
