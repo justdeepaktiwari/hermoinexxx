@@ -191,56 +191,7 @@
         width: 100%;
     }
     
-/* MAIN SECTION ENDS */
-
-/*QUESTION SECTION STARTS*/
-.question-container{
-    background-color: black;
-    border-top: 8px solid #222;
-    padding-top: 60px;
-}
-.question-container h1{
-    color: white;
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 3%;
-}
-.question-container button{
-    border: none;
-    background-color: #303030;
-    color: white;
-    width: 60%;
-    padding: 16px;
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    position: relative;
-}
-.question-container button img{
-    width: 3%;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    position: absolute;
-    right: 20px;
-}
-.question-container .answer1,
-.answer2,
-.answer3,
-.answer4,
-.answer5,
-.answer6{
-    background-color: #303030;
-    width: 60%;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    padding: 15px;
-    font-size: 20px;
-    display: none;
-}
-/*QUESTION SECTION ENDS*/
+/* MAIN SECTION ENDS */  
 
 /*EMAIL ADDRESS STARTS*/
 .email-address-container{
@@ -387,6 +338,10 @@ footer h5{
         padding: 0px 50px;
         padding-bottom: 0px;
     }
+
+    .main-section .section-container .right-column{
+        height: 380px;
+    }
 }
 
 @media(max-width: 659px){
@@ -413,20 +368,7 @@ footer h5{
         position: relative;
         right: 40px;
         padding: 2px 10px;
-    }
-    
-    /* QUESTION SECTION STARTS */
-    .question-container button{
-        width: 100%;
-    }
-    .question-container .answer1,
-    .answer2,
-    .answer3,
-    .answer4,
-    .answer5,
-    .answer6{
-        width: 100%;
-    }
+    } 
     /*EMAIL ADDRESS*/
     .email-address-container input{
         padding: 14px;
@@ -532,4 +474,46 @@ footer h5{
   #pricing-card .columns {
     width: 100%;
   }
+}
+
+/**-------------------------*/
+@media (max-width: 767px) {
+    #testomial-section .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    #testomial-section .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+#testomial-section .carousel-inner .carousel-item.active,
+#testomial-section .carousel-inner .carousel-item-next,
+#testomial-section .carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+
+    #testomial-section .carousel-inner .carousel-item-end.active,
+    #testomial-section .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    #testomial-section .carousel-inner .carousel-item-start.active, 
+    #testomial-section .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+}
+
+#testomial-section .carousel-inner .carousel-item-end,
+#testomial-section .carousel-inner .carousel-item-start { 
+    transform: translateX(0);
+}
+
+#testomial-section img{
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    /* width: 100%; */
 }

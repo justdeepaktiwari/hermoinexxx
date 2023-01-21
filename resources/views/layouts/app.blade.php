@@ -12,17 +12,22 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!--Scustom Css-->
     @yield('css')
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
+    @vite(['resources/sass/app.scss'])
+    <link rel="stylesheet" href="{{ asset("owlcarousel/owl.carousel.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
 </head>
 <body>
     @yield('content')
 
     <!--Scustom Js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    @vite(['resources/js/app.js'])
+    <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
     @yield('js')
 </body>
 </html>

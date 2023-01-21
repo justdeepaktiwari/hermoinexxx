@@ -84,6 +84,23 @@
             </div>
         </div>
     </div> 
+
+    <div class="section2-container" id="testomial-section">
+        <div class="text-center my-3 text-white col-12 col-carousel">
+            <h1>Our partners</h1> 
+            <div style="height: 20px;"></div>
+            <!-- Set up your HTML -->
+            <div class="owl-carousel carousel-main">
+                <div> <img src="{{ asset("assets/testomonials/test_1.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_2.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_3.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_4.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_5.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_6.webp") }}" class="border border-2 border-danger"> </div>
+                <div> <img src="{{ asset("assets/testomonials/test_7.webp") }}" class="border border-2 border-danger"> </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- MAIN SECTION ENDS -->
 
@@ -95,14 +112,7 @@
             <div><a href="#">FAQ</a></div>
             <div><a href="#">Investor Relations</a></div>
             <div><a href="#">Privacy</a></div>
-            <div><a href="#">Speed Test</a></div>
-            <br><br>
-            <select>
-                <option value="/kw-en/">English</option>
-                <option value="/kw/">العربية</option>
-            </select>
-            <br><br>
-            <p>Netflix Kuwait</p>
+            <div><a href="#">Speed Test</a></div> 
         </div>
 
         <div class="middle box">
@@ -125,10 +135,40 @@
             <div><a href="#">Terms of Use</a></div>
             <div><a href="#">Contact Us</a></div>
         </div>
+
+    </div>
+<div class="text-center bg-transparent py-3 text-white border border-2 border-bottom-0 border-end-0 border-start-0 border-danger">2023 copyrights@hermoinexxx.com</div>
 </footer>
+
 <!-- FOOTER SECTION ENDS -->
 @endsection
 
-@section('js')
-    <script src="assets/js/script.js"></script>
+@section('js') 
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.carousel-main').owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            margin: 10,
+            nav: false,
+            dots: false, 
+            loop:true, 
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1, 
+                },
+                600:{
+                    items: 2, 
+                },
+                1000:{
+                    items: 4,
+                }
+            }
+        })
+    });
+</script>
+<script src="assets/js/script.js"></script>
 @endsection
