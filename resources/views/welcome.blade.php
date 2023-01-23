@@ -12,7 +12,7 @@
         <img id="logo" src="{{ asset("assets/images/logo.webp") }}">
 
         <div class="right-side-button pe-2">
-            <button class="btn btn-outline-danger rounded-0">Instant Access</button>
+            <button class="btn btn-outline-light rounded-0">Instant Access</button>
 
             <button class="btn btn-danger rounded-0" type="submit">Sign In</button>
         </div>
@@ -34,47 +34,6 @@
 <!-- HEADER SECTION ENDS -->
 <!-- MAIN SECTION STARTS -->
 <section class="main-section">
-    <!-- DOWNLOAD YOU SHOW TO WATCH OFFLINE -->
-    <div class="section2-container text-white">
-        <div id="pricing-card" class="w-100 owl-carousel">
-        
-            <div class="columns w-100">
-                <ul class="price">
-                <li class="header">Basic</li>
-                <li class="grey">$ 9.99 / year</li>
-                <li>10GB Storage</li>
-                <li>10 Emails</li>
-                <li>10 Domains</li>
-                <li>1GB Bandwidth</li>
-                <li class="grey"><a href="#" class="btn btn-outline-success btn-lg rounded-0">Instant Access</a></li>
-                </ul>
-            </div>
-            
-            <div class="columns w-100">
-                <ul class="price">
-                <li class="header" style="background-color:#04AA6D">Pro</li>
-                <li class="grey">$ 24.99 / year</li>
-                <li>25GB Storage</li>
-                <li>25 Emails</li>
-                <li>25 Domains</li>
-                <li>2GB Bandwidth</li>
-                <li class="grey"><a href="#" class="btn btn-outline-success btn-lg rounded-0">Instant Access</a></li>
-                </ul>
-            </div>
-            
-            <div class="columns w-100">
-                <ul class="price">
-                <li class="header">Premium</li>
-                <li class="grey">$ 49.99 / year</li>
-                <li>50GB Storage</li>
-                <li>50 Emails</li>
-                <li>50 Domains</li>
-                <li>5GB Bandwidth</li>
-                <li class="grey"><a href="#" class="btn btn-outline-success btn-lg rounded-0">Instant Access</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> 
 
     <div class="section-container d-flex justify-content-between flex-wrap text-white">
         <div class="col-md-6 col-12">
@@ -308,11 +267,93 @@
 </footer>
 
 <!-- FOOTER SECTION ENDS -->
+
+<!--Pricing modal-->
+<!-- Button trigger modal --> 
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border border-2 border-danger rounded-0 text-white" style="background: black;"> 
+        <div class="modal-body">
+            <div class="d-flex justify-content-between w-100 mb-2">
+                <span class="fs-2">What are you waiting for ? </span><span class="text-white negative-margin fs-2" data-bs-dismiss="modal" aria-label="Close" role="button">&#10006;</span>
+            </div>
+            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer">
+                <div class="radio-btn me-1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                </div>
+                <div class="content me-1 cursor-pointer">
+                    <label for="flexRadioDefault1" class="cursor-pointer">
+                        30 Days <br>
+                        Billed in monthly payments of <del>$29.98</del> <span class="fw-bold">$24.98</span>
+                    </label>
+                </div>
+                <div class="offered-amount cursor-pointer">
+                    <label for="flexRadioDefault1"  class="cursor-pointer fs-3">
+                        $29<span class="fs-5"><sup>.98</sup><sub>/month</sub></span>
+                    </label>
+                </div>
+            </div>
+            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
+                <div class="radio-btn me-1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                </div>
+                <div class="content me-1 cursor-pointer">
+                    <label for="flexRadioDefault2" class="cursor-pointer">
+                        90 Days <br>
+                        Billed in 3 month payments of <del>$59.94</del> <span class="fw-bold">$54.00</span>
+                    </label>
+                </div>
+                <div class="offered-amount cursor-pointer">
+                    <label for="flexRadioDefault2"  class="cursor-pointer fs-3">
+                        $19<span class="fs-5"><sup>.98</sup><sub>/month</sub></span>
+                    </label>
+                    <div class="offer-div px-2 shadow position-absolute text-center">
+                        10% OFF
+                    </div>
+                </div>
+            </div>
+            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
+                <div class="radio-btn me-1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                </div>
+                <div class="content me-1 cursor-pointer">
+                    <label for="flexRadioDefault3" class="cursor-pointer">
+                        365 Days <br>
+                        Billed yearly in repeating payments of <del>$199.84</del> <span class="fw-bold">$84.00</span>
+                    </label>
+                </div>
+                <div class="offered-amount cursor-pointer">
+                    <label for="flexRadioDefault3"  class="cursor-pointer fs-3">
+                        $7<span class="fs-5"><sup>.98</sup><sub>/month</sub></span>
+                    </label>
+                    <div class="offer-div px-2 shadow position-absolute text-center">
+                        17% OFF
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mt-2 text-end">
+                <button class="btn btn-danger rounded-0 btn-sm fs-6 next-btn" style="width: 150px;" disabled>Next</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('js') 
 
 <script type="text/javascript">
+    var is_shown = true;
+    $(window).scroll(function () {
+        
+        if($(window).scrollTop() > 100 && is_shown){
+            $('#staticBackdrop').modal('show'); 
+            is_shown = false;
+        }
+
+    });
+
     $(document).ready(function(){
         $('.carousel-main').owlCarousel({
             loop: true,
@@ -336,31 +377,23 @@
                 }
             }
         })
+    });
 
-        $('#pricing-card').owlCarousel({
-            margin: 10,
-            nav: true,
-            dots: false,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1, 
-                },
-                900:{
-                    items: 2, 
-                },
-                1000:{
-                    items: 3,
-                }
+    $(document).ready(function () {
+        $(".radio-btn input").change(function (e) { 
+            e.preventDefault();
+            $(".background-change-click").removeClass("background-change-click");
+            
+            if($(this).is(":checked")){
+                $(this).parent().parent().addClass("background-change-click");
             }
-        })
 
-        $("#pricing-card .owl-next").html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-</svg>`);
-$("#pricing-card .owl-prev").html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-</svg>`);
+            if($(".background-change-click").length){
+                $(".next-btn").removeAttr("disabled");
+            }else{
+                $(".next-btn").attr("disabled", "disabled");
+            }
+        });    
     });
 </script>
 <script src="assets/js/script.js"></script>
