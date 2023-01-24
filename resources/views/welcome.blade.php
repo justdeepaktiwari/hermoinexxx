@@ -6,6 +6,7 @@
 
 @section('content')
 <!-- HEADER SECTION STARTS -->
+<div class="bg-light text-center py-2"><span class="badge rounded-pill bg-danger">NEW!</span> Plans now start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fs-6 fw-bold" target="_blank" rel="noopener noreferrer">Learn More ></a></div>
 <header class="showcase">
     <!-- NAVBAR -->
     <nav class="showcase-top d-flex justify-content-between align-items-center">
@@ -20,9 +21,17 @@
     <div class="get-started-container text-white justify-content-center text-center">
         <h2>Unlimited Access to Videos, Web Cam, <br>Photos, and More</h2>   
         <h3>Ready to watch?</h3> 
-        <h4 class="mt-4">Enter your email to create or restart your membership.</h4>
-        <input type="text" name="email" placeholder="Email Address">
-        <button type="submit">Instant Access ></button>
+        <h4 class="mt-4 ">Enter your email to create or restart your membership.</h4>
+        <div class="col-md-6 col-10 mx-auto d-lg-block d-none">
+            <div class="input-group mt-3 mx-auto">
+                <input type="text" class="form-control rounded-0" placeholder="Email Address">
+                <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+            </div>
+        </div>
+        <div class="col-11 mx-auto text-center d-lg-none d-block">
+            <input type="email" class="form-control w-100  py-3 px-2 rounded-0 mb-2" placeholder="Email Address">
+            <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+        </div>
     </div> 
 
     <div class="feature-video">
@@ -37,125 +46,132 @@
 
     <div class="section-container d-flex justify-content-between flex-wrap text-white">
         <div class="col-md-6 col-12">
-            <div class="right-column">
+            <div class="left-column">
+                <h1 class="cust-fs-1">Erotic Foot Fetish.</h1>
+                <h3>Signup to watch high rated videos recorded by our sexy partner. and also get one to one video call with our horny partner.</h3>
+                <div class="col-11 d-lg-block d-none">
+                    <div class="input-group mt-3 ">
+                        <input type="text" class="form-control rounded-0" placeholder="Email Address">
+                        <button class="btn btn-danger rounded-0 fs-2  p-2" type="button">Instant Access ></button>
+                    </div>
+                </div>
+                <div class="col-11 mx-auto text-center d-lg-none d-block">
+                    <input type="email" class="form-control w-100  py-3 px-2 rounded-0 mb-2" placeholder="Email Address">
+                    <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="right-column ms-auto">
                 <img src="{{ asset("assets/images/tv.png") }}">
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
-            </div>
-        </div>
-        
-        <div class="col-md-6 col-12">
-            <div class="left-column">
-                <h1>EROTIC FEET FETISH</h1>
-                <h3>Signup to watch high rated videos recorded by our sexy partner. and also get one to one video call with our horny partner.</h3>
-                <button class="btn btn-outline-danger rounded-0 mt-3" style="width: 200px;">Instant Access</button>
             </div>
         </div>
     </div> 
 
     <div class="section-container d-flex justify-content-between flex-wrap text-white">
         <div class="col-md-6 col-12">
-            <div class="left-column">
-                <h1>ENJOY BDSM PICS AND VIDEOS</h1>
-                <h3>Watch Live Web cam, Videos, Pics And more.</h3>
-                <button class="btn btn-outline-danger rounded-0 mt-3" style="width: 200px;">Instant Access</button>
-            </div>
-        </div>
-        <div class="col-md-6 col-12">
-            <div class="right-column">
+            <div class="right-column me-auto">
                 <img src="{{ asset("assets/images/tv.png") }}">
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
             </div>
         </div>
+        <div class="col-md-6 col-12">
+            <div class="left-column ms-auto">
+                <h1 class="cust-fs-1">Enjoy BDSM PICS and Videos.</h1>
+                <h3>Watch Live Web cam, Videos, Pics And more.</h3>
+                <div class="col-11 d-lg-block d-none">
+                    <div class="input-group mt-3 ">
+                        <input type="text" class="form-control rounded-0" placeholder="Email Address">
+                        <button class="btn btn-danger rounded-0 fs-2  p-2" type="button">Instant Access ></button>
+                    </div>
+                </div>
+                <div class="col-11 mx-auto text-center d-lg-none d-block">
+                    <input type="email" class="form-control w-100  py-3 px-2 rounded-0 mb-2" placeholder="Email Address">
+                    <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="section-container d-flex justify-content-between text-white flex-wrap">
-        <div class="text-center col-12">
-            <h1 class="text-uppercase">CUM CLUSTER</h1>
-            <div style="height: 20px;"></div>
+        <div class="text-md-start text-center col-md-6 col-12 me-auto mb-2 align-middle d-flex align-items-center">
+            <div class="my-auto d-block">
+                <h1 class="text-uppercase cust-fs-1">CUM CLUSTER OF DOWNLOADED AND UPLOADED VIDEOS</h1>
+                <div class="col-11 d-lg-block d-none">
+                    <div class=" input-group mt-3 me-auto">
+                        <input type="text" class="form-control rounded-0" placeholder="Email Address">
+                        <button class="btn btn-danger rounded-0 fs-2  p-2" type="button">Instant Access ></button>
+                    </div>
+                </div>
+                <div class="col-11 mx-auto text-center d-lg-none d-block">
+                    <input type="email" class="form-control w-100  py-3 px-2 rounded-0 mb-2" placeholder="Email Address">
+                    <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+                </div>
+            </div>
         </div>
-        <div class="col-12 cum-cluster-video d-flex justify-content-around flex-wrap border border-2 border-danger">
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+        <div class="col-md-6 col-12 cum-cluster-video d-flex justify-content-around flex-wrap border border-2 border-danger">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
                 </video>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
-                <a href="http://video">
-                <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                    <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
-                </video>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
-                <a href="http://video">
-                <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                    <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
-                </video>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
-                <a href="http://video">
-                <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                    <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
-                </video>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-12 border border-danger ">
+            <div class="col-md-4 col-sm-4 col-12 border border-danger ">
                 <a href="http://video">
                 <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
                     <source src="{{ asset("assets/videos/welcome.mp4") }}" type="video/mp4">
@@ -169,10 +185,19 @@
         <div class="col-12 big-logo text-center">
             <img src="{{ asset("assets/images/logo.webp") }}" alt="">
         </div>
-        <div class="email-address text-white col-12 text-center my-3">
-            <h3>ONE DAY FREE TRIAL</h3>
-            <input type="text" name="email" placeholder="Email Address">
-            <button type="submit">Instant Access ></button>
+        <div class="text-white col-12 text-center my-3">
+            <h1>ONE DAY FREE TRIAL</h1>
+            <div class="col-md-6 d-lg-block d-none mx-auto">
+                <div class="input-group mt-3 mx-auto">
+                    <input type="text" class="form-control rounded-0" placeholder="Email Address">
+                    <button class="btn btn-danger rounded-0 fs-2  p-2" type="button">Instant Access ></button>
+                </div>
+            </div>
+
+            <div class="col-11 mx-auto text-center d-lg-none d-block">
+                <input type="email" class="form-control w-100  py-3 px-2 rounded-0 mb-2" placeholder="Email Address">
+                <button class="btn btn-danger rounded-0 fs-2 p-2" type="button">Instant Access ></button>
+            </div>
         </div> 
     </div>
 
@@ -347,10 +372,10 @@
     var is_shown = true;
     $(window).scroll(function () {
         
-        if($(window).scrollTop() > 100 && is_shown){
-            $('#staticBackdrop').modal('show'); 
-            is_shown = false;
-        }
+        // if($(window).scrollTop() > 100 && is_shown){
+        //     $('#staticBackdrop').modal('show'); 
+        //     is_shown = false;
+        // }
 
     });
 

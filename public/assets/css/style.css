@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap');
 
 * {
     margin: 0;
@@ -6,7 +6,47 @@
     box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif !important;
 }
+.btn-danger{
+    background-color: #e50914 !important;
+}
 
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.cust-md-11{
+    width: 91.66666667% !important;
+}
+
+.cust-md-8{
+    width: 60% !important;
+}
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd !important;
+}
+
+.cust-fs-1{
+    font-size: 3.125rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+.cust-fs-2{
+    font-weight: 400;
+}
 .btn-close:focus {
     outline: none !important;
     box-shadow: none !important;
@@ -71,32 +111,14 @@
     font-size: 1.75rem;
 } */
 
-.get-started-container input, .email-address input {
-    width: 35%;
-    padding: 22px;
-    border: none;
-    margin-top: 0.5%;
-    outline: none;
-}
-
-.get-started-container button, .email-address button{
-    padding: 13px;
-    padding-bottom: 18px;
-    font-size: 24px;
-    border: none;
-    background-color: #e50914;
-    color: white;
-    margin-left: -0.3%;
-    font-weight: 500;
-}
-
 /* DEMO-SPECIFIC STYLES */
 .feature-video {
     position: absolute;
     width: 100%;
-    top: 100%;
+    top: 14%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: transparent;
     z-index: 99;
     height: 200px;
     width: 400px;
@@ -217,24 +239,6 @@
     width: 100%;
     padding-top: 4%;
     padding-bottom: 4%;
-}
-
-.get-started-container input, .email-address input {
-    width: 35%;
-    padding: 22px;
-    border: none;
-    margin-top: 0.5%;
-    outline: none;
-}
-
-.get-started-container button, .email-address button {
-    padding: 13px;
-    padding-bottom: 18px;
-    font-size: 24px;
-    border: none;
-    background-color: #e50914;
-    color: white;
-    margin-left: -0.3%;
 }
 
 /*EMAIL ADDRESS ENDS*/
@@ -379,21 +383,6 @@ footer .content .middle select option {
     }
 
     /*EMAIL ADDRESS*/
-    .get-started-container input, .email-address input {
-        padding: 17px;
-        width: 55%;
-    }
-
-    .get-started-container button, .email-address button {
-        display: b13ck;
-        padding-bottom: 18px;
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        margin: 0 auto;
-        margin-top: 1.5%;
-        padding: 12px;
-    }
 
     /* FOOTER SECTION */
     footer .content .box {
@@ -402,6 +391,17 @@ footer .content .middle select option {
 }
 
 @media (max-width: 774px) {
+
+    .feature-video {
+        position: absolute;
+        width: 100%;
+        top: 14%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        height: 200px;
+        width: 300px;
+    }
 
     .get-started-container h2 {
         font-size: 3rem;
@@ -433,6 +433,17 @@ footer .content .middle select option {
 
 @media(max-width: 659px) {
 
+    .feature-video {
+        position: absolute;
+        width: 100%;
+        top: 14%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        height: 150px;
+        width: 250px;
+    }
+
     /*NAVBAR*/
     .main-section .section2-container {
         padding: 0px 60px;
@@ -463,16 +474,21 @@ footer .content .middle select option {
         right: 40px;
         padding: 2px 10px;
     }
-
-    /*EMAIL ADDRESS*/
-    .get-started-container input, .email-address input {
-        padding: 14px;
-        width: 70%;
-    }
 }
 
 @media (max-width: 500px) { 
     
+    .feature-video {
+        position: absolute;
+        width: 100%;
+        top: 18%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        height: 80px;
+        width: 100px;
+    }
+
     .get-started-container h3 {
         font-size: 1.2rem;
         font-weight: 400;
@@ -503,12 +519,6 @@ footer .content .middle select option {
     /* DOWNLOAD YOUR SHOW TO WATCH OFFLINE */
     .main-section .section2-container .left-column .box {
         width: 100%;
-    }
-
-    /*EMAIL ADDRESS*/
-    .get-started-container input, .email-address input {
-        padding: 12px;
-        width: 80%;
     }
 
     /* FOOTER SECTION */
