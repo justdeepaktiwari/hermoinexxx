@@ -18,8 +18,8 @@
     <!-- Scripts -->
     
     @vite(['resources/sass/app.scss'])
-    <link rel="stylesheet" href="{{ asset("owlcarousel/owl.carousel.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("plugins/owlcarousel/owl.carousel.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("plugins/owlcarousel/owl.theme.default.min.css") }}">
 </head>
 <body>
     @yield('content')
@@ -27,7 +27,7 @@
     <!--Scustom Js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     @vite(['resources/js/app.js'])
-    <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
+    <script src="{{ asset("plugins/owlcarousel/owl.carousel.min.js") }}"></script>
     @yield('js')
 </body>
 </html>
