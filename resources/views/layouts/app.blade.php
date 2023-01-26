@@ -26,8 +26,9 @@
 
     <!--Scustom Js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    @vite(['resources/js/app.js'])
     <script src="{{ asset("plugins/owlcarousel/owl.carousel.min.js") }}"></script>
+
+    @vite(['resources/js/app.js'])
     @yield('js')
 </body>
 </html>

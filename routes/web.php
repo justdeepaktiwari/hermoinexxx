@@ -21,6 +21,10 @@ Route::get('/admin', function () {
     return view('admin.pages.dashboard');
 });
 
+Route::get('/admin', function () {
+    return view('admin.pages.dashboard');
+})->name("admin.notification");
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
