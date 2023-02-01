@@ -13,18 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("welcome");
 });
 
-Route::get('/admin', function () {
-    return view('admin.pages.dashboard');
+Route::group(['prefix' => 'alpha'], function(){
+    Route::get('/', function () {
+        return view('welcome');
+    })->name("welcome");
 });
 
-Route::get('/admin', function () {
-    return view('admin.pages.dashboard');
-})->name("admin.notification");
+Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    /**Use Role And Permission*/
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('products', App\Http\Controllers\ProductController::class);
+});
+
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

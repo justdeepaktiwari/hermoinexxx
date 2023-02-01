@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
             <div class="right-side-button pe-2">
                 <button class="btn btn-outline-light rounded-0">Instant Access</button>
 
-                <button class="btn btn-danger rounded-0" type="submit">Sign In</button>
+                <a class="btn btn-danger rounded-0" href="{{ route('login') }}">Sign In</a>
             </div>
         </nav>
         <div class="get-started-container text-white justify-content-center text-center">
@@ -299,7 +299,8 @@
             </div>
 
         </div>
-        <div class="text-center bg-transparent py-3 text-white border border-2 border-bottom-0 border-end-0 border-start-0 border-danger">
+        <div
+            class="text-center bg-transparent py-3 text-white border border-2 border-bottom-0 border-end-0 border-start-0 border-danger">
             2023 copyrights@hermoinexxx.com</div>
     </footer>
 
@@ -312,9 +313,11 @@
                 <span class="fs-2">What are you waiting for ? </span><span
                     class="text-white negative-margin fs-2 close-btn" role="button">&#10006;</span>
             </div>
-            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer">
+            <div
+                class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                        id="flexRadioDefault1">
                 </div>
                 <div class="content me-1 cursor-pointer">
                     <label for="flexRadioDefault1" class="cursor-pointer">
@@ -328,9 +331,11 @@
                     </label>
                 </div>
             </div>
-            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
+            <div
+                class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault" id="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                        id="flexRadioDefault2">
                 </div>
                 <div class="content me-1 cursor-pointer">
                     <label for="flexRadioDefault2" class="cursor-pointer">
@@ -347,9 +352,11 @@
                     </div>
                 </div>
             </div>
-            <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
+            <div
+                class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()"  name="flexRadioDefault" id="flexRadioDefault3">
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                        id="flexRadioDefault3">
                 </div>
                 <div class="content me-1 cursor-pointer">
                     <label for="flexRadioDefault3" class="cursor-pointer">
@@ -370,53 +377,69 @@
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="checkOutStepOne" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="checkOutStepOneLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-0">
-        <div class="modal-body">
-            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="text-center fs-3 border-bottom border-2 mb-2">
-               <div>Hermoine<span class="text-uppercase fw-bold text-white shadow p-1 rounded-2 bg-d315c8">XXX</span></div>
-               <div class="fw-normal text-danger small mt-2">PRESENTS</div>
-               <div class="mb-2"><img src="{{ asset('assets/images/logo.webp') }}" alt="" style="height: 65px;"></div>
-            </div>
+    <div class="modal fade" id="checkOutStepOne" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="checkOutStepOneLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-body">
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <div class="text-center fs-3 border-bottom border-2 mb-2">
+                        <div>Hermoine<span
+                                class="text-uppercase fw-bold text-white shadow p-1 rounded-2 bg-d315c8">XXX</span></div>
+                        <div class="fw-normal text-danger small mt-2">PRESENTS</div>
+                        <div class="mb-2"><img src="{{ asset('assets/images/logo.webp') }}" alt=""
+                                style="height: 65px;"></div>
+                    </div>
 
-            <div class="pricing">
-                <div class="title-section">
-                    <h3 class="modal-title">Step 1 of 2</h3>
-                    <p>Please select a membership then provide your email and desired password for your account.</p>
+                    <div class="pricing">
+                        <div class="title-section">
+                            <h3 class="modal-title">Step 1 of 2</h3>
+                            <p>Please select a membership then provide your email and desired password for your account.</p>
+                        </div>
+                        <div class="forms-field">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="Membership" class="form-label">Membership</label>
+                                    <select name="joinOption" class="form-select" id="Membership">
+                                        <option value="0000011174:840"
+                                            data-salespitch="Billed in monthly payments of <del>$29.98</del> <strong>$24.98</strong>">
+                                            17% OFF - 30 Days for $24.98/month ($24.98 every 30 Days) </option>
+                                        <option value="0000002986:840"
+                                            data-salespitch="Billed in repeating 3 month payments of $59.94"> 90 Days for
+                                            $19.98/month ($59.94 every 90 Days) </option>
+                                        <option value="0000036810:840" data-salespitch="Billed in one payment of $69.94">
+                                            90 Days for $23.31/month (non-recurring) </option>
+                                        <option value="0000594439:840"
+                                            data-salespitch="Billed yearly in repeating payments of <del>$199.00</del> <strong>$84.00</strong>">
+                                            60% OFF - 365 Days for $7.00/month ($84.00 every 365 Days) </option>
+                                        <option value="0000000035:840"
+                                            data-salespitch="Billed yearly in one payment of $99.95"> 50% OFF - 365 Days
+                                            for $8.33/month (non-recurring) </option>
+                                    </select>
+                                    <div class="form-text">Billed in monthly payments of <del>$29.98</del>
+                                        <strong>$24.98</strong></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                        autocomplete="off">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="forms-field">
-                    <form>
-                        <div class="mb-3">
-                            <label for="Membership" class="form-label">Membership</label>
-                            <select name="joinOption"  class="form-select" id="Membership">
-                                <option value="0000011174:840" data-salespitch="Billed in monthly payments of <del>$29.98</del> <strong>$24.98</strong>"> 17% OFF - 30 Days for $24.98/month ($24.98 every 30 Days) </option>
-                                <option value="0000002986:840" data-salespitch="Billed in repeating 3 month payments of $59.94"> 90 Days for $19.98/month ($59.94 every 90 Days) </option>
-                                <option value="0000036810:840" data-salespitch="Billed in one payment of $69.94"> 90 Days for $23.31/month (non-recurring) </option>
-                                <option value="0000594439:840" data-salespitch="Billed yearly in repeating payments of <del>$199.00</del> <strong>$84.00</strong>"> 60% OFF - 365 Days for $7.00/month ($84.00 every 365 Days) </option>
-                                <option value="0000000035:840" data-salespitch="Billed yearly in one payment of $99.95"> 50% OFF - 365 Days for $8.33/month (non-recurring) </option>
-                            </select>
-                            <div class="form-text">Billed in monthly payments of <del>$29.98</del> <strong>$24.98</strong></div>
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  autocomplete="off">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="off">
-                        </div>
-                      </form>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-danger">Proceed to Checkout</button>
                 </div>
             </div>
         </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-danger">Proceed to Checkout</button>
-        </div>
-      </div>
     </div>
-  </div>
 @endsection
 
 @section('js')
@@ -483,5 +506,5 @@
             $("#checkOutStepOne").modal('toggle');
         }
     </script>
-    <script src="assets/js/script.js"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 @endsection
