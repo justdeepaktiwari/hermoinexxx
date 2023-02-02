@@ -1,17 +1,14 @@
 @extends('admin.index')
 
-@section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit Role</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
+@section('title', 'Edit Role')
 
+@section('action-btn')
+  <div class="pull-right">
+    <a class="btn btn-outline-primary rounded-0" href="{{ route('users.index') }}"> Back</a>
+  </div>
+@endsection
+
+@section('content')
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">

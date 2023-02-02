@@ -98,3 +98,7 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+.bg-d315c8{
+  background: linear-gradient(#772172,#d315c8);
+}
