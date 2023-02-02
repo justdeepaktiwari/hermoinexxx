@@ -1,11 +1,10 @@
-@extends('layouts.app')
-
+@extends('admin.index')
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Role</h2>
+            <h2>Edit Role</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
@@ -26,7 +25,7 @@
 @endif
 
 
-{!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+{!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
@@ -39,7 +38,7 @@
             <strong>Permission:</strong>
             <br/>
             @foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                 {{ $value->name }}</label>
             <br/>
             @endforeach
@@ -52,5 +51,5 @@
 {!! Form::close() !!}
 
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
+<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>

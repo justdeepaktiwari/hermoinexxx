@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('admin.index')
 
+@section('title', 'Users Management')
 
 @section('content')
 <div class="row">
@@ -54,7 +55,4 @@
 
 
 {!! $data->render() !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
