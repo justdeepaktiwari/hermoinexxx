@@ -28,15 +28,15 @@ Route::group(['prefix' => 'alpha'], function(){
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function() {
-    Route::get('/home', function(){
-        return view("admin.index");
-    })->name('home');
-
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('dashboard', App\Http\Controllers\DashBoardController::class);
+    Route::resource('videos', App\Http\Controllers\VideoController::class);
+    Route::resource('photos', App\Http\Controllers\PhotoController::class);
+    Route::resource('products', App\Http\Controllers\ProductController::class);
 
     /**Use Role And Permission*/
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::resource('products', App\Http\Controllers\ProductController::class);
 
 });

@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300&display=swap');
+
 body {
   font-size: .875rem;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Roboto', sans-serif;
 }
 
 .feather {
@@ -101,4 +105,9 @@ body {
 
 .bg-d315c8{
   background: linear-gradient(#772172,#d315c8);
+}
+
+header .dropdown-menu[data-bs-popper]{
+  left: unset;
+  right: 0% !important;
 }

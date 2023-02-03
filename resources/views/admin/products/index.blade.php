@@ -1,21 +1,16 @@
 @extends('admin.index')
 
+@section('title', "Products")
+    
+@section('action-btn')
+<div class="pull-right">
+    @can('product-create')
+    <a class="btn btn-outline-success rounded-0" href="{{ route('products.create') }}"> Create New Product</a>
+    @endcan
+</div>
+@endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Products</h2>
-            </div>
-            <div class="pull-right">
-                @can('product-create')
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
-                @endcan
-            </div>
-        </div>
-    </div>
-
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -56,7 +51,4 @@
 
 
     {!! $products->links() !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
