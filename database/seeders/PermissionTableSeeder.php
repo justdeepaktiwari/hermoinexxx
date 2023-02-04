@@ -30,7 +30,10 @@ class PermissionTableSeeder extends Seeder
            'photo-list',
            'photo-create',
            'photo-edit',
-           'photo-delete'
+           'photo-delete',
+           'subscription-plan-gold',
+           'subscription-plan-silver',
+           'subscription-plan-bronze'
         ];
      
         foreach ($permissions as $permission) {

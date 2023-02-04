@@ -50,13 +50,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'product_name' => 'required',
+            'product_detail' => 'required',
+            'product_image' => 'required',
+            'product_amount' => 'required',
         ]);
+        $create_product = $request->all();
+        if($request->hasFile('product_image')){
+
+            $file = $request->file('product_image');
+            
+            $extension = $file->getClientOriginalExtension();
+            $randomstr = md5(date("Ymdhisu"));
+
+            $filename = $randomstr.".".$extension;
+
+            $path = public_path().'/uploads/';
+            $file->move($path, $filename);
+            $create_product["product_image"] = asset("uploads/".$filename);
+        }
+
+        Product::create($create_product);
     
-        Product::create($request->all());
-    
-        return redirect()->route('admin.products.index')
+        return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
     }
     
@@ -98,7 +114,7 @@ class ProductController extends Controller
     
         $product->update($request->all());
     
-        return redirect()->route('admin.products.index')
+        return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
     }
     
@@ -112,7 +128,7 @@ class ProductController extends Controller
     {
         $product->delete();
     
-        return redirect()->route('admin.products.index')
+        return redirect()->route('products.index')
                         ->with('success','Product deleted successfully');
     }
 }
