@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/style.css') }}">
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     <header class="showcase">
         <!-- NAVBAR -->
         <nav class="showcase-top d-flex justify-content-between align-items-center">
-            <img id="logo" src="{{ asset('assets/images/logo.webp') }}">
+            <img id="logo" src="{{ asset('public/assets/images/logo.webp') }}">
 
             <div class="right-side-button pe-2">
                 <button class="btn btn-outline-light rounded-0">Instant Access</button>
@@ -38,7 +38,7 @@
 
         <div class="feature-video">
             <video width="100%" height="100%" id="vid" loop="loop" autoplay="autoplay" controls muted>
-                <source src="{{ asset('assets/videos/feature-video.mp4') }}" type="video/mp4">
+                <source src="{{ asset('public/assets/videos/feature-video.mp4') }}" type="video/mp4">
             </video>
         </div>
     </header>
@@ -67,9 +67,9 @@
             </div>
             <div class="col-md-6 col-12">
                 <div class="right-column ms-auto">
-                    <img src="{{ asset('assets/images/tv.png') }}">
+                    <img src="{{ asset('public/assets/images/tv.png') }}">
                     <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                        <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -78,9 +78,9 @@
         <div class="section-container d-flex justify-content-between flex-wrap text-white">
             <div class="col-md-6 col-12">
                 <div class="right-column me-auto">
-                    <img src="{{ asset('assets/images/tv.png') }}">
+                    <img src="{{ asset('public/assets/images/tv.png') }}">
                     <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                        <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -121,68 +121,68 @@
                 </div>
             </div>
             <div class="mx-auto col-md-6 col-12 position-relative cum-cluster-tv">
-                <img src="{{ asset('assets/images/tv.png') }}">
+                <img src="{{ asset('public/assets/images/tv.png') }}">
                 <div class="col-md-9 col-9 cum-cluster-video d-flex justify-content-around flex-wrap border border-dark">
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                         <a href="http://video">
                             <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                                <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('public/assets/videos/welcome.mp4') }}" type="video/mp4">
                             </video>
                         </a>
                     </div>
@@ -193,7 +193,7 @@
 
         <div class="section-container d-flex justify-content-between text-white flex-wrap">
             <div class="col-12 big-logo text-center">
-                <img src="{{ asset('assets/images/logo.webp') }}" alt="">
+                <img src="{{ asset('public/assets/images/logo.webp') }}" alt="">
             </div>
             <div class="text-white col-12 text-center my-3">
                 <h1>ONE DAY FREE TRIAL</h1>
@@ -219,43 +219,43 @@
                 <!-- Set up your HTML -->
                 <div class="owl-carousel carousel-main">
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_1.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_1.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_2.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_2.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_3.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_3.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_4.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_4.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_5.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_5.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_6.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_6.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
                     </div>
                     <div class="border border-2 border-danger p-2 overflow-hidden">
-                        <img src="{{ asset('assets/testomonials/test_7.webp') }}">
+                        <img src="{{ asset('public/assets/testomonials/test_7.webp') }}">
                         <div class="text-center start-0 p-2 position-absolute bottom-0 w-100 testomonial-text">
                             Message of client
                         </div>
@@ -388,7 +388,7 @@
                         <div>Hermoine<span
                                 class="text-uppercase fw-bold text-white shadow p-1 rounded-2 bg-d315c8">XXX</span></div>
                         <div class="fw-normal text-danger small mt-2">PRESENTS</div>
-                        <div class="mb-2"><img src="{{ asset('assets/images/logo.webp') }}" alt=""
+                        <div class="mb-2"><img src="{{ asset('public/assets/images/logo.webp') }}" alt=""
                                 style="height: 65px;"></div>
                     </div>
 
@@ -506,5 +506,5 @@
             $("#checkOutStepOne").modal('toggle');
         }
     </script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('public/assets/js/script.js') }}"></script>
 @endsection

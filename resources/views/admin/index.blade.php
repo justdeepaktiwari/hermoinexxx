@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.carousel.min.css") }}">
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/dashboard.css') }}">
 
     @yield("css")
 </head>
@@ -147,7 +147,7 @@
     </form>
 </body>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
     <script src="{{ asset("js/jquery-3.6.3.min.js") }}"></script>
     <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
     @yield("js")
