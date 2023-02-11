@@ -15,32 +15,42 @@ use App\Http\Controllers\StripePaymentController;
 */
 
 
-Auth::routes(["login" => false, "register"=>false]);
+Auth::routes(["login" => false, "register" => false]);
 
 Route::get('/', function () {
-    return redirect()->route("welcome");
+    return view("videos.index");
+    return redirect()->route("home");
 });
 
-Route::group(['prefix' => 'alpha'], function(){
-    Route::get('/', function () {
-        return view('welcome');
-    })->name("welcome");
-    
-    Auth::routes(["login" => true]);
+Route::group(['prefix' => 'alpha'], function () {
+
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
+        ->name('home');
+    Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
+    Auth::routes(["login" => true, "register" => true]);
 });
 
-Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function() {
-    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
-    Route::resource('dashboard', App\Http\Controllers\DashBoardController::class);
-    Route::resource('videos', App\Http\Controllers\VideoController::class);
-    Route::resource('photos', App\Http\Controllers\PhotoController::class);
-    Route::resource('products', App\Http\Controllers\ProductController::class);
+    Route::group(['middleware' => ['role:super-admin|Admin']], function () {
+        Route::resource('dashboard', App\Http\Controllers\DashBoardController::class);
+        Route::resource('videos', App\Http\Controllers\VideoController::class);
+        Route::resource('photos', App\Http\Controllers\PhotoController::class);
+        Route::resource('products', App\Http\Controllers\ProductController::class);
 
-    /**Use Role And Permission*/
-    Route::resource('roles', App\Http\Controllers\RoleController::class);
-    Route::resource('users', App\Http\Controllers\UserController::class);
-   
+        /**Use Role And Permission*/
+        Route::resource('roles', App\Http\Controllers\RoleController::class);
+        Route::resource('users', App\Http\Controllers\UserController::class);
+
+        /**Landing Page Videos Manage*/
+        Route::resource('landing-page', App\Http\Controllers\LandinPageManageController::class);
+
+        Route::get('landing-pages/testimonials', [App\Http\Controllers\LandinPageManageController::class, "testimonials"]);
+        Route::get('landing-pages/purchase-offer', [App\Http\Controllers\LandinPageManageController::class, "purchaseOffer"]);
+    });
+
+    Route::resource('hermoinexxx-users', App\Http\Controllers\DashBoardController::class);
+
     /**Stripe Payment Integration*/
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

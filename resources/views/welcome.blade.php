@@ -6,8 +6,8 @@
 
 @section('content')
     <!-- HEADER SECTION STARTS -->
-    <div class="bg-light text-center py-1 small"><span class="badge rounded-pill bg-danger">Instant access!</span> Plans now
-        start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fs-6 fw-bold" target="_blank"
+    <div class="bg-light text-center small py-1"><span class="badge rounded-pill bg-danger">Instant access!</span> Plans now
+        start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fw-bold" target="_blank"
             rel="noopener noreferrer">Learn More ></a></div>
     <header class="showcase">
         <!-- NAVBAR -->
@@ -316,7 +316,7 @@
             <div
                 class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne('30-{{$real_amount_30}}-{{$off_amount_30}}')" name="flexRadioDefault"
                         id="flexRadioDefault1">
                 </div>
                 <div class="content me-1 cursor-pointer">
@@ -334,7 +334,7 @@
             <div
                 class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne('90-{{$real_amount_90}}-{{$off_amount_90}}')" name="flexRadioDefault"
                         id="flexRadioDefault2">
                 </div>
                 <div class="content me-1 cursor-pointer">
@@ -355,7 +355,7 @@
             <div
                 class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
                 <div class="radio-btn me-1">
-                    <input class="form-check-input" type="radio" onchange="checkOutStepOne()" name="flexRadioDefault"
+                    <input class="form-check-input" type="radio" onchange="checkOutStepOne('365-{{$real_amount_360}}-{{$off_amount_360}}')" name="flexRadioDefault"
                         id="flexRadioDefault3">
                 </div>
                 <div class="content me-1 cursor-pointer">
@@ -402,7 +402,9 @@
                                 <div class="mb-3">
                                     <label for="Membership" class="form-label">Membership</label>
                                     <select name="joinOption" class="form-select" id="Membership">
-                                        <option value="0000011174:840"
+
+
+                                    <option value="0000011174:840"
                                             data-salespitch="Billed in monthly payments of <del>$29.98</del> <strong>$24.98</strong>">
                                             17% OFF - 30 Days for $24.98/month ($24.98 every 30 Days) </option>
                                         <option value="0000002986:840"
@@ -416,6 +418,8 @@
                                         <option value="0000000035:840"
                                             data-salespitch="Billed yearly in one payment of $99.95"> 50% OFF - 365 Days
                                             for $8.33/month (non-recurring) </option>
+
+                                            
                                     </select>
                                     <div class="form-text">Billed in monthly payments of <del>$29.98</del>
                                         <strong>$24.98</strong></div>
@@ -503,6 +507,9 @@
         });
 
         function checkOutStepOne(plans) {
+            // console.log(plans);
+            $("#Membership").find('option:selected').removeAttr("selected");
+            $("#Membership").find('option[value="'+plans+'"]').attr("selected", "selected");
             $("#checkOutStepOne").modal('toggle');
         }
     </script>

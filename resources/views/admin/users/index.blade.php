@@ -4,7 +4,7 @@
 
 @section('action-btn')
   <div class="pull-right">
-    <a class="btn btn-outline-success rounded-0" href="{{ route('users.create') }}"> Create New Partner</a>
+    <a class="btn btn-sm rounded-0 btn-outline-success btn-sm rounded-0" href="{{ route('users.create') }}"> Create New Partner</a>
   </div>
 @endsection
 
@@ -22,7 +22,7 @@
    <th>Name</th>
    <th>Email</th>
    <th>Roles</th>
-   <th width="280px">Action</th>
+   <th width="280px" class="text-center">Action</th>
  </tr>
  @foreach ($data as $key => $user)
   <tr>
@@ -32,15 +32,15 @@
     <td>
       @if(!empty($user->getRoleNames()))
         @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
+           <label class="badge badge-success text-danger">{{ $v }}</label>
         @endforeach
       @endif
     </td>
-    <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+    <td class="d-flex justify-content-evenly">
+       <a class="btn btn-sm rounded-0 btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+       <a class="btn btn-sm rounded-0 btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Delete', ['class' => 'btn btn-sm rounded-0 btn-danger']) !!}
         {!! Form::close() !!}
     </td>
   </tr>

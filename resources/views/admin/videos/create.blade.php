@@ -59,7 +59,7 @@
 
     <form action="{{ route('videos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between flex-wrap">
             <div class="col-md-7 d-inline-block">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 mb-2">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // Auth::logout();
+        // $this->middleware('auth');
+        
+        // if (Auth::user()->hasAnyRole("role:super-admin|admin")) {
+        //     # code...
+        // }
     }
 
     /**
@@ -23,6 +29,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $real_amount_360 = $off_amount_360 = "100";
+        $real_amount_90 = $off_amount_90 = "100";
+        $real_amount_30 = $off_amount_30 = "100";
+
+        return view('welcome', compact("real_amount_360", "real_amount_90", "real_amount_30", "off_amount_360", "off_amount_90", "off_amount_30"));
     }
 }

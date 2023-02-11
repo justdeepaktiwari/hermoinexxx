@@ -4,7 +4,7 @@
 
 @section('action-btn')
   <div class="pull-right">
-    <a class="btn btn-outline-success rounded-0" href="{{ route('roles.create') }}">Create New Role</a>
+    <a class="btn rounded-0 btn-sm btn-outline-success rounded-0" href="{{ route('roles.create') }}">Create New Role</a>
   </div>
 @endsection
 
@@ -21,28 +21,26 @@
   <tr>
      <th>No</th>
      <th>Name</th>
-     <th width="280px">Action</th>
+     <th width="280px" class="text-center">Action</th>
   </tr>
     @foreach ($roles as $key => $role)
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $role->name }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
+        <td class="d-flex justify-content-evenly">
+            <a class="btn rounded-0 btn-sm btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
             @can('role-edit')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+                <a class="btn rounded-0 btn-sm btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
             @endcan
             @can('role-delete')
                 {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-sm rounded-0 btn-danger']) !!}
                 {!! Form::close() !!}
             @endcan
         </td>
     </tr>
     @endforeach
 </table>
-
-
 {!! $roles->render() !!}
 
 @endsection
