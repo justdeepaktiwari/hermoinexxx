@@ -18,7 +18,6 @@ use App\Http\Controllers\StripePaymentController;
 Auth::routes(["login" => false, "register" => false]);
 
 Route::get('/', function () {
-    return view("videos.index");
     return redirect()->route("home");
 });
 
@@ -49,7 +48,9 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         Route::get('landing-pages/purchase-offer', [App\Http\Controllers\LandinPageManageController::class, "purchaseOffer"]);
     });
 
-    Route::resource('hermoinexxx-users', App\Http\Controllers\DashBoardController::class);
+    Route::get('user-videos', function(){
+        return view("videos.index");
+    })->name("user-videos");
 
     /**Stripe Payment Integration*/
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
