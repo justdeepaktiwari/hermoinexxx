@@ -44,8 +44,12 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         /**Landing Page Videos Manage*/
         Route::resource('landing-page', App\Http\Controllers\LandinPageManageController::class);
 
-        Route::get('landing-pages/testimonials', [App\Http\Controllers\LandinPageManageController::class, "testimonials"]);
-        Route::get('landing-pages/purchase-offer', [App\Http\Controllers\LandinPageManageController::class, "purchaseOffer"]);
+        Route::get('landing/testimonials', [App\Http\Controllers\LandinPageManageController::class, "testimonials"])
+        ->name("landing-pages.testimonials");
+
+        Route::get('landing/purchase-offer', [App\Http\Controllers\LandinPageManageController::class, "purchaseOffer"])
+        ->name("landing-pages.purchaseOffer");
+
     });
 
     Route::get('user-videos', function(){

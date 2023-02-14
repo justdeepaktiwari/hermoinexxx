@@ -80,6 +80,14 @@ class LandinPageManageController extends Controller
      */
     public function destroy(LandinPageManage $landinPageManage)
     {
-        //
+        
+    }
+
+    public function testimonials(Request $request){
+        return view("admin.landingpage.index");
+    }
+
+    public function purchaseOffer(Request $request){
+        return view("admin.landingpage.index");
     }
 }

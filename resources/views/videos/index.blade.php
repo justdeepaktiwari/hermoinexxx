@@ -10,7 +10,6 @@
             position: relative;
         }
 
-
         textarea:focus,
         textarea.form-control:focus,
         input.form-control:focus,
@@ -123,7 +122,6 @@
         }
 
         @media(max-width: 600px) {
-
             .pop-up-modal-home:hover,
             .pop-up-modal-porn-video:hover,
             .pop-up-modal-categories:hover,
@@ -163,14 +161,11 @@
     </style>
 @endsection
 @section('content')
-    <div
-        class="text-white navbar-section border-bottom border-dark position-sticky top-0 d-flex justify-content-center justify-content-md-between flex-wrap align-items-center">
+    <div class="text-white navbar-section border-bottom border-dark position-sticky top-0 d-flex justify-content-center justify-content-md-between flex-wrap align-items-center">
         <div class="toogle-btn p-2">
             <span class="px-2 me-2" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-list"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                 </svg>
             </span>
             <img src="{{ asset('assets/images/logo.webp') }}" alt="" id="logo">
@@ -225,12 +220,9 @@
             </div>
             <div style="height: 40px;"></div>
             <div class="porn-video-icon d-flex justify-content-center gap-3" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-                    class="bi bi-dice-6" viewBox="0 0 16 16">
-                    <path
-                        d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z" />
-                    <path
-                        d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-dice-6" viewBox="0 0 16 16">
+                    <path d="M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z" />
+                    <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                 </svg>
                 <span class="text-white fs-5 fw-bold d-none">Porn Videos</span>
             </div>
@@ -1128,7 +1120,7 @@
 
             <div class="d-flex flex-wrap w-95 p-2 ms-auto mt-3">
                 <div class="col-md-9 col-12 row">
-                    <div class="fs-4 fw-bold">Videos Being Watched</div>
+                    <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
 
                     <div class="col-md-3 col-12 video-hover mb-2" role="button">
                         <div class="position-relative" style="height: 160px;">
@@ -1332,7 +1324,7 @@
 
             <div class="d-flex flex-wrap w-95 p-2 ms-auto mt-3">
                 <div class="col-12 row">
-                    <div class="fs-4 fw-bold">Recommended</div>
+                    <div class="fs-4 fw-bold my-2">Recommended</div>
                     <div class="col-md-3 col-12 video-hover mb-2" role="button">
                         <div class="position-relative" style="height: 160px;">
                             <video class="video" onmouseover="this.play()"
@@ -2117,8 +2109,9 @@
                     })
 
                     $(".toggle-with-button").find("div span")
-                        .addClass("d-none")
-                        .parent().addClass("justify-content-center").removeClass("justify-content-start");
+                    .addClass("d-none").parent()
+                    .addClass("justify-content-center")
+                    .removeClass("justify-content-start");
 
                     $(this).removeClass("active");
                 } else {
@@ -2126,8 +2119,11 @@
                         width: "200px"
                     })
 
-                    $(".toggle-with-button").find("div span").removeClass("d-none")
-                        .parent().addClass("justify-content-start").removeClass("justify-content-center");
+                    $(".toggle-with-button").find("div span")
+                    .removeClass("d-none").parent()
+                    .addClass("justify-content-start")
+                    .removeClass("justify-content-center");
+
                     $(this).addClass("active");
                 }
             });
