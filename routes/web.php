@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,6 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 });
+
+Route::post('upload-file-chunk', [VideoController::class, 'UploadVideo'])->name("upload-video");
+Route::get('upload-file-chunk', [VideoController::class, 'ViewVideo']);

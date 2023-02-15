@@ -7259,7 +7259,12 @@ textarea.form-control-lg {
 .w-5{
   width: 5%;
 }
+
 .w-95{
+  width: 95%;
+}
+
+.w-md-responsive{
   width: 95%;
 }
 
@@ -10837,5 +10842,11 @@ textarea.form-control-lg {
   }
   .d-print-none {
     display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .w-md-responsive{
+    width: 100%;
   }
 }
