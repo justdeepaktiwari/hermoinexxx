@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.carousel.min.css") }}">
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
     @yield("css")
 </head>
 <body>
@@ -191,6 +191,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset("js/jquery-3.6.3.min.js") }}"></script>
     <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     @yield("js")
 </html>
 

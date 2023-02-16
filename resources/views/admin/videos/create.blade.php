@@ -41,6 +41,10 @@
             height: 100%;
             object-fit: cover
         }
+
+        .progress-bar {
+            background: #28a745;
+        }
     </style>
 @endsection
 @section('content')
@@ -66,9 +70,9 @@
                         <div class="form-group">
                             <strong>Select Type</strong>
                             <select name="subscription_type_id" class="form-select">
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Bronze</option>
+                                @foreach($subscription as $key => $subscription_item)
+                                    <option value="{{ $subscription_item["id"] }}">{{ $subscription_item["name"] }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -81,7 +85,14 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
                         <div class="form-group">
                             <strong>Upload Video</strong>
-                            <input class="form-control" type="file" name="video_url" id="file-input" accept="video/*">
+                            <div class='input-group'>
+                                <input type='file' class="form-control rounded-0" id="fileInput">
+                                <button class="btn btn-primary rounded-0" type="button" id="uploadBtn">Upload</button>
+                            </div>
+
+                            <div class="progress my-2"></div>
+
+                            <div id="fileList" class="mt-2"></div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 mb-2">
@@ -91,13 +102,8 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-start">
-                        <button type="submit" class="btn btn-primary rounded-0">Submit</button>
+                        <button type="submit" class="btn btn-primary rounded-0 ready-submit" disabled>Submit</button>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-inline-block">
-                <div class="border video-lebel notuploadedvideo">
-                    <video id="video" controls></video>
                 </div>
             </div>
         </div>
@@ -106,35 +112,81 @@
 @endsection
 
 @section('js')
+    <!-- Adding Plupload Library -->
+    <script src="{{ asset('plupload/js/plupload.full.min.js') }}"></script>
+
     <script>
-        const input = document.getElementById('file-input');
-        const video = document.getElementById('video');
-        const videoSource = document.createElement('source');
 
-        input.addEventListener('change', function() {
-            
-            $(".video-lebel").addClass("notuploadedvideo");
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5,flash,silverlight,html4',
+            browse_button: 'fileInput',
+            url: '{{ route("upload-video") }}',
+            flash_swf_url: '{{ asset("plupload/js/Moxie.swf") }}',
+            silverlight_xap_url: '{{ asset("plupload/js/Moxie.xap") }}',
+            multi_selection: false,
+            chunk_size: '1mb',
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            filters: {
+                max_file_size: '3gb',
+                mime_types: [
+                    { title: "Video files", extensions: "mp4,avi,mpeg,mpg,mov,wmv" },
+                ]
+            },
 
-            const files = this.files || [];
+            init: {
+                PostInit: function () {
+                    document.getElementById('fileList').innerHTML = '';
+                    document.getElementById('uploadBtn').onclick = function () {
+                        if (uploader.files.length < 1) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: "Please Select Video",
+                                showConfirmButton: true,
+                                timer: 1500
+                            })
+                            return false;
+                        } else {
+                            uploader.start();
+                            return false;
+                        }
+                    };
+                },
 
-            if (!files.length) return;
+                FilesAdded: function (up, files) {
+                    plupload.each(files, function (file) {
+                        document.getElementById('fileList').innerHTML += 
+                            `<div id="${file.id}" class="p-2 border border-primary d-flex align-items-center gap-2 small fw-bold mb-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                                </svg>
+                                <input type="hidden" name="video_url" value="${file.name}"/>
+                                ${file.name} - ${plupload.formatSize(file.size)}
+                            </div>`;
+                    });
+                },
 
-            const reader = new FileReader();
+                UploadProgress: function (up, file) {
+                    document.querySelector(".progress").innerHTML = '<div class="progress-bar" style="width: ' + file.percent + '%;">' + file.percent + '%</div>';
+                },
 
-            reader.onload = function(e) {
-                videoSource.setAttribute('src', e.target.result);
-                video.appendChild(videoSource);
-                video.load();
-                video.play();
-            };
+                FileUploaded: function (up, file, result) {
+                    var responseData = result.response.replace('"{', '{').replace('}"', '}');
+                    var objResponse = JSON.parse(responseData);
+                    $(".ready-submit").removeAttr("disabled");
+                },
 
-            reader.onprogress = function(e) {
-                console.log('progress: ', Math.round((e.loaded * 100) / e.total));
-            };
-
-            reader.readAsDataURL(files[0]);
-
-            $(".video-lebel").removeClass("notuploadedvideo");
+                Error: function (up, err) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: err.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
         });
+
+        uploader.init();
+
     </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use App\Models\UserSubscrption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use File;
@@ -19,7 +20,8 @@ class VideoController extends Controller
 
     public function create()
     {
-        return view('admin.videos.create');
+        $subscription = UserSubscrption::get();
+        return view('admin.videos.create', compact('subscription'));
     }
 
 
@@ -30,28 +32,12 @@ class VideoController extends Controller
             'video_title' => 'required',
             'subscription_type_id' => 'required',
             'video_detail' => 'required',
-            'video_url' => 'required',
-        ], [
-            "video_url.required" => "The video field required"
         ]);
 
         $create_video = $request->all();
         unset($create_video["_token"]);
 
-        if ($request->hasFile('video_url')) {
-
-            $file = $request->file('video_url');
-
-            $extension = $file->getClientOriginalExtension();
-            $randomstr = md5(date("Ymdhisu"));
-
-            $filename = $randomstr . "." . $extension;
-
-            $path = public_path() . '/uploads/';
-            $file->move($path, $filename);
-            $create_video["video_url"] = asset("uploads/" . $filename);
-        }
-
+        $create_video["video_url"] = asset("uploads/" . date("m")."-".$request->video_url);
         Video::create($create_video);
 
         return redirect()->route('videos.index')
@@ -65,28 +51,30 @@ class VideoController extends Controller
     }
 
 
-    public function edit(Video $Video)
+    public function edit(Video $video)
     {
-        return view('admin.videos.edit', compact('Video'));
+        $subscription = UserSubscrption::get();
+        return view('admin.videos.edit', compact('video', "subscription"));
     }
 
 
-    public function update(Request $request, Video $Video)
+    public function update(Request $request, Video $video)
     {
         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'video_title' => 'required',
+            'subscription_type_id' => 'required',
+            'video_detail' => 'required',
         ]);
 
-        $Video->update($request->all());
+        $video->update($request->all());
 
         return redirect()->route('videos.index')
             ->with('success', 'Video updated successfully');
     }
 
-    public function destroy(Video $Video)
+    public function destroy(Video $video)
     {
-        $Video->delete();
+        $video->delete();
 
         return redirect()->route('videos.index')
             ->with('success', 'Video deleted successfully');

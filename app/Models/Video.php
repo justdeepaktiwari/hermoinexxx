@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Role;
+use Stripe\Subscription;
 
 class Video extends Model
 {
@@ -18,6 +19,6 @@ class Video extends Model
     ];
 
     public function subscription(){
-        return $this->hasOne(Role::class, "id", "subscription_type_id");
+        return $this->hasOne(UserSubscrption::class, "id", "subscription_type_id");
     }
 }
