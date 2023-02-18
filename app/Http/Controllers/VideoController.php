@@ -13,7 +13,7 @@ class VideoController extends Controller
     public function index(Request $req)
     {
 
-        $list_videos = Video::with("subscription")->paginate(15);
+        $list_videos = Video::with("subscription")->paginate(10);
         // dd($list_videos);
         return view("admin.videos.index", compact("list_videos"));
     }

@@ -54,4 +54,5 @@
 
   </tbody>
 </table>
+{!! $list_videos->links() !!}
 @endsection
