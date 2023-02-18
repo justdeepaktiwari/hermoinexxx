@@ -146,6 +146,7 @@
                             })
                             return false;
                         } else {
+                            $("#uploadBtn").text("Uploading...").attr("disabled", "disabled");
                             uploader.start();
                             return false;
                         }
@@ -173,6 +174,7 @@
                     var responseData = result.response.replace('"{', '{').replace('}"', '}');
                     var objResponse = JSON.parse(responseData);
                     $(".ready-submit").removeAttr("disabled");
+                    $("#uploadBtn").text("Uploaded").addClass("btn-success").removeClass("btn-primary");
                 },
 
                 Error: function (up, err) {

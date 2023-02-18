@@ -53,6 +53,10 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
     });
 
+    Route::get('user-videos/{video}', function(){
+        return view("videos.video-detail");
+    })->name("user-videos.video-detail");
+
     Route::get('user-videos', function(){
         return view("videos.index");
     })->name("user-videos");

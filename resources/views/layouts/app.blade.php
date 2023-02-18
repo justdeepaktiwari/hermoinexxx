@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
     @yield("css")
 </head>
-<body>
+<body class="position-relative">
     {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
