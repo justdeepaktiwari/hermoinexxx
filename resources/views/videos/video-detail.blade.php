@@ -59,8 +59,12 @@
                 <div class="col-md-9 col-12 row">
                     <div class="fs-3 my-2">Videos Being Watched</div>
                     <div class="video-section w-100">
+                        @php
+                            $type = explode(".", $video_detail->video_url);
+                            $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                        @endphp
                         <video class="video" controls>
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                            <source src="{{ $video_detail->video_url }}" type="video/{{ $type }}">
                         </video>
                     </div>
                 </div>
@@ -73,204 +77,35 @@
                 </div>
                 <div class="col-md-9 col-12 me-auto">
                     <div class="d-flex flex-wrap p-2 me-auto mt-3">
+                        <div class="fs-4 fw-bold my-2">Releated Video</div>
                         <div class="col-12 row">
-                            <div class="fs-4 fw-bold my-2">Releated Video</div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
+                            @foreach($related_video as $video)
+                            <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                                 <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                    @php
+                                        $type = explode(".", $video->video_url);
+                                        $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                                    @endphp
+                                    
+                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
+                                        <source src="{{ $video->video_url }}" type="video/{{ $type }}">
                                     </video>
                                     <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
                                         4:19
                                     </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                    <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
                                             <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
                                         </svg>
                                     </span>
                                 </div>
-                                <div class="mt-2">Title - Video</div>
+                                <div class="mt-2">{{ $video->video_title }}</div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
+                                    <span class="small text-muted">{{ $video->video_views_count ?? 200 }} views</span><span class="mt-1 small text-muted">77%</span>
                                 </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span
-                                        class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()"
-                                        onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span
-                                        class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"
-                                        playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span
-                                        class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 video-hover mb-2" role="button">
-                                <div class="position-relative" style="height: 160px;">
-                                    <video class="video" onmouseover="this.play()"
-                                        onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                        <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                    </video>
-                                    <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                        4:19
-                                    </span>
-                                    <span
-                                        class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="mt-2">Title - Video</div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="small text-muted">276 views</span><span
-                                        class="mt-1 small text-muted">77%</span>
-                                </div>
-                            </div>
+                            </a>
+                            @endforeach
                         </div>
         
                         <div class="col-12 text-center mt-3">

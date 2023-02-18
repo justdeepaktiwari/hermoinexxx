@@ -183,4 +183,26 @@ class VideoController extends Controller
     {
         return view("video");
     }
+
+    public function UserVideo(Request $request)
+    {
+        $new_video = Video::orderBy("id", "desc")->paginate(10);
+
+        $recomended_video = Video::limit(4)->get();
+
+        $max_watched = Video::orderBy("id", "desc")->limit(8)->get();
+        
+        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video'));
+    }
+
+    public function UserVideoDetail(Request $request)
+    {
+        $video_detail = Video::where("id", $request->video)->first();
+        $related_video = Video::orderBy("id", "desc")->paginate(8);
+        // dd($video_detail);
+        if (!$video_detail) {
+           return abort(404); 
+        }
+        return view("videos.video-detail", compact('video_detail', 'related_video'));
+    }
 }

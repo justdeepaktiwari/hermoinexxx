@@ -16,18 +16,23 @@ class UserSubscriptionSeeder extends Seeder
     {
         UserSubscrption::create([
             'name' => 'Gold', 
-            'can_access' => '[1,2,3]'
+            'can_access' => '[1,2,3,4]'
         ]);
 
         UserSubscrption::create([
             'name' => 'Silver', 
-            'can_access' => '[2,3]'
+            'can_access' => '[2,3,4]'
         ]);
 
 
         UserSubscrption::create([
             'name' => 'Bronze', 
-            'can_access' => '[3]'
+            'can_access' => '[3,4]'
+        ]);
+
+        UserSubscrption::create([
+            'name' => 'Free', 
+            'can_access' => '[4]'
         ]);
     }
 }

@@ -53,13 +53,11 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
     });
 
-    Route::get('user-videos/{video}', function(){
-        return view("videos.video-detail");
-    })->name("user-videos.video-detail");
+    Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
+    ->name("user-videos.video-detail");
 
-    Route::get('user-videos', function(){
-        return view("videos.index");
-    })->name("user-videos");
+    Route::get('user-videos', [VideoController::class, 'UserVideo'])
+    ->name("user-videos");
 
     /**Stripe Payment Integration*/
     Route::get('stripe', [StripePaymentController::class, 'stripe']);

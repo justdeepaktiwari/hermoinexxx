@@ -232,3 +232,21 @@ input[type=number]:focus,
         margin: auto;
     }
 }
+
+.pagination{
+    justify-content: center;
+}
+
+.pagination .page-item{
+    background-color: #000;
+}
+
+.pagination .page-item .page-link{
+    color: white;
+    background-color: #000;
+    border: 1px solid #dc3545;
+}
+
+.pagination .page-item.active > .page-link{
+    background-color: #212529;
+}
