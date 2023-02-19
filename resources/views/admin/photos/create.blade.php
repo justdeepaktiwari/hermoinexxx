@@ -34,9 +34,9 @@
                         <div class="form-group">
                             <strong>Select Type</strong>
                             <select name="subscription_type_id" class="form-select">
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Bronze</option>
+                                @foreach($subscription as $key => $subscription_item)
+                                    <option value="{{ $subscription_item["id"] }}">{{ $subscription_item["name"] }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -63,13 +63,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-4 d-inline-block">
-                <div class="border video-lebel notuploadedvideo">
-                    <Photo id="video" controls></video>
-                </div>
-            </div> -->
         </div>
-
     </form>
 @endsection
 

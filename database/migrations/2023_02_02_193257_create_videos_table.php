@@ -17,6 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string("video_title")->nullable();
             $table->string("video_url")->nullable();
+            $table->string("thumbnail_url")->nullable();
             $table->string("video_detail")->nullable();
             $table->string("video_views_count")->nullable();
             $table->string("subscription_type_id")->nullable();

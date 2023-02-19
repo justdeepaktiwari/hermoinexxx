@@ -53,7 +53,7 @@
                             $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
                         @endphp
                         
-                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
+                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop poster="{{ $video->thumbnail_url ?? asset('assets/images/logo.webp') }}">
                             <source src="{{ $video->video_url }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
@@ -93,7 +93,7 @@
                             $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
                         @endphp
                         
-                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
+                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop poster="{{ $video->thumbnail_url ?? asset('assets/images/logo.webp') }}">
                             <source src="{{ $video->video_url }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
@@ -129,7 +129,7 @@
                             $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
                         @endphp
                         
-                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
+                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop poster="{{ $video->thumbnail_url ?? asset('assets/images/logo.webp') }}">
                             <source src="{{ $video->video_url }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">

@@ -192,6 +192,7 @@
     <script src="{{ asset("js/jquery-3.6.3.min.js") }}"></script>
     <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/tata.js') }}"></script>
     @yield("js")
 </html>
 
