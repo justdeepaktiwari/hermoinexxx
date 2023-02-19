@@ -65,7 +65,7 @@
                             $type = explode(".", $video_detail->video_url);
                             $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
                         @endphp
-                        <video class="video" controls>
+                        <video class="video" controls muted autoplay>
                             <source src="{{ $video_detail->video_url }}" type="video/{{ $type }}">
                         </video>
                     </div>
