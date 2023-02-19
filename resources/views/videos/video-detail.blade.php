@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section("title", $video_detail->video_title)
+
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -57,8 +59,8 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-12 row">
-                    <div class="fs-3 my-2">Videos Being Watched</div>
-                    <div class="video-section w-100">
+                    <div class="fs-3 my-2 border border-danger w-100">{{ $video_detail->video_title }}</div>
+                    <div class="video-section w-100 border border-danger p-2">
                         @php
                             $type = explode(".", $video_detail->video_url);
                             $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
@@ -87,7 +89,7 @@
                                         $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
                                     @endphp
                                     
-                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop poster="{{ $video->thumbnail_url ?? asset('assets/images/logo.webp') }}">
+                                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
                                         <source src="{{ $video->video_url }}" type="video/{{ $type }}">
                                     </video>
                                     <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">

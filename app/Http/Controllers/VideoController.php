@@ -30,7 +30,6 @@ class VideoController extends Controller
             'video_title' => 'required',
             'subscription_type_id' => 'required',
             'video_detail' => 'required',
-            'thumbnail_url' => 'required',
             'video_url' => 'required',
         ]);
 
@@ -38,7 +37,6 @@ class VideoController extends Controller
         unset($create_video["_token"]);
 
         $create_video["video_url"] = asset("uploads/" . date("m")."-".$request->video_url);
-        $create_video["thumbnail_url"] = asset("uploads/thumbnail/" . date("m")."-".$request->thumbnail_url);
 
         Video::create($create_video);
         return redirect()->route('videos.index')

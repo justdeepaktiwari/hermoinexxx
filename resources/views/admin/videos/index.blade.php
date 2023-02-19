@@ -18,7 +18,7 @@
         <th>Title</th>
         <th>Description</th>
         <th>Video Url</th>
-        <th style="width: 10%;">Thumbnail Url</th>
+        <!-- <th style="width: 10%;">Thumbnail Url</th> -->
         <th>Type</th>
         <th>Action</th>
     </tr>
@@ -30,7 +30,7 @@
         <td>{{$video->video_title}}</td>
         <td class="text-break">{{$video->video_detail}}</td>
         <td class="text-break">{{$video->video_url}}</td>
-        <td class="text-break text-center"><a href="{{$video->thumbnail_url}}" class="{{ $video->thumbnail_url ?? 'd-none' }}" target="_blank">Click To See</a></td>
+        <!-- <td class="text-break text-center"><a href="{{$video->thumbnail_url}}" class="{{ $video->thumbnail_url ?? 'd-none' }}" target="_blank">Click To See</a></td> -->
         <td>@if($video->subscription) {{$video->subscription->name}} @endif</td>
         <td>
             <span class="edit text-warning mx-1" role="button" onclick="window.location.href = '{{ route("videos.edit", $video->id) }}'">
