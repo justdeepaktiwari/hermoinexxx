@@ -22,7 +22,7 @@
                                 </svg>
                             </div>
                             <div class="media-body text-right">
-                                <h3>278</h3>
+                                <h3>{{ $count_video }}</h3>
                                 <span>Videos</span>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                 </svg>
                             </div>
                             <div class="media-body text-right">
-                                <h3>278</h3>
+                                <h3>{{ $count_photo }}</h3>
                                 <span>Photos</span>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 </svg>
                             </div>
                             <div class="media-body text-right">
-                                <h3>278</h3>
+                                <h3>{{ $count_partner }}</h3>
                                 <span>Partners</span>
                             </div>
                         </div>
@@ -89,8 +89,52 @@
                                 </svg>
                             </div>
                             <div class="media-body text-right">
-                                <h3>278</h3>
+                                <h3>{{ $count_product }}</h3>
                                 <span>Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="card" role="button">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex justify-content-around">
+                            <div class="align-self-center text-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+                                <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
+                                <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                            </svg>
+                            </div>
+                            <div class="media-body text-right">
+                                <h3>{{ $count_tag }}</h3>
+                                <span>Tag</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="card" role="button">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex justify-content-around">
+                            <div class="align-self-center text-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
+                                <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
+                            </svg>
+                            </div>
+                            <div class="media-body text-right">
+                                <h3>{{ $count_category }}</h3>
+                                <span>Category</span>
                             </div>
                         </div>
                     </div>

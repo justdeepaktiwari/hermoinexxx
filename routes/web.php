@@ -42,6 +42,32 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::resource('users', App\Http\Controllers\UserController::class);
 
+        /**Use Category And Tag*/
+        Route::get('category-tag', [App\Http\Controllers\CategoryAndTagController::class, "index"])
+        ->name("category-tag.index");
+
+        Route::get('category-tag/categories/{id}/edit', [App\Http\Controllers\CategoryAndTagController::class, "categoryEdit"])
+        ->name("categories.edit");
+        Route::get('category-tag/categories/create', [App\Http\Controllers\CategoryAndTagController::class, "categoryCreate"])
+        ->name("categories.create");
+        Route::post('category-tag/categories/store', [App\Http\Controllers\CategoryAndTagController::class, "categoryStore"])
+        ->name("categories.store");
+        Route::post('category-tag/categories/{id}', [App\Http\Controllers\CategoryAndTagController::class, "categoryUpdate"])
+        ->name("categories.update");
+        Route::delete('category-tag/categories/{id}', [App\Http\Controllers\CategoryAndTagController::class, "categoryDestroy"])
+        ->name("categories.destroy");
+
+        Route::get('category-tag/tags/{id}/edit', [App\Http\Controllers\CategoryAndTagController::class, "tagEdit"])
+        ->name("tags.edit");
+        Route::get('category-tag/tags/create', [App\Http\Controllers\CategoryAndTagController::class, "tagCreate"])
+        ->name("tags.create");
+        Route::post('category-tag/tags/store', [App\Http\Controllers\CategoryAndTagController::class, "tagStore"])
+        ->name("tags.store");
+        Route::post('category-tag/tags/{id}/update', [App\Http\Controllers\CategoryAndTagController::class, "tagStore"])
+        ->name("tags.update");
+        Route::delete('category-tag/tags/{id}', [App\Http\Controllers\CategoryAndTagController::class, "tagDestroy"])
+        ->name("tags.destroy");
+
         /**Landing Page Videos Manage*/
         Route::resource('landing-page', App\Http\Controllers\LandinPageManageController::class);
 
