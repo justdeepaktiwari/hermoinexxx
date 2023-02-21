@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\RelCategory;
+use App\Models\RelTag;
+use App\Models\Tag;
 use App\Models\Video;
 use App\Models\UserSubscrption;
 use Illuminate\Http\Request;
@@ -12,33 +16,53 @@ class VideoController extends Controller
 {
     public function index(Request $req)
     {
-        $list_videos = Video::with("subscription")->paginate(10);
+        $list_videos = Video::with("subscription")
+                        ->with("rel_category.category")
+                        ->with("rel_tag.tag")
+                        ->paginate(10);
+
         return view("admin.videos.index", compact("list_videos"));
     }
 
     public function create()
     {
         $subscription = UserSubscrption::get();
-        return view('admin.videos.create', compact('subscription'));
+        $category = Category::get();
+        $tags = Tag::get();
+        return view('admin.videos.create', compact('subscription', 'category', 'tags'));
     }
 
 
     public function store(Request $request)
     {
-
         request()->validate([
             'video_title' => 'required',
             'subscription_type_id' => 'required',
             'video_detail' => 'required',
-            'video_url' => 'required',
         ]);
 
         $create_video = $request->all();
+        
         unset($create_video["_token"]);
 
         $create_video["video_url"] = asset("uploads/" . date("m")."-".$request->video_url);
 
-        Video::create($create_video);
+        $create_video["categories_id"] = json_encode($create_video["categories_id"]);
+        $create_video["tags_id"] = json_encode($create_video["tags_id"]);
+
+        $video = Video::create($create_video);
+
+        $create_video["categories_id"] = json_decode($create_video["categories_id"]);
+        $create_video["tags_id"] = json_decode($create_video["tags_id"]);
+
+        foreach ($create_video["categories_id"] as $categories_id) {
+            RelCategory::create(["video_id" => $video->id , "category_id" => $categories_id]);
+        }
+
+        foreach ($create_video["tags_id"] as $tags_id) {
+            RelTag::create(["video_id" => $video->id , "tag_id" => $tags_id]);
+        }
+
         return redirect()->route('videos.index')
             ->with('success', 'Video created successfully.');
     }
@@ -50,10 +74,17 @@ class VideoController extends Controller
     }
 
 
-    public function edit(Video $video)
+    public function edit($id)
     {
+        $video = Video::with("rel_category.category")
+        ->with("rel_tag.tag")->where("id", $id)->first();
+
+        // dd($video);
+        
         $subscription = UserSubscrption::get();
-        return view('admin.videos.edit', compact('video', "subscription"));
+        $category = Category::get();
+        $tags = Tag::get();
+        return view('admin.videos.edit', compact('video', "subscription", "category", "tags"));
     }
 
 
@@ -65,7 +96,36 @@ class VideoController extends Controller
             'video_detail' => 'required',
         ]);
 
-        $video->update($request->all());
+        $update = $request->all();
+
+        if(isset($update["categories_id"])){
+            $update["categories_id"] = json_encode($update["categories_id"]);
+        }
+
+        if (isset($update["tags_id"])) {
+            $update["tags_id"] = json_encode($update["tags_id"]);
+        }
+
+        $video->update($update);
+
+        RelCategory::where("video_id", $video->id)->delete();
+
+        if(isset($update["categories_id"])){
+            $update["categories_id"] = json_decode($update["categories_id"]);
+
+            foreach ($update["categories_id"] as $categories_id) {
+                RelCategory::create(["video_id" => $video->id, "category_id" => $categories_id]);
+            }
+        }
+
+        RelTag::where("video_id", $video->id)->delete();
+        if (isset($update["tags_id"])) {
+            $update["tags_id"] = json_decode($update["tags_id"]);
+
+            foreach ($update["tags_id"] as $tags_id) {
+                RelTag::create(["video_id" => $video->id, "tag_id" => $tags_id]);
+            }
+        }
 
         return redirect()->route('videos.index')
             ->with('success', 'Video updated successfully');

@@ -18,7 +18,8 @@
         <th>Title</th>
         <th>Description</th>
         <th>Video Url</th>
-        <!-- <th style="width: 10%;">Thumbnail Url</th> -->
+        <th style="width: 20%;">Category</th>
+        <th style="width: 20%;">Tag</th>
         <th>Type</th>
         <th>Action</th>
     </tr>
@@ -30,7 +31,28 @@
         <td>{{$video->video_title}}</td>
         <td class="text-break">{{$video->video_detail}}</td>
         <td class="text-break">{{$video->video_url}}</td>
-        <!-- <td class="text-break text-center"><a href="{{$video->thumbnail_url}}" class="{{ $video->thumbnail_url ?? 'd-none' }}" target="_blank">Click To See</a></td> -->
+        <td class="text-break">
+            @if(isset($video->rel_category))
+                @foreach($video->rel_category as $rel_category)
+                    @if($rel_category->category_id)
+                        <span class="badge rounded-pill bg-primary">{{ $rel_category->category->name }}</span>
+                    @endif
+                @endforeach
+            @else
+                NA
+            @endif
+        </td>
+        <td class="text-break">
+            @if(isset($video->rel_tag))
+                @foreach($video->rel_tag as $rel_tag)
+                    @if($rel_tag->tag_id)
+                        <span class="badge rounded-pill bg-primary">{{ $rel_tag->tag->name }}</span>
+                    @endif
+                @endforeach
+            @else
+                NA
+            @endif
+        </td>
         <td>@if($video->subscription) {{$video->subscription->name}} @endif</td>
         <td>
             <span class="edit text-warning mx-1" role="button" onclick="window.location.href = '{{ route("videos.edit", $video->id) }}'">

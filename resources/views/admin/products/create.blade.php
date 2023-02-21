@@ -24,7 +24,7 @@
 
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
     	@csrf
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 mb-2">
                     <div class="form-group">
@@ -50,8 +50,8 @@
                         <input type="number" class="form-control" name="product_amount">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-start">
-                        <button type="submit" class="btn btn-primary rounded-0">Submit</button>
+                <div class="col-xs-12 col-sm-12 col-md-6 text-start">
+                        <button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
                 </div>
             </div>
         </div>

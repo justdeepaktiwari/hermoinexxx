@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset("owlcarousel/owl.theme.default.min.css") }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
     @yield("css")
 </head>
 <body>
@@ -48,7 +49,7 @@
             <!-- </a> -->
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id) }}">Profile</a></li>
                 <li><a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Sign Out</a></li>
             </ul>
         </div>
@@ -202,6 +203,8 @@
     <script src="{{ asset("owlcarousel/owl.carousel.min.js") }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/tata.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
     @yield("js")
 </html>
 

@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Photo;
+use App\Models\RelCategory;
+use App\Models\RelPhotoCategory;
+use App\Models\RelPhotoTag;
+use App\Models\RelTag;
+use App\Models\Tag;
 use App\Models\UserSubscrption;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {
     public function index(Request $req){
-        $list_photos = Photo::with("subscription")->paginate(15);
+        $list_photos = Photo::with("subscription")
+                        ->with("rel_category.category")
+                        ->with("rel_tag.tag")
+                        ->paginate(15);
         return view("admin.photos.index", compact("list_photos"));
     }
 
     public function create()
     {
         $subscription = UserSubscrption::get();
-        return view('admin.photos.create', compact('subscription'));
+        $category = Category::get();
+        $tags = Tag::get();
+        return view('admin.photos.create', compact('subscription', 'category', 'tags'));
     }
    
     
@@ -33,6 +44,7 @@ class PhotoController extends Controller
         ]);
     
         $create_photo = $request->all();
+        // dd($create_photo);
         unset($create_photo["_token"]);
 
         if($request->hasFile('photo_url')){
@@ -48,8 +60,22 @@ class PhotoController extends Controller
             $file->move($path, $filename);
             $create_photo["photo_url"] = asset("uploads/".$filename);
         }
+
+        $create_photo["categories_id"] = json_encode($create_photo["categories_id"]);
+        $create_photo["tags_id"] = json_encode($create_photo["tags_id"]);
         
-        Photo::create($create_photo);
+        $photo = Photo::create($create_photo);
+
+        $create_photo["categories_id"] = json_decode($create_photo["categories_id"]);
+        $create_photo["tags_id"] = json_decode($create_photo["tags_id"]);
+
+        foreach ($create_photo["categories_id"] as $categories_id) {
+            RelPhotoCategory::create(["photo_id" => $photo->id , "category_id" => $categories_id]);
+        }
+
+        foreach ($create_photo["tags_id"] as $tags_id) {
+            RelPhotoTag::create(["photo_id" => $photo->id , "tag_id" => $tags_id]);
+        }
     
         return redirect()->route('photos.index')
                         ->with('success','Photo created successfully.');
@@ -58,13 +84,22 @@ class PhotoController extends Controller
     
     public function show(Photo $photo)
     {
-        return view('admin.photos.show',compact('Video'));
+        return view('admin.photos.show',compact('photo'));
     }
     
     
-    public function edit(Photo $photo)
+    public function edit($id)
     {
-        return view('admin.photos.edit',compact('Video'));
+        $photo = Photo::with("rel_category.category")
+        ->with("rel_tag.tag")->where("id", $id)->first();
+
+        // dd($photo);
+        
+        $subscription = UserSubscrption::get();
+        $category = Category::get();
+        $tags = Tag::get();
+
+        return view('admin.photos.edit',compact('photo', 'subscription', 'category', 'tags'));
     }
     
     
@@ -75,8 +110,39 @@ class PhotoController extends Controller
             'detail' => 'required',
         ]);
     
-        $photo->update($request->all());
+        $update = $request->all();
+
+        if(isset($update["categories_id"])){
+            $update["categories_id"] = json_encode($update["categories_id"]);
+        }
+
+        if (isset($update["tags_id"])) {
+            $update["tags_id"] = json_encode($update["tags_id"]);
+        }
+
+
+        $photo->update($update);
     
+        
+        RelCategory::where("photo_id", $photo->id)->delete();
+
+        if(isset($update["categories_id"])){
+            $update["categories_id"] = json_decode($update["categories_id"]);
+
+            foreach ($update["categories_id"] as $categories_id) {
+                RelCategory::create(["photo_id" => $photo->id, "category_id" => $categories_id]);
+            }
+        }
+
+        RelTag::where("photo_id", $photo->id)->delete();
+        if (isset($update["tags_id"])) {
+            $update["tags_id"] = json_decode($update["tags_id"]);
+
+            foreach ($update["tags_id"] as $tags_id) {
+                RelTag::create(["photo_id" => $photo->id, "tag_id" => $tags_id]);
+            }
+        }
+
         return redirect()->route('photos.index')
                         ->with('success','Photo updated successfully');
     }

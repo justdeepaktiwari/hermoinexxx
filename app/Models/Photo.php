@@ -18,6 +18,15 @@ class Photo extends Model
     ];
 
     public function subscription(){
-        return $this->hasOne(Role::class, "id", "subscription_type_id");
+        return $this->hasOne(UserSubscrption::class, "id", "subscription_type_id");
+    }
+
+    
+    public function rel_category(){
+        return $this->hasMany(RelPhotoCategory::class, "photo_id", "id");
+    }
+
+    public function rel_tag(){
+        return $this->hasMany(RelPhotoTag::class, "photo_id", "id");
     }
 }

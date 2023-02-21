@@ -26,7 +26,7 @@
     @method("PATCH")
 
     <div class="d-flex justify-content-between flex-wrap">
-        <div class="col-md-7 d-inline-block">
+        <div class="col-md-10 d-inline-block">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 mb-2">
                     <div class="form-group">
@@ -59,7 +59,7 @@
                         </div>
                     @else 
                         <strong>Uploaded Video</strong>
-                        <div class="form-control border border-primary d-flex align-items-center gap-2 small fw-bold mb-1">
+                        <div class="form-control border border-primary d-flex align-items-center gap-2 small fw-bold mb-1 p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
                             </svg> 
@@ -73,8 +73,29 @@
                         <textarea class="form-control" name="video_detail" placeholder="Detail" rows="2">{{ $video->video_detail }}</textarea>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-start">
-                    <button type="submit" class="btn btn-primary rounded-0">Submit</button>
+                <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                    <div class="form-group">
+                        <strong>Select Categories</strong>
+                        <select name="categories_id[]" multiple class="w-100">
+                            @foreach($category as $cat)
+                            <option value="{{ $cat->id }}" {{ in_array($cat->id, array_column($video->rel_category->toArray(), "category_id")) ? "selected" : "" }}>{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                    <div class="form-group">
+                        <strong>Select Tags</strong>
+                        <select name="tags_id[]" multiple class="w-100">
+                            @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}" {{ in_array($tag->id, array_column($video->rel_tag->toArray(), "tag_id")) ? "selected" : "" }}>{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 text-start">
+                    <button type="submit" class="btn btn-primary rounded-0 w-100">Submit</button>
                 </div>
             </div>
         </div>
@@ -82,4 +103,10 @@
 
 </form>
 
+@endsection
+
+@section("js")
+    <script>
+        $('[name="categories_id[]"], [name="tags_id[]"]').select2();
+    </script>
 @endsection

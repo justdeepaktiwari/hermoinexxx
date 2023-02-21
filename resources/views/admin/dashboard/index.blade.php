@@ -11,7 +11,7 @@
     <div class="d-flex flex-wrap gap-4"> 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('videos.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -33,7 +33,7 @@
 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('photos.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -56,7 +56,7 @@
 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('users.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -78,7 +78,7 @@
 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('products.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -100,7 +100,7 @@
 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('category-tag.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -122,7 +122,7 @@
 
 
         <div class="col-md-2">
-            <div class="card" role="button">
+            <div class="card" role="button" onclick="window.location.href = `{{ route('category-tag.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">

@@ -17,9 +17,19 @@ class Video extends Model
         'thumbnail_url',
         'video_detail',
         'subscription_type_id',
+        'categories_id',
+        'tags_id'
     ];
 
     public function subscription(){
         return $this->hasOne(UserSubscrption::class, "id", "subscription_type_id");
+    }
+
+    public function rel_category(){
+        return $this->hasMany(RelCategory::class, "video_id", "id");
+    }
+
+    public function rel_tag(){
+        return $this->hasMany(RelTag::class, "video_id", "id");
     }
 }

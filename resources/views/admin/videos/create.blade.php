@@ -13,6 +13,18 @@
     .progress-bar {
         background: #28a745;
     }
+
+    .select2-selection__rendered {
+        line-height: 31px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 34px !important;
+    }
 </style>
 @endsection
 @section('content')
@@ -32,7 +44,7 @@
 <form action="{{ route('videos.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="d-flex justify-content-between flex-wrap">
-        <div class="col-md-7 d-inline-block">
+        <div class="col-md-10 d-inline-block">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 mb-2">
                     <div class="form-group">
@@ -63,25 +75,35 @@
                         <div id="fileList" class="mt-2"></div>
                     </div>
                 </div>
-                <!-- <div class="col-xs-12 col-sm-12 col-md-6 mb-3 photo-upload">
-                        <div class="form-group">
-                            <strong>Upload Thumbnail</strong>
-                            <div class='input-group'>
-                                <input type='file' class="form-control rounded-0" id="photoInput">
-                                <button class="btn btn-primary rounded-0" type="button" id="photoUploadBtn">Upload</button>
-                            </div>
-
-                            <div class="progress my-2"></div>
-
-                            <div id="photofileList" class="mt-2"></div>
-                        </div>
-                    </div> -->
                 <div class="col-xs-12 col-sm-12 col-md-6 mb-2">
                     <div class="form-group">
                         <strong>Video Description</strong>
-                        <textarea class="form-control" name="video_detail" placeholder="Detail" rows="1" required></textarea>
+                        <textarea class="form-control" name="video_detail" placeholder="Detail" rows="2" required></textarea>
                     </div>
                 </div>
+                
+                <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                    <div class="form-group">
+                        <strong>Select Categories</strong>
+                        <select name="categories_id[]" multiple class="w-100">
+                            @foreach($category as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                    <div class="form-group">
+                        <strong>Select Tags</strong>
+                        <select name="tags_id[]" multiple class="w-100">
+                            @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-6 text-start mb-3">
                     <strong class="invisible">Video Description</strong>
                     <button type="submit" class="btn btn-primary rounded-0 ready-submit w-100" disabled>Submit</button>
@@ -164,85 +186,6 @@
     });
     uploader.init();
 
-
-    /*var photoUploader = new plupload.Uploader({
-         runtimes: 'html5,flash,silverlight,html4',
-         browse_button: 'photoInput',
-         url: '{{ route("upload-thumbnail") }}',
-         flash_swf_url: '{{ asset("plupload/js/Moxie.swf") }}',
-         silverlight_xap_url: '{{ asset("plupload/js/Moxie.xap") }}',
-         multi_selection: false,
-         chunk_size: '200kb',
-         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-         filters: {
-             max_file_size: '2mb',
-             mime_types: [
-                 { title: "Photo files", extensions: "jpg,png,gif" },
-             ]
-         },
-
-         init: {
-             PostInit: function () {
-                 document.getElementById('photofileList').innerHTML = '';
-                 document.getElementById('photoUploadBtn').onclick = function () {
-                     if (photoUploader.files.length < 1) {
-                         tata.error("Error!", "Please select photo");
-                         return false;
-                     } else {
-                         $("#photoUploadBtn").text("Uploading...").attr("disabled", "disabled");
-                         photoUploader.start();
-                         return false;
-                     }
-                 };
-             },
-
-             FilesAdded: function (up, files) {
-                 plupload.each(files, function (file) {
-                     document.getElementById('photofileList').innerHTML += 
-                         `<div id="${file.id}" class="p-2 border border-primary d-flex align-items-center gap-2 small fw-bold mb-1">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-                                 <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                                 <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
-                             </svg>
-                             <input type="hidden" name="thumbnail_url" value="${file.name}"/>
-                             ${file.name} - ${plupload.formatSize(file.size)}
-                         </div>`;
-                 });
-             },
-
-             UploadProgress: function (up, file) {
-                 document.querySelector(".photo-upload .progress").innerHTML = '<div class="progress-bar" style="width: ' + file.percent + '%;">' + file.percent + '%</div>';
-             },
-
-             FileUploaded: function (up, file, result) {
-                 var responseData = result.response.replace('"{', '{').replace('}"', '}');
-                 var objResponse = JSON.parse(responseData);
-                 checkUploads(false, true);
-                 $("#photoUploadBtn").text("Uploaded").addClass("btn-success").removeClass("btn-primary");
-             },
-
-             Error: function (up, err) {
-                 tata.error("Error!", err.message);
-             }
-         }
-     });
-     photoUploader.init();*/
-
-
-    var video_upload = thumbnail_upload = false;
-
-    function checkUploads(video_upload_param, thumbnail_upload_param) {
-        if (video_upload_param) {
-            video_upload = true;
-        }
-
-        if (thumbnail_upload_param) {
-            thumbnail_upload = true;
-        }
-
-        if (video_upload && thumbnail_upload) {
-            $(".ready-submit").removeAttr("disabled");
-        }
-    }
+    $('[name="categories_id[]"], [name="tags_id[]"]').select2();
 </script>
 @endsection
