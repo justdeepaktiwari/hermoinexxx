@@ -235,6 +235,7 @@ input[type=number]:focus,
 
 .pagination{
     justify-content: center;
+    flex-wrap: wrap !important;
 }
 
 .pagination .page-item{

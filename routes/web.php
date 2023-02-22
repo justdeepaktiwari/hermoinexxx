@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VideoController;
@@ -93,3 +94,4 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 Route::post('upload-video-chunk', [VideoController::class, 'UploadVideo'])->name("upload-video");
 Route::post('upload-photo-chunk', [VideoController::class, 'UploadThumbanil'])->name("upload-thumbnail");
 Route::get('upload-file-chunk', [VideoController::class, 'ViewVideo']);
+Route::get('debug-project', [HomeController::class, 'debugAmount']);

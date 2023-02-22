@@ -153,7 +153,7 @@
             </div>
         </div>
 
-        <div class="pagination-section py-3 text-center">
+        <div class="pagination-section py-3 text-center col-11 mx-auto">
             {!! $new_video->links() !!}
         </div>
 

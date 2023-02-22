@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\backup_videos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,5 +35,35 @@ class HomeController extends Controller
         $real_amount_30 = $off_amount_30 = "100";
 
         return view('welcome', compact("real_amount_360", "real_amount_90", "real_amount_30", "off_amount_360", "off_amount_90", "off_amount_30"));
+    }
+
+
+    public function debugAmount()
+    {
+        // dd("KUXBHI");
+
+        $path = public_path("uploads");
+        $backup_path = public_path("renamedvideo");
+
+        $file_array_dir = array_diff(scandir($path), array('..', '.'));
+
+        $file_array = array_filter($file_array_dir, function($item) use($path){
+            return !is_dir($path.'/' . $item);
+        });
+
+        foreach ($file_array as $key => $value) {
+            echo $value."<br>";
+            $uniq_folder = uniqid();
+           
+            if (!file_exists($path.'/hermoinexxx____'.$uniq_folder)) {
+                mkdir($path.'/hermoinexxx____'.$uniq_folder, 0777, true);
+            }
+
+            copy($path."/".$value, $backup_path."/".$value);
+
+            rename($path."/".$value, $path.'/hermoinexxx____'.$uniq_folder."/hermoinexxx____".$uniq_folder.".mp4");
+
+            backup_videos::updateOrCreate(["old_name" => $value],["new_name" => "hermoinexxx____".$uniq_folder.".mp4"]);
+        }
     }
 }
