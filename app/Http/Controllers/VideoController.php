@@ -45,7 +45,7 @@ class VideoController extends Controller
         
         unset($create_video["_token"]);
 
-        $create_video["video_url"] = asset("uploads/" . date("m")."-".$request->video_url);
+        $create_video["video_url"] = asset("uploads/" . $request->video_url);
 
         if(isset($create_video["categories_id"])){
             $create_video["categories_id"] = json_encode($create_video["categories_id"]);
@@ -241,106 +241,23 @@ class VideoController extends Controller
         // Check if file has been uploaded 
         if (!$chunks || $chunk == $chunks - 1) {
             // Strip the temp .part suffix off  
-            rename("{$filePath}.part", $filePath);
-        }
-
-        // Return Success JSON-RPC response 
-        die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!"}}');
-    }
-
-    public function UploadThumbanil(Request $request)
-    {
-
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
-
-
-        $path = public_path("uploads/thumbnail");
-        // dd($path);
-        $cleanupTargetDir = true;
-        $maxFileAge = 5 * 3600;
-
-        // Create target dir 
-        if (!File::exists($path)) {
-            File::makeDirectory($path, $mode = 0777, true, true);
-        }
-        
-        // Get a file name
-        $month = Date("m");
-        
-        if (isset($request->name)) {
-            $fileName = $month."-".$request->name;
-        } elseif ($request->has("file")) {
-            $fileName = $month."-".$_FILES["file"]["name"];
-        } else {
-            $fileName = uniqid("file_");
-        }
-
-        $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
-
-        // Chunking might be enabled
-        $chunk = isset($request->chunk) ? intval($request->chunk) : 0;
-        $chunks = isset($request->chunks) ? intval($request->chunks) : 0;
-
-
-        // Remove old temp files
-        if ($cleanupTargetDir) {
-            if (!is_dir($path) || !$dir = opendir($path)) {
-                die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
+            $ext = explode(".", $filePath);
+            
+            if(isset($ext[count($ext)-1])){
+                $ext = $ext[count($ext)-1];
+            }else{
+                die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Select correct file."}, "id" : "id"}');
             }
 
-            while (($file = readdir($dir)) !== false) {
-                $tmpfilePath = $path . DIRECTORY_SEPARATOR . $file;
+            $path = public_path("uploads");
+            $uniq_folder = uniqid();
 
-                // If temp file is current file proceed to the next 
-                if ($tmpfilePath == "{$filePath}.part") {
-                    continue;
-                }
-
-                // Remove temp file if it is older than the max age and is not the current file 
-                if (preg_match('/\.part$/', $file) && (filemtime($tmpfilePath) < time() - $maxFileAge)) {
-                    // @unlink($tmpfilePath);
-                    File::delete($tmpfilePath);
-                }
+            if (!file_exists($path.'/hermoinexxx____'.$uniq_folder)) {
+                mkdir($path.'/hermoinexxx____'.$uniq_folder, 0777, true);
             }
-            closedir($dir);
-        }
-
-
-        // Open temp file 
-        if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
-            die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
-        }
-
-        if (!empty($_FILES)) {
-            if ($_FILES["file"]["error"] || !is_uploaded_file($_FILES["file"]["tmp_name"])) {
-                die('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
-            }
-
-            // Read binary input stream and append it to temp file 
-            if (!$in = @fopen($_FILES["file"]["tmp_name"], "rb")) {
-                die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
-            }
-        } else {
-            if (!$in = @fopen("php://input", "rb")) {
-                die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
-            }
-        }
-
-        while ($buff = fread($in, 4096)) {
-            fwrite($out, $buff);
-        }
-
-        @fclose($out);
-        @fclose($in);
-
-        // Check if file has been uploaded 
-        if (!$chunks || $chunk == $chunks - 1) {
-            // Strip the temp .part suffix off  
-            rename("{$filePath}.part", $filePath);
+            
+            rename("{$filePath}.part", $path.'/hermoinexxx____'.$uniq_folder."/hermoinexxx____".$uniq_folder.".".$ext);
+            die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!", "name": "hermoinexxx____'.$uniq_folder.'/hermoinexxx____'.$uniq_folder.'.'.$ext.'"}}');
         }
 
         // Return Success JSON-RPC response 
