@@ -47,20 +47,30 @@ class VideoController extends Controller
 
         $create_video["video_url"] = asset("uploads/" . date("m")."-".$request->video_url);
 
-        $create_video["categories_id"] = json_encode($create_video["categories_id"]);
-        $create_video["tags_id"] = json_encode($create_video["tags_id"]);
+        if(isset($create_video["categories_id"])){
+            $create_video["categories_id"] = json_encode($create_video["categories_id"]);
+        }
+
+        if (isset($create_video["tags_id"])) {
+            $create_video["tags_id"] = json_encode($create_video["tags_id"]);
+        }
+
 
         $video = Video::create($create_video);
 
-        $create_video["categories_id"] = json_decode($create_video["categories_id"]);
-        $create_video["tags_id"] = json_decode($create_video["tags_id"]);
-
-        foreach ($create_video["categories_id"] as $categories_id) {
-            RelCategory::create(["video_id" => $video->id , "category_id" => $categories_id]);
+        
+        if(isset($create_video["categories_id"])){
+            $create_video["categories_id"] = json_decode($create_video["categories_id"]);
+            foreach ($create_video["categories_id"] as $categories_id) {
+                RelCategory::create(["video_id" => $video->id , "category_id" => $categories_id]);
+            }
         }
 
-        foreach ($create_video["tags_id"] as $tags_id) {
-            RelTag::create(["video_id" => $video->id , "tag_id" => $tags_id]);
+        if (isset($create_video["tags_id"])) {
+            $create_video["tags_id"] = json_decode($create_video["tags_id"]);
+            foreach ($create_video["tags_id"] as $tags_id) {
+                RelTag::create(["video_id" => $video->id , "tag_id" => $tags_id]);
+            }
         }
 
         return redirect()->route('videos.index')

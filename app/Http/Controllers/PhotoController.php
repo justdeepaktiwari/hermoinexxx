@@ -61,20 +61,28 @@ class PhotoController extends Controller
             $create_photo["photo_url"] = asset("uploads/".$filename);
         }
 
-        $create_photo["categories_id"] = json_encode($create_photo["categories_id"]);
-        $create_photo["tags_id"] = json_encode($create_photo["tags_id"]);
+        if (isset($create_photo["categories_id"])) {
+            $create_photo["categories_id"] = json_encode($create_photo["categories_id"]);
+        }
         
-        $photo = Photo::create($create_photo);
-
-        $create_photo["categories_id"] = json_decode($create_photo["categories_id"]);
-        $create_photo["tags_id"] = json_decode($create_photo["tags_id"]);
-
-        foreach ($create_photo["categories_id"] as $categories_id) {
-            RelPhotoCategory::create(["photo_id" => $photo->id , "category_id" => $categories_id]);
+        if (isset($create_photo["tags_id"])) {
+            $create_photo["tags_id"] = json_encode($create_photo["tags_id"]);
         }
 
-        foreach ($create_photo["tags_id"] as $tags_id) {
-            RelPhotoTag::create(["photo_id" => $photo->id , "tag_id" => $tags_id]);
+        $photo = Photo::create($create_photo);
+
+        if(isset($create_photo["categories_id"])){
+            $create_photo["categories_id"] = json_decode($create_photo["categories_id"]);
+            foreach ($create_photo["categories_id"] as $categories_id) {
+                RelPhotoCategory::create(["photo_id" => $photo->id , "category_id" => $categories_id]);
+            }
+        }
+        
+        if(isset($create_photo["tags_id"])){
+            $create_photo["tags_id"] = json_decode($create_photo["tags_id"]);
+            foreach ($create_photo["tags_id"] as $tags_id) {
+                RelPhotoTag::create(["photo_id" => $photo->id , "tag_id" => $tags_id]);
+            }
         }
     
         return redirect()->route('photos.index')
