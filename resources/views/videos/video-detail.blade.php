@@ -58,8 +58,8 @@
                         <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
                     </div>
                 </div>
-                <div class="col-md-9 col-12 row">
-                    <div class="fs-3 my-2 border border-danger w-100">{{ $video_detail->video_title }}</div>
+                <div class="col-md-9 col-12 d-flex flex-column gap-3 mt-2">
+                    <div class="fs-3 my-2 border border-danger w-100 p-2">{{ $video_detail->video_title }}</div>
                     <div class="video-section w-100 border border-danger p-2">
                         @php
                             $type = explode(".", $video_detail->video_url);
@@ -70,7 +70,7 @@
                         </video>
                     </div>
                 </div>
-                <div class="col-md-3 col-12 text-end px-2">
+                <div class="col-md-3 col-12 text-end px-2  mt-2">
                     <div class="bg-white ad-section  mx-2" style="height: 45%; min-height: 180px;"></div>
                     <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;">
                         <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
@@ -78,8 +78,10 @@
                     <div class="bg-white ad-section  mx-2" style="height: 45%;  min-height: 180px;"></div>
                 </div>
                 <div class="col-md-9 col-12 me-auto">
-                    <div class="d-flex flex-wrap p-2 me-auto mt-3">
+                    <div style="height: 20px;"></div>
+                    <div class="d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center flex-wrap p-2 me-auto mt-3">
                         <div class="fs-4 fw-bold my-2">Releated Video</div>
+                        <div style="height: 20px;"></div>
                         <div class="col-12 row">
                             @foreach($related_video as $video)
                             <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">

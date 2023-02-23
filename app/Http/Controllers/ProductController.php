@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
     
 use App\Models\Product;
 use Illuminate\Http\Request;
-    
+use File;
+
 class ProductController extends Controller
 { 
     /**
@@ -65,9 +66,14 @@ class ProductController extends Controller
 
             $filename = $randomstr.".".$extension;
 
-            $path = public_path().'/uploads/';
+            $path = public_path().'/uploads/products/';
+            
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+
             $file->move($path, $filename);
-            $create_product["product_image"] = asset("uploads/".$filename);
+            $create_product["product_image"] = asset("uploads/products/".$filename);
         }
 
         Product::create($create_product);

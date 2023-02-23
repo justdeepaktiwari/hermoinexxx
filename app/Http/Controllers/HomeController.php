@@ -42,7 +42,7 @@ class HomeController extends Controller
     public function debugAmount()
     {
         // dd("KUXBHI");
-
+        return;
         $get_file_name = backup_videos::get();
         foreach ($get_file_name as $key => $get_file_name_val) {
             echo($get_file_name_val->old_name)."<br>";

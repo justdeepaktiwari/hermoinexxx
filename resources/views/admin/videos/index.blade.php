@@ -27,10 +27,22 @@
   <tbody>
     @forelse ($list_videos as $video)
     <tr>
+        @php
+            $video_name = explode("/", $video->video_url);
+            if(isset($video_name[count($video_name)-1])){
+                $video_name = $video_name[count($video_name)-1];
+            }else{
+                $video_name = "NA";
+            }
+        @endphp
         <td>{{$video->id}}</td>
         <td>{{$video->video_title}}</td>
         <td class="text-break">{{$video->video_detail}}</td>
-        <td class="text-break">{{$video->video_url}}</td>
+        <td class="text-break align-middle">
+            <a href="{{ route('user-videos.video-detail', $video->id) }}" class="text-decoration-none" target="_blank">
+                {{ $video_name }}
+            </a>
+        </td>
         <td class="text-break">
             @if(isset($video->rel_category))
                 @foreach($video->rel_category as $rel_category)

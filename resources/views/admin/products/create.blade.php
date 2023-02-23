@@ -40,14 +40,18 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 mb-2">
                     <div class="form-group">
-                        <strong>Product Image</strong>
-                        <input type="file" class="form-control" accept="image/*" name="product_image">
+                        <strong>Product Video/Image</strong>
+                        <input type="file" class="form-control" accept="image/*,video/*" name="product_image">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 mb-2">
                     <div class="form-group">
                         <strong>Product Amount</strong>
-                        <input type="number" class="form-control" name="product_amount">
+                        
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="product_amount">
+                            <span class="input-group-text" id="basic-addon2">$</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 text-start">
