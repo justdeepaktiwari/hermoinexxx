@@ -66,7 +66,7 @@ class ProductController extends Controller
 
             $filename = $randomstr.".".$extension;
 
-            $path = public_path().'/uploads/products/';
+            $path = public_path("uploads/products");
             
             if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
