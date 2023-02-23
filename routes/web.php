@@ -38,6 +38,7 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         Route::resource('videos', App\Http\Controllers\VideoController::class);
         Route::resource('photos', App\Http\Controllers\PhotoController::class);
         Route::resource('products', App\Http\Controllers\ProductController::class);
+        Route::resource('purchase', App\Http\Controllers\PurchaseOfferController::class);
 
         /**Use Role And Permission*/
         Route::resource('roles', App\Http\Controllers\RoleController::class);

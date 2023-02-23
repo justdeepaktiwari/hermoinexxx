@@ -402,8 +402,6 @@
                                 <div class="mb-3">
                                     <label for="Membership" class="form-label">Membership</label>
                                     <select name="joinOption" class="form-select" id="Membership">
-
-
                                     <option value="0000011174:840"
                                             data-salespitch="Billed in monthly payments of <del>$29.98</del> <strong>$24.98</strong>">
                                             17% OFF - 30 Days for $24.98/month ($24.98 every 30 Days) </option>
