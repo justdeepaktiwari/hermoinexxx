@@ -33,7 +33,7 @@
       @endif
     </td>
     
-    <td class="align-middle">{!! !count($user->getRoleNames()) ? 'User - '.$user->subscription->name : '<span class="badge bg-success text-light p-2 rounded-0">Partner</span>' !!}</td>
+    <td class="align-middle">{!! !count($user->getRoleNames()) ? 'User - '.(isset($user->subscription->name) ? $user->subscription->name : "NA") : '<span class="badge bg-success text-light p-2 rounded-0">Partner</span>' !!}</td>
     <td class="d-flex justify-content-evenly">
        <a class="btn btn-sm rounded-0 btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
        <a class="btn btn-sm rounded-0 btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
