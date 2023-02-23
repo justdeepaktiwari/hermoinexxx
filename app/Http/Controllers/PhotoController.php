@@ -11,6 +11,7 @@ use App\Models\RelTag;
 use App\Models\Tag;
 use App\Models\UserSubscrption;
 use Illuminate\Http\Request;
+use File;
 
 class PhotoController extends Controller
 {
@@ -56,9 +57,14 @@ class PhotoController extends Controller
 
             $filename = $randomstr.".".$extension;
 
-            $path = public_path().'/uploads/';
+            $path = public_path().'/uploads/photos/';
+            
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+
             $file->move($path, $filename);
-            $create_photo["photo_url"] = asset("uploads/".$filename);
+            $create_photo["photo_url"] = asset("uploads/photos/".$filename);
         }
 
         if (isset($create_photo["categories_id"])) {
