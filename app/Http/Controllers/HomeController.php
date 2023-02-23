@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\backup_videos;
+use App\Models\PurchaseOffer;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,11 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $real_amount_360 = $off_amount_360 = "100";
-        $real_amount_90 = $off_amount_90 = "100";
-        $real_amount_30 = $off_amount_30 = "100";
-
-        return view('welcome', compact("real_amount_360", "real_amount_90", "real_amount_30", "off_amount_360", "off_amount_90", "off_amount_30"));
+        $purchase_offer = PurchaseOffer::get();
+        return view('welcome', compact("purchase_offer"));
     }
 
 
