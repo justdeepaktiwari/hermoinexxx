@@ -51,8 +51,13 @@
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                     <div class="position-relative" style="height: 160px;">
                         @php
-                            $type = explode(".", $video->video_url);
-                            $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                            $folder = explode(".", $video->video_url);
+                            $type = isset($folder[count($folder)-1]) ? $folder[count($folder)-1] : "mp4";
+
+                            $folder = isset($folder[0]) ? explode("/", $folder[0]) : "";
+                            if(isset($folder[count($folder)-1])){
+                                $folder = $folder[count($folder)-1];
+                            }
                         @endphp
                         
                         <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
@@ -94,7 +99,10 @@
                             $folder = explode(".", $video->video_url);
                             $type = isset($folder[count($folder)-1]) ? $folder[count($folder)-1] : "mp4";
 
-                            $folder = isset($folder[0]) ? explode("/", $folder[0])[0] : "";
+                            $folder = isset($folder[0]) ? explode("/", $folder[0]) : "";
+                            if(isset($folder[count($folder)-1])){
+                                $folder = $folder[count($folder)-1];
+                            }
                         @endphp
                         
                         <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
@@ -129,8 +137,13 @@
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                     <div class="position-relative" style="height: 160px;">
                         @php
-                            $type = explode(".", $video->video_url);
-                            $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                            $folder = explode(".", $video->video_url);
+                            $type = isset($folder[count($folder)-1]) ? $folder[count($folder)-1] : "mp4";
+
+                            $folder = isset($folder[0]) ? explode("/", $folder[0]) : "";
+                            if(isset($folder[count($folder)-1])){
+                                $folder = $folder[count($folder)-1];
+                            }
                         @endphp
                         
                         <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
