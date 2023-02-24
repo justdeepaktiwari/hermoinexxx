@@ -5,6 +5,7 @@
 <style>
     .disable-after{
         position: relative !important;
+        pointer-events: none;
     }
 
     .disable-after::after{
@@ -17,6 +18,7 @@
         opacity: 0.4;
         z-index: 9999999 !important;
         background: linear-gradient(0deg,rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+        pointer-events: none;
     }
 </style>
 @endsection
@@ -546,10 +548,10 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-
+                    tata.success("Success!", "Payment completed successfullly!")
+                    window.location.href = "{{ route('user-videos') }}"
                 },
                 error: function(err, xhr){
-                    console.log(err.responseJSON);
                     tata.error("Error!", err.responseJSON.message);
                     
                     var errors = err.responseJSON.errors;

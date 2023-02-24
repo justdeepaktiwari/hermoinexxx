@@ -42,44 +42,43 @@ class StripePaymentController extends Controller
 
         $user_info = (array)json_decode($request->user_info);
         // dd($user_info);
+        $password = $user_info["password"];
+        $email = $user_info['email'];
+        $credentials = ['email' => $email, 'password' => $password];
+
         unset($user_info["_token"]);
         if(!User::where("email", $user_info["email"])->exists()){
             $user_info["password"] = Hash::make($user_info["password"]);
             User::create($user_info);
         }
 
-        $credentials = ['email' => $user_info['email'], 'password' => $user_info['password']];
-        // dd($credentials);
-        // if(Auth::attempt($credentials)){
-        //     dd("success");
-        // }
-        // dd(Hash::make($user_info["password"]));
-        try{
-            $stripe = new \Stripe\StripeClient(env("STRIPE_SECRET"));
-
-            $res = $stripe->tokens->create([
-                        'card' => [
-                            'number' => $request->number,
-                            'exp_month' => $request->exp_month,
-                            'exp_year' => $request->exp_year,
-                            'cvc' => $request->cvc,
-                        ],
-                    ]);
-            
-            Stripe\Stripe::setApiKey(env("STRIPE_KEY"));
-
-            $response = $stripe->charges->create([
-                            'amount' => $request->amount,
-                            'currency' => 'usd',
-                            'source' => $res->id,
-                            'description' => $request->description,
+        if(Auth::attempt($credentials)){
+            try{
+                $stripe = new \Stripe\StripeClient(env("STRIPE_SECRET"));
+    
+                $res = $stripe->tokens->create([
+                            'card' => [
+                                'number' => $request->number,
+                                'exp_month' => $request->exp_month,
+                                'exp_year' => $request->exp_year,
+                                'cvc' => $request->cvc,
+                            ],
                         ]);
-                        
-            // dd($response);
-            return response()->json([[$response]], 201);
-        }catch(\Throwable $e){
-            dd($e->getMessage());
-            return response()->json([['response' => $e]], 500);
+                
+                Stripe\Stripe::setApiKey(env("STRIPE_KEY"));
+    
+                $response = $stripe->charges->create([
+                                'amount' => $request->amount*100,
+                                'currency' => 'usd',
+                                'source' => $res->id,
+                                'description' => $request->description,
+                            ]);
+                return response()->json($response, 201);
+            }catch(\Throwable $e){
+                return response()->json($e->getMessage(), 500);
+            }
+        }else{
+            return response()->json(["message" => "User already exist"], 422);
         }
     }
 

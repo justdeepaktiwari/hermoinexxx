@@ -58,14 +58,14 @@
             @if(isset($video->rel_tag))
                 @foreach($video->rel_tag as $rel_tag)
                     @if($rel_tag->tag_id)
-                        <span class="badge rounded-pill bg-primary">{{ $rel_tag->tag->name }}</span>
+                        <span class="badge rounded-pill bg-primary">{{ isset($rel_tag->tag->name) ? $rel_tag->tag->name : "" }}</span>
                     @endif
                 @endforeach
             @else
                 NA
             @endif
         </td>
-        <td>@if($video->subscription) {{$video->subscription->name}} @endif</td>
+        <td>@if($video->subscription) {{isset($video->subscription->name) ? $video->subscription->name : "" }} @endif</td>
         <td>
             <span class="edit text-warning mx-1" role="button" onclick="window.location.href = '{{ route("videos.edit", $video->id) }}'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
