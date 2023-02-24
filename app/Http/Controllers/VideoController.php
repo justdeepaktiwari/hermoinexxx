@@ -47,6 +47,16 @@ class VideoController extends Controller
 
         $create_video["video_url"] = asset("uploads/" . $request->video_url);
 
+        $folder = explode("/", $request->video_url);
+        if(isset($folder[1])){
+            $ext = explode(".", $folder[1]);
+            $ext = $ext[count($ext)-1];
+
+            $output = 
+            shell_exec('cd ./uploads/'.$folder[0].'; ffmpeg -i '.$folder[1].' -ss 00:01:20 -t 00:00:30 -c:v copy -c:a copy poster.'.$ext);
+            echo "<pre>$output</pre>";
+        }
+
         if(isset($create_video["categories_id"])){
             $create_video["categories_id"] = json_encode($create_video["categories_id"]);
         }
