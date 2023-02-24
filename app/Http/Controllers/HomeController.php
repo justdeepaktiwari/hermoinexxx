@@ -63,8 +63,6 @@ class HomeController extends Controller
             shell_exec('cd ./uploads/'.$value.'; ffmpeg -i '.$value.'.mp4 -ss 00:01:20 -t 00:00:30 -c:v copy -c:a copy poster.mp4');
             echo "<pre>$output</pre>";
             
-            echo $value."<br>";
-            exit();
             // $uniq_folder = uniqid();
            
             // if (!file_exists($path.'/hermoinexxx____'.$uniq_folder)) {
