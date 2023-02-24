@@ -2,6 +2,23 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+<style>
+    .disable-after{
+        position: relative !important;
+    }
+
+    .disable-after::after{
+        position: absolute !important;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+        z-index: 9999999 !important;
+        background: linear-gradient(0deg,rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+    }
+</style>
 @endsection
 
 @section('content')
@@ -334,7 +351,7 @@
 <div class="modal fade" id="checkOutStepOne" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="checkOutStepOneLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-0">
-            <form action="{{ route('register') }}" method="post">
+            <form method="post" id="step-one-process">
                 @csrf
                 <div class="modal-body">
                     <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -346,15 +363,15 @@
 
                     <div class="pricing">
                         <div class="title-section">
-                            <h3 class="modal-title">Step 1 of 2</h3>
+                            <h3 class="modal-title">Step <span class="in-step">1</span> of 2</h3>
                             <p>Please select a membership then provide your email and desired password for your account.</p>
                         </div>
-                        <div class="forms-field">
+                        <div class="forms-field" id="forms-field">
                             <div class="mb-3">
                                 <label for="Membership" class="form-label">Membership</label>
-                                <select name="subscription_id" class="form-select" id="Membership">
+                                <select name="subscription_id" class="form-select" id="Membership" required>
                                     @forelse($purchase_offer as $offer)
-                                    <option value="{{ $offer->subscription_id }}">{{ $offer->name." - ".$offer->percentage_off."% OFF - ".$offer->discounted_amount."$ for ".$offer->duration." Days" }}</option>
+                                    <option value="{{ $offer->subscription_id }}" data-amount="{{$offer->discounted_amount}}">{{ $offer->name." - ".$offer->percentage_off."% OFF - ".$offer->discounted_amount."$ for ".$offer->duration." Days" }}</option>
                                     @empty
                                     <option value="">No Offer Available</option>
                                     @endforelse
@@ -362,21 +379,21 @@
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" autocomplete="off">
+                                <input type="text" class="form-control" id="name" name="name" autocomplete="off" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email-name" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email-name" name="email" autocomplete="off">
+                                <input type="email" class="form-control" id="email-name" name="email" autocomplete="off" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password-example" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password-example" autocomplete="off">
+                                <input type="password" class="form-control" name="password" id="password-example" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-danger">Proceed to Checkout</button>
+                    <button type="submit" class="btn btn-outline-danger col-10 mx-auto rounded-0">Next ></button>
                 </div>
             </form>
         </div>
@@ -444,6 +461,111 @@
         });
     });
 
+    $("body").on("submit", "#step-one-process", function (e) { 
+        e.preventDefault();
+        var form = $(this)[0];
+
+        var that = $(this).find("input, select");
+        if($(".in-step").html() == 1){
+            var arr_str = '{';
+            var subscription_amount = $(this).find("select option:selected").data("amount");
+
+            that.map(function(index, elem){
+                if(that.length-1 == index){
+                    return arr_str += '"'+$(elem).attr("name")+'":"'+$(elem).val()+'"';
+                }
+                return arr_str += '"'+$(elem).attr("name")+'":"'+$(elem).val()+'", ';
+            })
+
+            arr_str += '}';
+
+            console.log(arr_str);
+
+            let payment_detail =  
+                    `<div class='form-row row mb-2'>
+                        <input type="hidden" name="user_info" value='${arr_str}'>
+                        <div class='col-xs-12 form-group col-md-8'>
+                            <label class='control-label'>Name on Card</label>
+                            <input name="card_name" class='form-control border-danger rounded-0 text-dark bg-transparent' size='4' type='text'>
+                        </div>
+                        <div class='col-xs-12 form-group col-md-4'>
+                            <label class='control-label'>Amount</label>
+                            <div class="input-group disable-after">
+                                <span class="input-group-text border-danger bg-danger rounded-0 z-index-9 text-white fw-bold" id="basic-addon2">$</span>
+                                <input name="amount" type="text" class="form-control border-danger rounded-0 text-dark bg-transparent disabled-amount" value="${subscription_amount}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='form-row row  mb-2'>
+                        <div class='col-xs-12 form-group'>
+                            <label class='control-label'>Card Number</label> <input autocomplete='off' name="number" class='form-control border-danger rounded-0 text-dark bg-transparent card-number' size='20' type='text'>
+                        </div>
+                    </div>
+
+                    <div class='form-row row  mb-2'>
+                        <div class='col-xs-12 col-md-4 form-group'>
+                            <label class='control-label'>CVC</label>
+                            <input autocomplete='off' name="cvc" class='form-control border-danger rounded-0 text-dark bg-transparent' placeholder='ex. 311' size='4' type='text'>
+                        </div>
+                        <div class='col-xs-12 col-md-4 form-group'>
+                            <label class='control-label'>Expiration Month</label>
+                            <input name="exp_month" class='form-control border-danger rounded-0 text-dark bg-transparent card-expiry-month' placeholder='MM' size='2' type='text'>
+                        </div>
+                        <div class='col-xs-12 col-md-4 form-group'>
+                            <label class='control-label'>Expiration Year</label>
+                            <input name="exp_year" class='form-control border-danger rounded-0 text-dark bg-transparent card-expiry-year' placeholder='YYYY' size='4' type='text'>
+                        </div>
+                    </div>
+                    <div class='form-row row  mb-2'>
+                        <div class='col-xs-12 form-group'>
+                            <label class='control-label'>Description</label> <input autocomplete='off' name="description" class='form-control border-danger rounded-0 text-dark bg-transparent' type='text'>
+                        </div>
+                    </div>`;
+            $("#forms-field").html(payment_detail);
+        }
+
+
+        if($(".in-step").html() == 2){
+            // console.log(that);
+            // const arr = [];
+            // that.map(function(index, elem){
+            //     arr.push(`{"${$(elem).attr("name")}":"${$(elem).val()}"}`);
+            //     return `{"${$(elem).attr("name")}":"${$(elem).val()}"}`;
+            // })
+            // console.log(arr);
+
+            var formData = new FormData(form);
+            $(".payment-error").remove();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('stripe.post') }}",
+                data: formData,
+                dataType: "JSON",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                },
+                error: function(err, xhr){
+                    console.log(err.responseJSON);
+                    tata.error("Error!", err.responseJSON.message);
+                    
+                    var errors = err.responseJSON.errors;
+
+                    $.each(errors, function (indexInArray, valueOfElement) { 
+                        console.log(indexInArray);     
+                        $("[name='"+indexInArray+"']").after(`<div class="small text-danger payment-error">${valueOfElement[0]}</div>`);
+                    });
+                }
+            });
+
+        }
+
+        $(".in-step").html(2);
+    });
+    
     function checkOutStepOne(email = '', subscription_id = '') {
         if (email) {
             $("#email-name").val(email);

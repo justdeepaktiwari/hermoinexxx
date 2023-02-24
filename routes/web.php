@@ -87,12 +87,16 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
     Route::get('user-videos', [VideoController::class, 'UserVideo'])
     ->name("user-videos");
 
-    /**Stripe Payment Integration*/
-    Route::get('stripe', [StripePaymentController::class, 'stripe']);
-    Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+    
 });
+
+Route::post('register-user', [StripePaymentController::class, 'processStep'])->name("payment.process");
 
 Route::post('upload-video-chunk', [VideoController::class, 'UploadVideo'])->name("upload-video");
 Route::post('upload-photo-chunk', [VideoController::class, 'UploadThumbanil'])->name("upload-thumbnail");
 Route::get('upload-file-chunk', [VideoController::class, 'ViewVideo']);
 Route::get('debug-project', [HomeController::class, 'debugAmount']);
+
+/**Stripe Payment Integration*/
+Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
