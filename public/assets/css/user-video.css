@@ -251,3 +251,14 @@ input[type=number]:focus,
 .pagination .page-item.active > .page-link{
     background-color: #212529;
 }
+
+.search-bar-desc{
+    display: none;
+}
+
+.on-focus-show:focus ~ .search-bar-desc{
+    display: block;
+}
+.search-bar-desc:hover{
+    display: block;
+}

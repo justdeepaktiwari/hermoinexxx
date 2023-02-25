@@ -8,6 +8,7 @@ use App\Models\RelTag;
 use App\Models\Tag;
 use App\Models\Video;
 use App\Models\UserSubscrption;
+use App\Models\SearchHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use File;
@@ -281,7 +282,8 @@ class VideoController extends Controller
     public function UserVideo(Request $request)
     {
         $can_access = UserSubscrption::where("id", auth()->user()->subscription_id)->get();
-        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
+        $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
+        $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
 
         $array_subs_id = [];
         foreach ($can_access as $access_value) {
@@ -303,7 +305,7 @@ class VideoController extends Controller
                         ->inRandomOrder()
                         ->limit(8)->get();
 
-        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches'));
+        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches', 'recent_search'));
     }
 
     public function UserVideoDetail(Request $request)
@@ -311,13 +313,14 @@ class VideoController extends Controller
 
         $video_detail = Video::where("id", $request->video)->first();
         $related_video = Video::orderBy("id", "desc")->paginate(8);
-        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
-
+        $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
+        
+        $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
         if (!$video_detail) {
            return abort(404); 
         }
 
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches'));
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search'));
     }
 
     public function searchQuery(Request $request)
@@ -334,8 +337,24 @@ class VideoController extends Controller
     public function VideoSearch(Request $request)
     {
         $search = $request->search;
-        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
+        $delete = $request->delete;
 
+        if($delete){
+            $is_deleted = SearchHistory::where("user_id", auth()->user()->id)->where("search", "like", "%$delete%")->delete();
+            return response()->json(["success"], 200);
+        }
+
+        if($search){
+            $count = SearchHistory::where("user_id", auth()->user()->id)->count();
+            if($count >= 5){
+                SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->first()->update(["search" => $search]);
+            }else{
+                SearchHistory::updateOrCreate(["user_id" => auth()->user()->id , "search" => $search],["user_id" => auth()->user()->id , "search" => $search]);
+            }
+        }
+        
+        $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
+        $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
         $new_video = Video::orderBy("id", "desc")
         ->where(function($query) use($search){
             if($search){
@@ -343,6 +362,6 @@ class VideoController extends Controller
             }
         })->paginate(12);
 
-        return view("videos.search-video", compact("new_video", "search", "trending_searches"));
+        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search"));
     }
 }

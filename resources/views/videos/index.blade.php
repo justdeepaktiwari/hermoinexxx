@@ -5,20 +5,6 @@
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="{{ asset('assets/css/user-video.css') }}">
-
-<style>
-    
-    .search-bar-desc{
-        display: none;
-    }
-
-    .on-focus-show:focus ~ .search-bar-desc{
-        display: block;
-    }
-    .search-bar-desc:hover{
-        display: block;
-    }
-</style>
 @endsection
 
 @section('content')
@@ -30,7 +16,7 @@
 <div class="text-white w-md-responsive ms-auto">
     <main class="content-section">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
-            <div class="border-end  border-dark w-20 py-2 text-center fs-6" role="button">
+            <div class="border-end  border-dark w-20 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('user-videos.search') }}`">
                 videos
             </div>
             <div class="border-end  border-dark w-20 py-2 text-center fs-6" role="button">
@@ -223,40 +209,7 @@
         $(".small-size-screen-sidebar").slideUp("easing");
         return;
     }
-
-    function changeText(elem) {
-        $("#on-focus-show").val(elem);
-        window.location.href = '{{ route("user-videos.search") }}?search='+elem;
-    }
-
-
-    $(document).ready(function () {
-        $("#on-focus-show").keyup(function (e) { 
-            if($("#on-focus-show").val().length > 3){
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('search.query') }}",
-                    data: {
-                        search: $("#on-focus-show").val()
-                    },
-                    dataType: "JSON",
-                    success: function (response) {
-                        var search_text = "";
-                        $.each(response, function (indexInArray, valueOfElement) { 
-                            search_text += `<div class="my-2">
-                                                <div class="tags p-1 rounded-1 border text-white d-inline-block mx-2" role="button"  onclick="changeText(this.innerText)">${valueOfElement}</div>
-                                            </div>`;
-                        });
-                        if(search_text){
-                            $(".search-bar-desc").html(search_text);
-                        }else{
-                            $(".search-bar-desc").html("No Result Found!");
-                        }
-                    }
-                });
-            }
-        });
-    });
 </script>
+@include("videos.partials.commonjs")
 <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 @endsection
