@@ -84,6 +84,9 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
     ->name("user-videos.video-detail");
 
+    Route::get('user-video', [VideoController::class, 'VideoSearch'])
+    ->name("user-videos.search");
+
     Route::get('user-videos', [VideoController::class, 'UserVideo'])
     ->name("user-videos");
 
@@ -100,3 +103,6 @@ Route::get('debug-project', [HomeController::class, 'debugAmount']);
 /**Stripe Payment Integration*/
 Route::get('stripe', [StripePaymentController::class, 'stripe']);
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+
+/**Search Query*/
+Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");

@@ -231,7 +231,7 @@ class VideoController extends Controller
                 die('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
             }
 
-            // Read binary input stream and append it to temp file 
+
             if (!$in = @fopen($_FILES["file"]["tmp_name"], "rb")) {
                 die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
             }
@@ -248,11 +248,10 @@ class VideoController extends Controller
         @fclose($out);
         @fclose($in);
 
-        // Check if file has been uploaded 
         if (!$chunks || $chunk == $chunks - 1) {
-            // Strip the temp .part suffix off  
+
             $ext = explode(".", $filePath);
-            
+
             if(isset($ext[count($ext)-1])){
                 $ext = $ext[count($ext)-1];
             }else{
@@ -270,7 +269,7 @@ class VideoController extends Controller
             die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!", "name": "hermoinexxx____'.$uniq_folder.'/hermoinexxx____'.$uniq_folder.'.'.$ext.'"}}');
         }
 
-        // Return Success JSON-RPC response 
+    
         die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!"}}');
     }
 
@@ -281,23 +280,69 @@ class VideoController extends Controller
 
     public function UserVideo(Request $request)
     {
-        $new_video = Video::orderBy("id", "desc")->paginate(10);
+        $can_access = UserSubscrption::where("id", auth()->user()->subscription_id)->get();
+        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
 
-        $recomended_video = Video::limit(4)->get();
+        $array_subs_id = [];
+        foreach ($can_access as $access_value) {
+            if($access_value->can_access){
+                $array_subs_id = json_decode($access_value->can_access);
+            }
+        }
 
-        $max_watched = Video::orderBy("id", "desc")->limit(8)->get();
-        
-        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video'));
+        $new_video = Video::orderBy("id", "desc")
+                    ->whereIn("subscription_type_id",$array_subs_id)
+                    ->paginate(10);
+
+        $recomended_video = Video::whereIn("subscription_type_id",$array_subs_id)
+                            ->inRandomOrder()
+                            ->limit(4)->get();
+
+        $max_watched = Video::whereIn("subscription_type_id",$array_subs_id)
+                        ->orderBy("id", "desc")
+                        ->inRandomOrder()
+                        ->limit(8)->get();
+
+        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches'));
     }
 
     public function UserVideoDetail(Request $request)
     {
+
         $video_detail = Video::where("id", $request->video)->first();
         $related_video = Video::orderBy("id", "desc")->paginate(8);
-        // dd($video_detail);
+        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
+
         if (!$video_detail) {
            return abort(404); 
         }
-        return view("videos.video-detail", compact('video_detail', 'related_video'));
+
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches'));
+    }
+
+    public function searchQuery(Request $request)
+    {
+        $search = $request->search;
+
+        $video_search = Video::where(function($query) use($search){
+            $query->where("video_title", "like", "%$search%")->orWhere("video_detail", "like", "%$search%");
+        })->limit(8)->pluck("video_title")->toArray();
+
+        return response()->json($video_search, 200);
+    }
+
+    public function VideoSearch(Request $request)
+    {
+        $search = $request->search;
+        $trending_searches = Tag::orderBy("id", "DESC")->paginate(5);
+
+        $new_video = Video::orderBy("id", "desc")
+        ->where(function($query) use($search){
+            if($search){
+                $query->where("video_title", "like", "%$search%")->orWhere("video_detail", "like", "%$search%");
+            }
+        })->paginate(12);
+
+        return view("videos.search-video", compact("new_video", "search", "trending_searches"));
     }
 }
