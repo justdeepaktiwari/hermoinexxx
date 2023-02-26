@@ -5,7 +5,8 @@
         width: 100%;
         height: 100%;
         position: fixed;
-        background: rgba(34, 34, 34, 0.9);
+        background: #000;
+        opacity: 0.9;
         z-index: 9999999999999 !important;
     }
 
@@ -52,10 +53,9 @@
 <script>
     document.onreadystatechange = function() {
         if (document.readyState == "complete") {
-            document.querySelector(
-            "#loader-css").style.display = "none";
-            document.querySelector(
-            "body").style.visibility = "visible";
+            setTimeout(function(){
+                document.querySelector("#loader-css").style.display = "none";
+            }, 2000);
         }
     };
 </script>
