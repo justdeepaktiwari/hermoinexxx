@@ -48,6 +48,15 @@ class VideoController extends Controller
 
         $create_video["video_url"] = asset("uploads/" . $request->video_url);
 
+        $getID3 = new \getID3;
+        $file = $getID3->analyze(public_path("uploads/".$request->video_url));
+
+        if(isset($file["error"])){
+            $create_video["video_duration"] = "4:16";
+        }else{
+            $create_video["video_duration"] = $file['playtime_string'];
+        }
+
         $folder = explode("/", $request->video_url);
         if(isset($folder[1])){
             $ext = explode(".", $folder[1]);

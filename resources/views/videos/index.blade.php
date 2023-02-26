@@ -53,7 +53,7 @@
                             <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                            4:19
+                           {{$video->video_duration ?? "4:19"}}
                         </span>
                         <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
@@ -98,7 +98,7 @@
                             <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                            4:19
+                           {{$video->video_duration ?? "4:19"}}
                         </span>
                         <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
@@ -139,7 +139,7 @@
                             <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/{{ $type }}">
                         </video>
                         <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                            4:19
+                        {{$video->video_duration ?? "4:19"}}
                         </span>
                         <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">

@@ -39,6 +39,7 @@ class HomeController extends Controller
 
     public function debugAmount()
     {
+        return;
         $video = Video::get();
 
         foreach ($video as $vid_value) {

@@ -14,6 +14,7 @@ class Video extends Model
     protected $fillable = [
         'video_title',
         'video_url',
+        'video_duration',
         'thumbnail_url',
         'video_detail',
         'subscription_type_id',
