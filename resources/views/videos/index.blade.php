@@ -9,6 +9,8 @@
 
 @section('content')
 
+@include("loader")
+
 @include("videos.partials.header")
 
 @include("videos.partials.sidebar")
