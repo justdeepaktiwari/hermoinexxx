@@ -5,12 +5,11 @@
     }
 
     function removeItem(elem) {
-        console.log(elem.nextElementSibling.innerText);
         $.ajax({
             type: "GET",
             url: "{{ route('user-videos.search') }}",
             data: {
-                delete: elem.nextElementSibling.innerText
+                delete: $(elem).parent().find(":first-child").find("span").text()
             },
             dataType: "JSON",
             success: function(response) {
@@ -49,4 +48,12 @@
             }
         });
     });
+
+    $(window).resize(function () { 
+        let position = $(".user-tab").position().top;
+        $(".top-change").css("top", position+2);
+    });
+
+    let position = $(".user-tab").position().top;
+    $(".top-change").css("top", position+2);
 </script>

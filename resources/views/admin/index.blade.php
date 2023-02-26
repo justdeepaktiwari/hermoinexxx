@@ -48,7 +48,8 @@
                 </div>
             <!-- </a> -->
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <ul class="dropdown-menu me-2" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="{{ route('user-videos') }}">Visit Website</a></li>
                 <li><a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id) }}">Profile</a></li>
                 <li><a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Sign Out</a></li>
             </ul>

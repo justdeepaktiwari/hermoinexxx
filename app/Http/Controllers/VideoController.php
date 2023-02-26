@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\RelCategory;
 use App\Models\RelTag;
 use App\Models\Tag;
@@ -108,8 +109,6 @@ class VideoController extends Controller
     {
         $video = Video::with("rel_category.category")
         ->with("rel_tag.tag")->where("id", $id)->first();
-
-        // dd($video);
         
         $subscription = UserSubscrption::get();
         $category = Category::get();
@@ -293,7 +292,14 @@ class VideoController extends Controller
         $can_access = UserSubscrption::where("id", auth()->user()->subscription_id)->get();
         $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
         $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
+        
+        $random_products_video = Product::where("product_image", "like", "%.mp4%")
+                                    ->inRandomOrder()->limit(1)->first();
 
+        $random_products_photo = Product::where("product_image", "like", "%.png%")
+                                    ->orWhere("product_image", "like", "%.jpg%")
+                                    ->orWhere("product_image", "like", "%.jpeg%")
+                                    ->inRandomOrder()->limit(1)->first();
         $array_subs_id = [];
         foreach ($can_access as $access_value) {
             if($access_value->can_access){
@@ -314,7 +320,7 @@ class VideoController extends Controller
                         ->inRandomOrder()
                         ->limit(8)->get();
 
-        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches', 'recent_search'));
+        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo'));
     }
 
     public function UserVideoDetail(Request $request)

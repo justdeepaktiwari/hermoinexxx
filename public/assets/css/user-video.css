@@ -149,13 +149,12 @@ input[type=number]:focus,
     display: block;
 }
 
-.video-hover:hover,
 .home-icon:hover,
 .porn-video-icon:hover,
 .categories-icon:hover,
 .latest-video-icon:hover,
 .history-video-icon:hover{
-    background-color: #000;
+    background-color: #212529;
 }
 
 .home-icon:hover>.pop-up-modal-home {

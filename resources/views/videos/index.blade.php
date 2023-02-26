@@ -70,11 +70,28 @@
                 @endforeach
             </div>
             <div class="col-md-3 col-12 text-end px-2">
-                <div class="bg-white ad-section  mx-2" style="height: 45%; min-height: 180px;"></div>
-                <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;">
+                <div class="ad-section  mx-2  border border-danger p-1" style="height: 45%; min-height: 180px;">
+                    @php
+                        $type = explode(".", $random_products_video->product_image);
+                        $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+
+                        $folder = isset($random_products_video->product_image) ? explode("/", $random_products_video->product_image) : "";
+                        if(isset($folder[count($folder)-2])){
+                            $folder = $folder[count($folder)-2];
+                        }
+                    @endphp
+                    <video class="video" playsinline muted loop autoplay>
+                        <source src="{{ $random_products_video->product_image }}" type="video/{{ $type }}">
+                    </video>
+                </div>
+                <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;" st>
                     <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
                 </div>
-                <div class="bg-white ad-section  mx-2" style="height: 45%;  min-height: 180px;"></div>
+                <div class="ad-section  mx-2 border border-danger p-1" style="height: 45%;  min-height: 180px;">
+                        <div class="h-100 w-100" style="background: url('{{ asset($random_products_photo->product_image) }}') no-repeat center center/cover;">
+
+                        </div>
+                </div>
             </div>
         </div>
 

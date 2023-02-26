@@ -24,13 +24,14 @@
                             @foreach($recent_search as $search)
                                 <div class="my-2">
                                     <div class="tags p-1 rounded-1 border text-white d-inline-block mx-2" role="button">
-                                        <span class="me-1"  onclick="removeItem(this)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                            </svg>
-                                        </span>
                                         <span onclick="changeText(this.innerText)">{{ $search->search }}</span>
                                     </div>
+
+                                    <span class="me-1 float-end"  onclick="removeItem(this)" role="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </span>
                                 </div>
                             @endforeach()
                         </div>
