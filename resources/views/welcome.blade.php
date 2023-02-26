@@ -552,7 +552,12 @@
                     window.location.href = "{{ route('user-videos') }}"
                 },
                 error: function(err, xhr){
-                    tata.error("Error!", err.responseJSON.message);
+                    console.log(err);
+                    if(err.responseJSON.message === undefined){
+                        tata.error("Error!", err.responseJSON);
+                    }else{
+                        tata.error("Error!", err.responseJSON.message);
+                    }
                     
                     var errors = err.responseJSON.errors;
 

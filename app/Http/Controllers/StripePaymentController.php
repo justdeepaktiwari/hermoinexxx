@@ -45,10 +45,12 @@ class StripePaymentController extends Controller
         $password = $user_info["password"];
         $email = $user_info['email'];
         $credentials = ['email' => $email, 'password' => $password];
+        $subscription_id = $user_info["subscription_id"];
 
         unset($user_info["_token"]);
         if(!User::where("email", $user_info["email"])->exists()){
             $user_info["password"] = Hash::make($user_info["password"]);
+            $user_info["subscription_id"] = 4;
             User::create($user_info);
         }
 
@@ -73,12 +75,16 @@ class StripePaymentController extends Controller
                                 'source' => $res->id,
                                 'description' => $request->description,
                             ]);
+                            
+                if($response->status == "succeeded"){
+                    User::where("email", $user_info["email"])->update(["subscription_id" => $subscription_id]);
+                }
                 return response()->json($response, 201);
             }catch(\Throwable $e){
                 return response()->json($e->getMessage(), 500);
             }
         }else{
-            return response()->json(["message" => "User already exist"], 422);
+            return response()->json(["message" => "you are member enter correct password!"], 422);
         }
     }
 

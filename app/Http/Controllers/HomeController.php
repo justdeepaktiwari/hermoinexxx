@@ -39,15 +39,27 @@ class HomeController extends Controller
 
     public function debugAmount()
     {
-        // dd("KUXBHI");
-        // return;
-        // $get_file_name = backup_videos::get();
-        // foreach ($get_file_name as $key => $get_file_name_val) {
-        //     echo($get_file_name_val->old_name)."<br>";
-        //     $folder = str_replace(".mp4", "", $get_file_name_val->new_name);
-        //     Video::where("video_url", "like", "%$get_file_name_val->old_name%")->update(["video_url" => asset("uploads/".$folder."/".$get_file_name_val->new_name)]);
-        // }
-        // dd("deepak");
+        $video = Video::get();
+
+        foreach ($video as $vid_value) {
+            $folder = explode("/", $vid_value->video_url);
+            $folder = $folder[count($folder)-2];
+
+            $getID3 = new \getID3;
+            $file = $getID3->analyze(public_path("uploads/".$folder."/".$folder.".mp4"));
+            
+            if(isset($file["error"])){
+                continue;
+            }
+
+            Video::where("id", $vid_value->id)->update(["video_duration" => $file['playtime_string']]);
+            // dd($file['playtime_string']);
+        }
+        // $getID3 = new \getID3;
+        // $file = $getID3->analyze($video_path);
+        // $duration = date('H:i:s.v', $file['playtime_seconds']);
+
+        return;
 
         $path = public_path("uploads");
     //     $backup_path = public_path("renamedvideo");
