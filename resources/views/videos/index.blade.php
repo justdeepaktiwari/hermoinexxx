@@ -72,7 +72,7 @@
                 @endforeach
             </div>
             <div class="col-md-4 col-12 text-end px-2 mb-2">
-                <div class="ad-section  mx-2  border border-danger p-1" style="height: 45%; min-height: 200px;">
+                <div class="ad-section  mx-2  border border-danger p-1" style="height: 45%; height: 200px;">
                     @php
                         $type = explode(".", $random_products_video->product_image);
                         $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
@@ -89,7 +89,7 @@
                 <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;" st>
                     <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
                 </div>
-                <div class="ad-section  mx-2 border border-danger p-1" style="height: 45%;  min-height: 200px;">
+                <div class="ad-section  mx-2 border border-danger p-1" style="height: 45%;  height: 200px;">
                         <div class="h-100 w-100" style="background: url('{{ asset($random_products_photo->product_image) }}') no-repeat center center/cover;">
 
                         </div>

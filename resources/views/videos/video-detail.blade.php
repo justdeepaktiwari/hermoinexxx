@@ -71,11 +71,11 @@
                 </div>
             </div>
             <div class="col-md-4 col-12 text-end px-2  mt-2 mb-2">
-                <div class="bg-white ad-section  mx-2" style="height: 45%; min-height: 180px;"></div>
+                <div class="bg-white ad-section  mx-2" style="height: 45%; height: 200px;"></div>
                 <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;">
                     <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
                 </div>
-                <div class="bg-white ad-section  mx-2" style="height: 45%;  min-height: 180px;"></div>
+                <div class="bg-white ad-section  mx-2" style="height: 45%;  height: 200px;"></div>
             </div>
             <div class="col-md-12 col-12 me-auto">
                 <div style="height: 20px;"></div>
