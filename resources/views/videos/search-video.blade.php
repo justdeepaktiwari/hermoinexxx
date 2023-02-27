@@ -99,45 +99,5 @@
 @endsection
 
 @section('js')
-<script>
-    $(document).ready(function() {
-        $(".toogle-btn span").click(function(e) {
-
-            if($(window).width() < 600){
-                $(".small-size-screen-sidebar").slideDown("easing");
-                return;
-            }
-            
-            if ($(this).hasClass("active")) {
-                $(".toggle-with-button").animate({
-                    width: "80px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .addClass("d-none").parent()
-                    .addClass("justify-content-center")
-                    .removeClass("justify-content-start");
-
-                $(this).removeClass("active");
-            } else {
-                $(".toggle-with-button").animate({
-                    width: "200px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .removeClass("d-none").parent()
-                    .addClass("justify-content-start")
-                    .removeClass("justify-content-center");
-
-                $(this).addClass("active");
-            }
-        });
-    });
-
-    function slideUp() {
-        $(".small-size-screen-sidebar").slideUp("easing");
-        return;
-    }
-</script>
 @include("videos.partials.commonjs")
 @endsection

@@ -53,9 +53,7 @@
 <script>
     document.onreadystatechange = function() {
         if (document.readyState == "complete") {
-            setTimeout(function(){
-                document.querySelector("#loader-css").style.display = "none";
-            }, 2000);
+            document.querySelector("#loader-css").style.display = "none";
         }
     };
 </script>

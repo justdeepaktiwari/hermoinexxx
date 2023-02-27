@@ -36,7 +36,7 @@
         </div>
 
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3 justify-lg-content-between justify-md-content-between justify-content-center">
-            <div class="col-md-9 col-12 row">
+            <div class="col-md-8 col-12 row mb-2">
                 <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
                 @foreach($max_watched as $video)
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
@@ -71,8 +71,8 @@
                 </a>
                 @endforeach
             </div>
-            <div class="col-md-3 col-12 text-end px-2">
-                <div class="ad-section  mx-2  border border-danger p-1" style="height: 45%; min-height: 180px;">
+            <div class="col-md-4 col-12 text-end px-2 mb-2">
+                <div class="ad-section  mx-2  border border-danger p-1" style="height: 45%; min-height: 200px;">
                     @php
                         $type = explode(".", $random_products_video->product_image);
                         $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
@@ -89,7 +89,7 @@
                 <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;" st>
                     <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
                 </div>
-                <div class="ad-section  mx-2 border border-danger p-1" style="height: 45%;  min-height: 180px;">
+                <div class="ad-section  mx-2 border border-danger p-1" style="height: 45%;  min-height: 200px;">
                         <div class="h-100 w-100" style="background: url('{{ asset($random_products_photo->product_image) }}') no-repeat center center/cover;">
 
                         </div>
@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3">
+        <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-1">
             <div class="col-12 row">
                 <div class="fs-4 fw-bold my-2">Recommended</div>
                 @foreach($recomended_video as $video)
@@ -190,44 +190,7 @@
 
 @section('js')
 <script>
-    $(document).ready(function() {
-        $(".toogle-btn span").click(function(e) {
 
-            if($(window).width() < 600){
-                $(".small-size-screen-sidebar").slideDown("easing");
-                return;
-            }
-            
-            if ($(this).hasClass("active")) {
-                $(".toggle-with-button").animate({
-                    width: "80px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .addClass("d-none").parent()
-                    .addClass("justify-content-center")
-                    .removeClass("justify-content-start");
-
-                $(this).removeClass("active");
-            } else {
-                $(".toggle-with-button").animate({
-                    width: "200px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .removeClass("d-none").parent()
-                    .addClass("justify-content-start")
-                    .removeClass("justify-content-center");
-
-                $(this).addClass("active");
-            }
-        });
-    });
-
-    function slideUp() {
-        $(".small-size-screen-sidebar").slideUp("easing");
-        return;
-    }
 </script>
 @include("videos.partials.commonjs")
 <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>

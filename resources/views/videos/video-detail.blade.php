@@ -58,7 +58,7 @@
                     <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
                 </div>
             </div>
-            <div class="col-md-9 col-12 d-flex flex-column gap-3 mt-2">
+            <div class="col-md-8 col-12 d-flex flex-column gap-3 mt-2 mb-2">
                 <div class="fs-3 my-2 border border-danger w-100 p-2">{{ $video_detail->video_title }}</div>
                 <div class="video-section w-100 border border-danger p-2">
                     @php
@@ -70,14 +70,14 @@
                     </video>
                 </div>
             </div>
-            <div class="col-md-3 col-12 text-end px-2  mt-2">
+            <div class="col-md-4 col-12 text-end px-2  mt-2 mb-2">
                 <div class="bg-white ad-section  mx-2" style="height: 45%; min-height: 180px;"></div>
                 <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;">
                     <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
                 </div>
                 <div class="bg-white ad-section  mx-2" style="height: 45%;  min-height: 180px;"></div>
             </div>
-            <div class="col-md-9 col-12 me-auto">
+            <div class="col-md-12 col-12 me-auto">
                 <div style="height: 20px;"></div>
                 <div class="d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center flex-wrap p-2 me-auto mt-3">
                     <div class="fs-4 fw-bold my-2">Releated Video</div>
@@ -145,39 +145,6 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $(".toogle-btn span").click(function(e) {
-            if ($(window).width() < 600) {
-                $(".small-size-screen-sidebar").slideToggle("easing");
-                return;
-            }
-
-            if ($(this).hasClass("active")) {
-                $(".toggle-with-button").animate({
-                    width: "80px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .addClass("d-none").parent()
-                    .addClass("justify-content-center")
-                    .removeClass("justify-content-start");
-
-                $(this).removeClass("active");
-            } else {
-                $(".toggle-with-button").animate({
-                    width: "200px"
-                })
-
-                $(".toggle-with-button").find("div span")
-                    .removeClass("d-none").parent()
-                    .addClass("justify-content-start")
-                    .removeClass("justify-content-center");
-
-                $(this).addClass("active");
-            }
-        });
-    });
-
-    $(document).ready(function() {
         $(".close-btn").click(function(e) {
             e.preventDefault();
             $("#custom-model").fadeOut("slow");
@@ -230,12 +197,7 @@
         $(".carousel-main .owl-nav .owl-next span").html(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>`);
 
         $(".carousel-main .owl-nav .owl-prev span").html(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/></svg>`);
-    });
-
-    function slideUp() {
-        $(".small-size-screen-sidebar").slideUp("easing");
-        return;
-    }
+    }); 
 </script>
 
 @include("videos.partials.commonjs")

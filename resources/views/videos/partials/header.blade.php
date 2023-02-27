@@ -69,8 +69,4 @@
             </ul>
         </div>
     </div>
-    <form action="{{ route('logout') }}" method="POST" id="logout-form">
-        @csrf
-    </form>
-    <div class="btn btn-danger rounded-0 me-2" onclick="document.getElementById('logout-form').submit()">Logout</div>
 </div>
