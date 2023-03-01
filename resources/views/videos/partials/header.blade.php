@@ -1,8 +1,8 @@
-<div class="text-white navbar-section border-bottom border-dark position-sticky top-0 d-flex flex-wrap align-items-center justify-lg-content-start justify-md-content-start justify-content-center py-2">
+<div class="text-white navbar-section border-bottom border-dark position-sticky top-0 d-flex flex-wrap align-items-center justify-lg-content-start justify-md-content-start justify-content-center py-2" style="background: linear-gradient(0deg,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{{ asset("assets/images/eyes.webp") }}') no-repeat center center/cover;">
 
     <div class="toogle-btn p-2">
         <span class="px-2 me-2" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
             </svg>
         </span>
@@ -15,7 +15,7 @@
         <div class="col-11 col-lg-5 col-md-6">
             <form action="{{ route('user-videos.search') }}" method="get">
                 <div class="input-group postion-relative">
-                    <input type="text" name="search" class="form-control rounded-0 on-focus-show" id="on-focus-show" placeholder="Search Here" aria-describedby="button-addon2" value="{{ isset($search) ? $search : '' }}">
+                    <input type="text" name="search" class="form-control rounded-0 on-focus-show" id="on-focus-show" placeholder="Search Here" aria-describedby="button-addon2" value="{{ isset($search) ? $search : '' }}" autocomplete="off">
                     <button class="btn btn-danger rounded-0" type="submit" id="button-addon2">Search</button>
                     <div class="search-bar-desc position-absolute top-100 start-0 w-100 bg-dark p-2" style="z-index: 99999999999999999 !important;">
                         @if(count($recent_search))
@@ -68,5 +68,9 @@
                         Transgender</a></li>
             </ul>
         </div>
+    </div>
+    <div>
+        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn">LogIn</div>
+        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn">SignUp</div>
     </div>
 </div>

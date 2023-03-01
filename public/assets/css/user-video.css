@@ -21,7 +21,7 @@ input[type=number]:focus,
 
 
 #logo {
-    height: 80px !important;
+    height: 120px;
 }
 
 .bg-black-color,
@@ -128,21 +128,6 @@ input[type=number]:focus,
     cursor: pointer !important;
 }
 
-@media(max-width: 600px) {
-
-    .pop-up-modal-home:hover,
-    .pop-up-modal-porn-video:hover,
-    .pop-up-modal-categories:hover,
-    .pop-up-modal-latest-video:hover,
-    .pop-up-modal-history-video:hover {
-        display: none;
-    }
-
-    .toggle-with-button{
-        display: none;
-    }
-}
-
 .pop-up-modal-home:hover,
 .pop-up-modal-porn-video:hover,
 .pop-up-modal-categories:hover,
@@ -217,6 +202,10 @@ input[type=number]:focus,
     .custom-me-md-auto {
         margin-right: auto;
     }
+
+    #logo {
+        height: 80px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -225,8 +214,30 @@ input[type=number]:focus,
     .custom-mx-auto {
         margin-right: auto;
     }
+
+    #logo {
+        height: 80px;
+    }
 }
 
+@media(max-width: 600px) {
+
+    .pop-up-modal-home:hover,
+    .pop-up-modal-porn-video:hover,
+    .pop-up-modal-categories:hover,
+    .pop-up-modal-latest-video:hover,
+    .pop-up-modal-history-video:hover {
+        display: none;
+    }
+
+    .toggle-with-button{
+        display: none;
+    }
+
+    #logo {
+        height: 80px;
+    }
+}
 
 @media (max-width: 576px) {
     .custom-mx-auto {
