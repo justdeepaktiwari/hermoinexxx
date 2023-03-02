@@ -9,7 +9,7 @@
             
             if ($(this).hasClass("active")) {
                 $(".toggle-with-button").animate({
-                    width: "80px"
+                    width: "100px"
                 })
 
                 $(".toggle-with-button").find("div span")
@@ -86,13 +86,13 @@
                 });
             }
         });
+
+        let position = $(".user-tab").position().top;
+        $(".top-change").css("top", position+2);
     });
 
     $(window).resize(function () { 
         let position = $(".user-tab").position().top;
         $(".top-change").css("top", position+2);
     });
-
-    let position = $(".user-tab").position().top;
-    $(".top-change").css("top", position+2);
 </script>
