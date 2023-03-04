@@ -29,6 +29,22 @@ Route::group(['prefix' => 'alpha'], function () {
         ->name('home');
     Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
     Auth::routes(["login" => true, "register" => true]);
+
+    Route::get('list-product', [App\Http\Controllers\ProductController::class, "listProduct"])->name("list.product");
+    Route::get('list-product/{id}/detail', [App\Http\Controllers\ProductController::class, "productDetail"])->name("list.product.detail");
+    Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
+    ->name("user-videos.video-detail");
+
+    Route::get('user-video', [VideoController::class, 'VideoSearch'])
+    ->name("user-videos.search");
+    
+    Route::get('user-videos', [VideoController::class, 'UserVideo'])
+    ->name("user-videos");
+
+    Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
+    ->name("user-photos");
+    /**Search Query*/
+    Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
@@ -80,17 +96,6 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         ->name("landing-pages.purchaseOffer");
 
     });
-
-    Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
-    ->name("user-videos.video-detail");
-
-    Route::get('user-video', [VideoController::class, 'VideoSearch'])
-    ->name("user-videos.search");
-
-    Route::get('user-videos', [VideoController::class, 'UserVideo'])
-    ->name("user-videos");
-
-    
 });
 
 Route::post('register-user', [StripePaymentController::class, 'processStep'])->name("payment.process");
@@ -103,6 +108,3 @@ Route::get('debug-project', [HomeController::class, 'debugAmount']);
 /**Stripe Payment Integration*/
 Route::get('stripe', [StripePaymentController::class, 'stripe']);
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
-
-/**Search Query*/
-Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");

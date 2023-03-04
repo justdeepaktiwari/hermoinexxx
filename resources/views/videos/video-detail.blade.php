@@ -5,11 +5,110 @@
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="{{ asset('assets/css/user-video.css') }}">
+<style>
+    .video-section {
+        position: relative;
+    }
+
+    .play-btn-div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .play-btn {
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(rgba(255, 0, 128, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
+        border-radius: 50%;
+        position: relative;
+        display: block;
+        margin: 100px auto;
+        box-shadow: 0px 0px 25px 3px rgba(255, 0, 128, 0.8);
+    }
+
+    /* triangle */
+    .play-btn::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateX(-40%) translateY(-50%);
+        transform: translateX(-40%) translateY(-50%);
+        transform-origin: center center;
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 25px solid #fff;
+        z-index: 100;
+        -webkit-transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    /* pulse wave */
+    .play-btn:before {
+        content: "";
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        -webkit-animation-delay: 0s;
+        animation-delay: 0s;
+        -webkit-animation: pulsate1 2s;
+        animation: pulsate1 2s;
+        -webkit-animation-direction: forwards;
+        animation-direction: forwards;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-timing-function: steps;
+        animation-timing-function: steps;
+        opacity: 1;
+        border-radius: 50%;
+        border: 5px solid rgba(255, 255, 255, .75);
+        top: -30%;
+        left: -30%;
+        background: rgba(198, 16, 0, 0);
+    }
+
+    @-webkit-keyframes pulsate1 {
+        0% {
+            -webkit-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 1;
+            box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75), 0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+        }
+
+        100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 0;
+            box-shadow: none;
+
+        }
+    }
+
+    @keyframes pulsate1 {
+        0% {
+            -webkit-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 1;
+            box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75), 0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+        }
+
+        100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1);
+            opacity: 0;
+            box-shadow: none;
+
+        }
+    }
+</style>
 @endsection
 
 @section('content')
-
-@include("loader")
 
 @include("videos.partials.header")
 
@@ -20,13 +119,13 @@
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
             <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
                 Webcam
-            </div> 
+            </div>
             <div class=" border-dark col-4 py-2 text-center fs-6" role="button">
                 Shop
             </div>
             <div class="border-start  border-end  border-dark col-4 py-2 text-center fs-6" role="button">
                 PICTURE GALLERY
-            </div> 
+            </div>
         </div>
 
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3 justify-lg-content-between justify-md-content-between justify-content-center">
@@ -52,26 +151,29 @@
                     <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
                 </div>
             </div>
-            <div class="col-md-8 col-12 d-flex flex-column gap-3 mt-2 mb-2">
-                <div class="fs-3 my-2 border border-danger w-100 p-2">{{ $video_detail->video_title }}</div>
-                <div class="video-section w-100 border border-danger p-2">
-                    @php
-                    $type = explode(".", $video_detail->video_url);
-                    $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
-                    @endphp
-                    <video class="video" controls controlsList="nodownload">
-                        <source src="{{ $video_detail->video_url }}" type="video/{{ $type }}">
-                    </video>
+            <div class="col-md-7 col-12  mt-2 mb-2">
+                <div class="d-flex flex-column gap-3">
+                    <div class="fs-3 my-2 border border-danger w-100 p-2">{{ $video_detail->video_title }}</div>
+                    <div class="video-section w-100 border border-danger p-2">
+                        @php
+                        $type = explode(".", $video_detail->video_url);
+                        $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                        @endphp
+                        <video class="video" controls controlsList="nodownload">
+                            <source src="{{ $video_detail->video_url }}" type="video/{{ $type }}">
+                        </video>
+                        <div class="play-btn-div">
+                            <span class="play-btn"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 col-12 text-end px-2  mt-2 mb-2">
-                <div class="bg-white ad-section  mx-2" style="height: 45%; height: 200px;"></div>
-                <div class="ad-section mx-2 d-flex align-items-center" style="height: 10%;  min-height: 80px;">
-                    <button class="btn btn-outline-secondary rounded-0 w-100">Purchase Panties & Socks</button>
+            <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `{{ route('list.product.detail', 2) }}`">
+                <div class="p-3 overflow-hidden" style="max-width: 400px;">
+                    <img src="{{ asset($random_products_photo->product_image) }}" class="img-fluid" alt="{{ asset($random_products_photo->product_image) }}">
                 </div>
-                <div class="bg-white ad-section  mx-2" style="height: 45%;  height: 200px;"></div>
             </div>
-            <div class="col-md-12 col-12 me-auto">
+            <div class="col-md-12 col-12 me-auto  mt-2">
                 <div style="height: 20px;"></div>
                 <div class="d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center flex-wrap p-2 me-auto mt-3">
                     <div class="fs-4 fw-bold my-2">Releated Video</div>
@@ -116,7 +218,7 @@
                     </div>
 
                     <div class="text-white fw-bold fs-4 col-md-12 col-12 mt-3 mb-2">Releated Searches:</div>
-                    <div class="carousel-second owl-carousel">
+                    <div class="carousel-second owl-carousel p-2">
                         <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Big Tits</div>
                         <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Cumshot</div>
                         <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">MILF</div>
@@ -191,7 +293,18 @@
         $(".carousel-main .owl-nav .owl-next span").html(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>`);
 
         $(".carousel-main .owl-nav .owl-prev span").html(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/></svg>`);
-    }); 
+    });
+
+    $(".play-btn").click(function(e) {
+        e.preventDefault();
+        $(".video").trigger('play');
+        $(".play-btn-div").fadeOut();
+    });
+
+    $(".pause-btn").click(function(e) {
+        e.preventDefault();
+        $('.video').trigger('pause');
+    });
 </script>
 
 @include("videos.partials.commonjs")

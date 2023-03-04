@@ -115,7 +115,7 @@ input[type=number]:focus,
     z-index: 999999 !important;
 }
 
-.small-size-screen-sidebar{
+.small-size-screen-sidebar {
     display: none;
     z-index: 999999 !important;
     position: fixed;
@@ -124,7 +124,7 @@ input[type=number]:focus,
     width: 100%;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer !important;
 }
 
@@ -140,7 +140,7 @@ input[type=number]:focus,
 .porn-video-icon:hover,
 .categories-icon:hover,
 .latest-video-icon:hover,
-.history-video-icon:hover{
+.history-video-icon:hover {
     background-color: #212529;
 }
 
@@ -195,6 +195,10 @@ input[type=number]:focus,
     margin-right: auto;
 }
 
+.responsive {
+    justify-content: space-between;
+}
+
 @media (max-width: 992px) {
 
     .custom-me-lg-auto,
@@ -205,6 +209,11 @@ input[type=number]:focus,
 
     #logo {
         height: 80px;
+    }
+
+
+    .responsive {
+        justify-content: space-between;
     }
 }
 
@@ -218,6 +227,11 @@ input[type=number]:focus,
     #logo {
         height: 80px;
     }
+
+
+    .responsive {
+        justify-content: center;
+    }
 }
 
 @media(max-width: 600px) {
@@ -230,12 +244,16 @@ input[type=number]:focus,
         display: none;
     }
 
-    .toggle-with-button{
+    .toggle-with-button {
         display: none;
     }
 
     #logo {
         height: 80px;
+    }
+
+    .responsive {
+        justify-content: center;
     }
 }
 
@@ -243,42 +261,48 @@ input[type=number]:focus,
     .custom-mx-auto {
         margin: auto;
     }
+
+    .responsive {
+        justify-content: center;
+    }
 }
 
-.pagination{
+.pagination {
     justify-content: center;
     flex-wrap: wrap !important;
 }
 
-.pagination .page-item{
+.pagination .page-item {
     background-color: #000;
 }
 
-.pagination .page-item .page-link{
+.pagination .page-item .page-link {
     color: white;
     background-color: #000;
     border: 1px solid #dc3545;
 }
 
-.pagination .page-item.active > .page-link{
+.pagination .page-item.active>.page-link {
     background-color: #212529;
 }
 
-.search-bar-desc{
+.search-bar-desc {
     display: none;
 }
 
-.on-focus-show:focus ~ .search-bar-desc{
-    display: block;
-}
-.search-bar-desc:hover{
+.on-focus-show:focus~.search-bar-desc {
     display: block;
 }
 
-.font-poppins, .toggle-with-button{
+.search-bar-desc:hover {
+    display: block;
+}
+
+.font-poppins,
+.toggle-with-button {
     font-family: 'Poppins', sans-serif !important;
 }
 
-.on-hover-tab:hover{
+.on-hover-tab:hover {
     background-color: #000;
 }

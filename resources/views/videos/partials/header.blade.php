@@ -23,7 +23,7 @@
                             Recent Searches
                             @foreach($recent_search as $search)
                                 <div class="my-2">
-                                    <div class="tags p-1 rounded-1 border text-white d-inline-block mx-2" role="button">
+                                    <div class="selected-elem p-1 rounded-1 border text-white d-inline-block mx-2" role="button">
                                         <span onclick="changeText(this.innerText)">{{ $search->search }}</span>
                                     </div>
 
@@ -33,7 +33,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                            @endforeach()
+                            @endforeach
                         </div>
                         @endif
                         <div class="trending-search">
@@ -49,7 +49,7 @@
                                         {{ $trending_search->search }}
                                     </div>
                                 </div>
-                            @endforeach()
+                            @endforeach
                         </div>
                     </div>
                 </div>

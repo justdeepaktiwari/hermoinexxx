@@ -44,18 +44,21 @@
     }
 
     function removeItem(elem) {
+        let parent_elem = $(elem).parent();
+        
         $.ajax({
             type: "GET",
             url: "{{ route('user-videos.search') }}",
             data: {
-                delete: $(elem).parent().find(":first-child").find("span").text()
+                delete: parent_elem.find(".selected-elem").find("span").text()
             },
             dataType: "JSON",
             success: function(response) {
-                if (!$(elem.parentElement.parentElement).siblings().length) {
-                    elem.parentElement.parentElement.parentElement.remove();
+                if(parent_elem.siblings().length > 1){
+                    parent_elem.remove();
+                }else{
+                    parent_elem.parent().remove();
                 }
-                elem.parentElement.parentElement.remove();
             }
         });
     }

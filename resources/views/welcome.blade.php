@@ -35,7 +35,7 @@
         <div class="right-side-button pe-2">
             <button class="btn btn-outline-light rounded-0" onclick="checkOutStepOne()">Instant Access</button>
 
-            <a class="btn btn-danger rounded-0" href="{{ route('login') }}">Sign In</a>
+            <a class="btn btn-danger rounded-0" href="{{ route('user-videos') }}">Free Video</a>
         </div>
     </nav>
     <div class="get-started-container text-white justify-content-center text-center">

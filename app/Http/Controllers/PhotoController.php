@@ -267,4 +267,9 @@ class PhotoController extends Controller
         // Return Success JSON-RPC response 
         die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!"}}');
     }
+
+    public function UserPhoto()
+    {
+        return view("photos.index");
+    }
 }
