@@ -13,6 +13,7 @@ use App\Models\SearchHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use File;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -289,9 +290,21 @@ class VideoController extends Controller
 
     public function UserVideo(Request $request)
     {
-        $can_access = UserSubscrption::where("id", auth()->user()->subscription_id)->get();
+        $can_access = UserSubscrption::where(function($query){
+            if (Auth::check()) {
+                $query->where("id", auth()->user()->subscription_id);
+            }else{
+                $query->where("id", 4);
+            }
+        })->get();
         $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
-        $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
+        $recent_search = SearchHistory::where(function($query){
+            if(Auth::check()){
+                $query->where("user_id", auth()->user()->id);
+            }else{
+                $query->where("user_id", 0);
+            }
+        })->orderBy('id','desc')->get();
         
         $random_products_video = Product::where("product_image", "like", "%.mp4%")
                                     ->inRandomOrder()->limit(1)->first();
