@@ -70,7 +70,7 @@
         </div>
     </div>
     <div>
-        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn">LogIn</div>
-        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn">SignUp</div>
+        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn" onclick="window.location.href = `{{ route('login') }}`">LogIn</div>
+        <div class="mx-1 fs-6 rounded-0 px-3 btn-sm btn-dark btn" onclick="window.location.href = `{{ route('register') }}`">SignUp</div>
     </div>
 </div>

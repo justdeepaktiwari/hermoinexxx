@@ -316,11 +316,9 @@
                         <hr>
                         <div><span class="fs-4">Most Popular Searches</span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span></div>
                         @foreach($trending_searches as $trending_search)
-                        <div class="my-2">
-                            <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 px-2" role="button" onclick="changeText(this.innerText)">
+                            <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 px-2 my-2" role="button" onclick="changeText(this.innerText)">
                                 {{ $trending_search->search }}
                             </div>
-                        </div>
                         @endforeach()
                     </div>
 
@@ -373,13 +371,11 @@
                             <div class="fs-5 ms-3">
                                 Top Cams Categories
                             </div>
-                            <div class="ps-4 py-2 fs-6">
-                                @foreach($trending_searches as $trending_search)
-                                <div class="my-2">
-                                    <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 px-2" role="button" onclick="changeText(this.innerText)">
+                            <div class="ps-2 py-2 fs-6">
+                                @foreach($trending_searches as $trending_search) 
+                                    <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 my-2 px-2" role="button" onclick="changeText(this.innerText)">
                                         {{ $trending_search->search }}
-                                    </div>
-                                </div>
+                                    </div> 
                                 @endforeach()
                             </div>
                         </div>

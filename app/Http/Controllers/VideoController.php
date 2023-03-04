@@ -343,7 +343,13 @@ class VideoController extends Controller
         $related_video = Video::orderBy("id", "desc")->paginate(8);
         $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
         
-        $recent_search = SearchHistory::where("user_id", auth()->user()->id)->orderBy('id','desc')->get();
+        $recent_search = SearchHistory::where(function($query){
+            if(Auth::check()){
+                $query->where("user_id", auth()->user()->id);
+            }else{
+                $query->where("user_id", 0);
+            }
+        })->orderBy('id','desc')->get();
 
         $random_products_photo = Product::where("product_image", "like", "%.png%")
         ->orWhere("product_image", "like", "%.jpg%")
