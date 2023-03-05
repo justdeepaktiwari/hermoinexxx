@@ -54,7 +54,7 @@
             },
             dataType: "JSON",
             success: function(response) {
-                if(parent_elem.siblings().length > 1){
+                if(parent_elem.siblings().length >= 1){
                     parent_elem.remove();
                 }else{
                     parent_elem.parent().remove();

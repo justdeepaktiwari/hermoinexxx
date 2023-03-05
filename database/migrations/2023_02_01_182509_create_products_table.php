@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->text('product_detail');
             $table->text('product_image');
-            $table->string('product_amount');
+            $table->string('product_real_amount');
+            $table->string('product_percentage_discount');
+            $table->string('product_discounted_amount');
             $table->timestamps();
         });
     }

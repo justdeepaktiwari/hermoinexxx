@@ -54,17 +54,17 @@ class ProductController extends Controller
             'product_name' => 'required',
             'product_detail' => 'required',
             'product_image' => 'required',
-            'product_amount' => 'required',
+            'product_real_amount' => 'required',
+            'product_percentage_discount' => 'required',
+            'product_discounted_amount' => 'required',
         ]);
+
+
         $create_product = $request->all();
+
         if($request->hasFile('product_image')){
 
             $file = $request->file('product_image');
-            
-            $extension = $file->getClientOriginalExtension();
-            $randomstr = md5(date("Ymdhisu"));
-
-            $filename = $randomstr.".".$extension;
 
             $path = public_path("uploads/products");
             
@@ -72,12 +72,26 @@ class ProductController extends Controller
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
 
-            $file->move($path, $filename);
-            $create_product["product_image"] = asset("uploads/products/".$filename);
+            $file_name_arr = [];
+
+            foreach ($file as $file_value) {
+                $extension = $file_value->getClientOriginalExtension();
+                
+                $randomstr = uniqid();
+                
+                $filename = $randomstr.".".$extension;
+                
+                $file_value->move($path, $filename);
+
+                $file_name_arr[] = $filename;
+            }
+
+            $create_product["product_image"] = json_encode($file_name_arr);
         }
 
+        
         Product::create($create_product);
-    
+        
         return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
     }
@@ -111,14 +125,56 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+        request()->validate([
+            'product_name' => 'required',
+            'product_detail' => 'required',
+            'product_real_amount' => 'required',
+            'product_percentage_discount' => 'required',
+            'product_discounted_amount' => 'required',
         ]);
-    
-        $product->update($request->all());
+
+
+        $create_product = $request->all();
+        
+        // dd($request->hasFile('product_image'));
+
+        if($request->hasFile('product_image')){
+
+            $file = $request->file('product_image');
+
+            $path = public_path("uploads/products");
+            
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+
+            $file_name_arr = [];
+
+            foreach ($file as $file_value) {
+                $extension = $file_value->getClientOriginalExtension();
+                
+                $randomstr = uniqid();
+                
+                $filename = $randomstr.".".$extension;
+                
+                $file_value->move($path, $filename);
+
+                $file_name_arr[] = $filename;
+            }
+
+            $create_product["product_image"] = json_encode($file_name_arr);
+        }else{
+            unset($create_product["product_image"]);
+        }
+
+        unset($create_product["_token"]);
+        unset($create_product["_method"]);
+
+        // dd($create_product);
+
+        Product::where("id", $id)->update($create_product);
     
         return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
@@ -142,7 +198,8 @@ class ProductController extends Controller
 
     public function listProduct()
     {
-        return view("products.index");
+        $latest_product = Product::orderBy("id", "DESC")->paginate(8);
+        return view("products.index", compact("latest_product"));
     }
 
     public function productDetail()
