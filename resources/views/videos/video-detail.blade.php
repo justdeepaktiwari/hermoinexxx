@@ -153,9 +153,14 @@
                     </div>
                 </div>
             </div>
+            @php
+                if($random_products_photo->product_image){
+                    $product_image = json_decode($random_products_photo->product_image);
+                }
+            @endphp
             <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `{{ route('list.product.detail', 2) }}`">
                 <div class="p-3 overflow-hidden" style="max-width: 400px;">
-                    <img src="{{ asset($random_products_photo->product_image) }}" class="img-fluid" alt="{{ asset($random_products_photo->product_image) }}">
+                <img src="{{ asset('uploads/products/'.$product_image[0]) }}" class="img-fluid" alt="{{ $product_image[0] }}">
                 </div>
             </div>
             <div class="col-md-12 col-12 me-auto  mt-2">
