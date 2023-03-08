@@ -22,13 +22,13 @@
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
             <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
                 Webcam
-            </div> 
-            <div class=" border-dark col-4 py-2 text-center fs-6" role="button">
+            </div>
+            <div class=" border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('list.product') }}`">
                 Shop
             </div>
-            <div class="border-start  border-end  border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class="border-start  border-end  border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('user-photos') }}`">
                 PICTURE GALLERY
-            </div> 
+            </div>
         </div>
 
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3">

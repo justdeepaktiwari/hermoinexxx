@@ -69,7 +69,7 @@
 
                 <div class="row mb-2 px-0 mx-0">
                     <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
-                    @foreach($max_watched as $video)
+                    @foreach($watched_later as $video)
                     <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                         <div class="position-relative" style="height: 160px;">
                             @php
@@ -152,19 +152,18 @@
             <div class="col-12 row">
                 <div class="fs-4 fw-bold d-flex justify-content-between my-2">
                     <span>New Videos</span>
-                    <span class="btn btn-outline-secondary rounded-0" style="width: 150px;">Latest</span>
                 </div>
                 @foreach($new_video as $video)
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                     <div class="position-relative" style="height: 160px;">
                         @php
-                        $type = explode(".", $video->video_url);
-                        $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+                            $type = explode(".", $video->video_url);
+                            $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
 
-                        $folder = isset($video->video_url) ? explode("/", $video->video_url) : "";
-                        if(isset($folder[count($folder)-2])){
-                        $folder = $folder[count($folder)-2];
-                        }
+                            $folder = isset($video->video_url) ? explode("/", $video->video_url) : "";
+                            if(isset($folder[count($folder)-2])){
+                                $folder = $folder[count($folder)-2];
+                            }
                         @endphp
 
                         <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>

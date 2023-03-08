@@ -114,16 +114,16 @@
 
 @include("videos.partials.sidebar")
 
-<div class="text-white w-md-responsive ms-auto">
+<div class="text-white w-md-responsive ms-auto" style="background: #000;">
     <main class="content-section">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
             <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
                 Webcam
             </div>
-            <div class=" border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class=" border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('list.product') }}`">
                 Shop
             </div>
-            <div class="border-start  border-end  border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class="border-start  border-end  border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('user-photos') }}`">
                 PICTURE GALLERY
             </div>
         </div>
@@ -161,7 +161,7 @@
             <div class="col-md-12 col-12 me-auto  mt-2">
                 <div style="height: 20px;"></div>
                 <div class="d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center flex-wrap p-2 me-auto mt-3">
-                    <div class="fs-4 fw-bold my-2">Releated Video</div>
+                    <div class="fs-4 fw-800 my-2">Releated Video</div>
                     <div style="height: 20px;"></div>
                     <div class="col-12 row add-more">
                         @foreach($related_video as $video)
@@ -202,7 +202,7 @@
                         <div class="col-11 col-md-5 btn btn-secondary btn-sm" onclick="showMore(this, '{{ json_encode($related_tag) }}', '{{ $related_category }}', '{{ $related_video_count }}')">Show More</div>
                     </div>
                 @if(count($related_search))
-                    <div class="text-white fw-bold fs-4 col-md-12 col-12 mt-3 mb-2">Releated Searches:</div>
+                    <div class="text-white fw-800 fs-4 col-md-12 col-12 mt-3 mb-2">Releated Searches:</div>
                         <div class="col-md-7 me-auto">
                             <div class="carousel-second owl-carousel">
                                 @foreach($related_search as $related_search_item)
@@ -220,8 +220,8 @@
         </div>
         <div style="height: 20px;"></div>
         <div style="height: 20px;"></div>
-        @include("videos.partials.footer")
     </main>
+    @include("videos.partials.footer")
 </div>
 @endsection
 
