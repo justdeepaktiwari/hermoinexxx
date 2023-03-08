@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
+    protected  $can_access;
+
+    public function __construct()
+    {
+        $this->can_access = $this->canAccess();    
+    }
+
     public function index(Request $req)
     {
         $list_videos = Video::with("subscription")
@@ -288,19 +295,18 @@ class VideoController extends Controller
     {
         return view("video");
     }
+    /**
+     * User Video Section
+     */
 
     public function UserVideo(Request $request)
     {
-        $can_access = UserSubscrption::where(function ($query) {
-            if (Auth::check()) {
-                $query->where("id", auth()->user()->subscription_id);
-            } else {
-                $query->where("id", 4);
-            }
-        })->get();
-        
+        $premium_video = Video::where("subscription_type_id", 1)
+                        ->inRandomOrder()
+                        ->limit(4)->get();
+
         $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
-        
+
         $recent_search = SearchHistory::where(function ($query) {
             if (Auth::check()) {
                 $query->where("user_id", auth()->user()->id);
@@ -317,36 +323,94 @@ class VideoController extends Controller
             ->orWhere("product_image", "like", "%.jpeg%")
             ->inRandomOrder()->limit(1)->first();
 
-        $array_subs_id = [];
-
-        foreach ($can_access as $access_value) {
-            if ($access_value->can_access) {
-                $array_subs_id = json_decode($access_value->can_access);
-            }
-        }
-
         $new_video = Video::orderBy("id", "desc")
-            ->whereIn("subscription_type_id", $array_subs_id)
+            ->whereIn("subscription_type_id", $this->can_access)
             ->paginate(10);
 
-        $recomended_video = Video::whereIn("subscription_type_id", $array_subs_id)
+        $recomended_video = Video::whereIn("subscription_type_id", $this->can_access)
             ->inRandomOrder()
             ->limit(4)->get();
 
-        $max_watched = Video::whereIn("subscription_type_id", $array_subs_id)
+        $max_watched = Video::whereIn("subscription_type_id", $this->can_access)
             ->orderBy("id", "desc")
             ->inRandomOrder()
-            ->limit(8)->get();
+            ->limit(4)->get();
 
-        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo'));
+        return view("videos.index", compact('new_video', 'max_watched', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video'));
     }
 
     public function UserVideoDetail(Request $request)
     {
+        $video_tag = Tag::inRandomOrder()->get();
+        
+        $video_detail = Video::where("id", $request->video)->whereIn("subscription_type_id", $this->can_access)->first();
+        // dd($video_detail);
+        if(!$video_detail){
+            return abort(403);
+        }
 
-        $video_detail = Video::where("id", $request->video)->first();
-        $related_video = Video::orderBy("id", "desc")->paginate(8);
+        $related_category = $video_detail->categories_id;
+        $related_tag = $video_detail->tags_id;
+
+        $related_video = Video::orderBy("id", "desc")->where(function ($query) use ($related_category, $related_tag) {
+            if ($related_tag) {
+
+                $related_tag = json_decode($related_tag);
+                $tag_count = count($related_tag);
+
+                $query->whereJsonContains("tags_id", $related_tag[0]);
+                for ($i = 1; $i < $tag_count; $i++) {
+                    $query->orWhereJsonContains("tags_id", $related_tag[$i]);
+                }
+            }
+
+            if ($related_category) {
+                $related_category = json_decode($related_category);
+                $category_count = count($related_category);
+
+                $query->whereJsonContains("categories_id", $related_category[0]);
+                for ($i = 1; $i < $category_count; $i++) {
+                    $query->orWhereJsonContains("categories_id", $related_category[$i]);
+                }
+            }
+        })->whereIn("subscription_type_id", $this->can_access)->limit(8)->get();
+
+        $related_video_count = Video::orderBy("id", "desc")->where(function ($query) use ($related_category, $related_tag) {
+            if ($related_tag) {
+
+                $related_tag = json_decode($related_tag);
+                $tag_count = count($related_tag);
+
+                $query->whereJsonContains("tags_id", $related_tag[0]);
+                for ($i = 1; $i < $tag_count; $i++) {
+                    $query->orWhereJsonContains("tags_id", $related_tag[$i]);
+                }
+            }
+
+            if ($related_category) {
+                $related_category = json_decode($related_category);
+                $category_count = count($related_category);
+
+                $query->whereJsonContains("categories_id", $related_category[0]);
+                for ($i = 1; $i < $category_count; $i++) {
+                    $query->orWhereJsonContains("categories_id", $related_category[$i]);
+                }
+            }
+        })->whereIn("subscription_type_id", $this->can_access)->count();
+
+        if ($related_tag) {
+            $related_tag = json_decode($related_tag);
+        } else {
+            $related_tag = [];
+        }
+
         $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
+
+        $related_search = SearchHistory::whereHas("relatedSearch", function($query) use($related_tag){
+                                $query->whereIn("id", $related_tag);
+                          })->select("search", \DB::raw("count(search) as count"))
+                          ->orderBy("count", "DESC")->groupBy("search")
+                          ->limit(8)->get();
 
         $recent_search = SearchHistory::where(function ($query) {
             if (Auth::check()) {
@@ -365,7 +429,7 @@ class VideoController extends Controller
             return abort(404);
         }
 
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo'));
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search'));
     }
 
     public function searchQuery(Request $request)
@@ -374,10 +438,10 @@ class VideoController extends Controller
 
         $video_search = Video::where(function ($query) use ($search) {
             $query->where("video_title", "like", "%$search%")->orWhere("video_detail", "like", "%$search%");
-            $query->orWhereHas("rel_tag.tag", function (Builder $query) use($search){
+            $query->orWhereHas("rel_tag.tag", function (Builder $query) use ($search) {
                 $query->where("name", "like", "%$search%");
             });
-        })->limit(8)->pluck("video_title")->toArray();
+        })->whereIn("subscription_type_id", $this->can_access)->limit(8)->pluck("video_title")->toArray();
 
         return response()->json($video_search, 200);
     }
@@ -434,12 +498,97 @@ class VideoController extends Controller
             ->where(function ($query) use ($search) {
                 if ($search) {
                     $query->where("video_title", "like", "%$search%")->orWhere("video_detail", "like", "%$search%");
-                    $query->orWhereHas("rel_tag.tag", function (Builder $query) use($search){
+                    $query->orWhereHas("rel_tag.tag", function (Builder $query) use ($search) {
                         $query->where("name", "like", "%$search%");
                     });
                 }
-            })->paginate(15);
+            })->whereIn("subscription_type_id", $this->can_access)->paginate(15);
 
         return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search"));
+    }
+
+
+    public function loadMoreVideo(Request $request)
+    {
+
+        $related_tag = $request->rel_tag;
+        $related_category = $request->rel_cat;
+        $related_video_count = $request->related_video_count;
+
+        $related_video = Video::orderBy("id", "desc")->where(function ($query) use ($related_category, $related_tag) {
+            if ($related_tag) {
+
+                $related_tag = json_decode($related_tag);
+                $tag_count = count($related_tag);
+
+                $query->whereJsonContains("tags_id", $related_tag[0]);
+                for ($i = 1; $i < $tag_count; $i++) {
+                    $query->orWhereJsonContains("tags_id", $related_tag[$i]);
+                }
+            }
+
+            if ($related_category) {
+                $related_category = json_decode($related_category);
+                $category_count = count($related_category);
+
+                $query->whereJsonContains("categories_id", $related_category[0]);
+                for ($j = 1; $j < $category_count; $j++) {
+                    $query->orWhereJsonContains("categories_id", $related_category[$j]);
+                }
+            }
+        })->whereIn("subscription_type_id", $this->can_access)->skip(8)->limit($related_video_count)->get();
+
+        $res_video = "";
+        foreach ($related_video as $video) {
+            $type = explode(".", $video->video_url);
+            $type = isset($type[count($type) - 1]) ? $type[count($type) - 1] : "mp4";
+            $folder = isset($video->video_url) ? explode("/", $video->video_url) : "";
+
+            if (isset($folder[count($folder) - 2])) {
+                $folder = $folder[count($folder) - 2];
+            }
+
+            $res_video .=
+                '<a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="' . route("user-videos.video-detail", $video->id) . '" role="button">
+                    <div class="position-relative" style="height: 160px;">
+                        <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
+                            <source src="' . asset("uploads/" . $folder . "/poster." . $type) . '" type="video/' . $type . '">
+                        </video>
+                        <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">'.($video->video_duration ?? "4:19").'</span>
+                        <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="mt-2">' . $video->video_title . '</div>
+                    <div class="d-flex justify-content-between">
+                        <span class="small text-muted">' . ($video->video_views_count ?? 200) . ' views</span><span class="mt-1 small text-muted">77%</span>
+                    </div>
+                </a>';
+        }
+        return response($res_video, 200);
+    }
+
+    public function canAccess()
+    {
+        $array_subs_id = [];
+
+        $can_access = UserSubscrption::where(function ($query) {
+            if (Auth::check()) {
+                $query->where("id", auth()->user()->subscription_id);
+            } else {
+                $query->where("id", 4);
+            }
+        })->get();
+
+        foreach ($can_access as $access_value) {
+            if ($access_value->can_access) {
+                $array_subs_id = json_decode($access_value->can_access);
+            }
+        }
+
+        return $array_subs_id;
     }
 }

@@ -43,8 +43,12 @@ Route::group(['prefix' => 'alpha'], function () {
 
     Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
     ->name("user-photos");
+    
     /**Search Query*/
     Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
+
+    /**Search Query*/
+    Route::get('load-more', [VideoController::class, 'loadMoreVideo'])->name("load.more");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {

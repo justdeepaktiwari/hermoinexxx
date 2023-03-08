@@ -131,24 +131,9 @@
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3 justify-lg-content-between justify-md-content-between justify-content-center">
             <div class="col-11 d-flex overflow-x-scroll py-2 custom-mx-auto custom-me-md-auto custom-me-lg-auto">
                 <div class="owl-carousel carousel-main position-relative">
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Tits</a></div>
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Cumshot</a></div>
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">MILF</a></div>
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Brunette</a></div>
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Rough</a></div>
-                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Ass</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Dick</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
-
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Rough</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Ass</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Dick</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
-
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Rough</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Ass</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Big Dick</a></div>
-                    <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="" class="text-decoration-none text-white">Step Fantasy</a></div>
+                    @foreach($video_tag as $video_tag_val)
+                    <div class="border  black-color @if(in_array($video_tag_val->id, $related_tag)) border-secondary @endif text-white mx-1 px-3 py-1 rounded-1 text-center cursor-pointer"><a href="@if(in_array($video_tag_val->id, $related_tag)) # @else {{ route('user-videos.search') }}?search={{ $video_tag_val->name }} @endif" class="text-decoration-none @if(in_array($video_tag_val->id, $related_tag)) text-muted @else text-white @endif">{{ $video_tag_val->name }}</a></div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-md-7 col-12  mt-2 mb-2">
@@ -178,7 +163,7 @@
                 <div class="d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center flex-wrap p-2 me-auto mt-3">
                     <div class="fs-4 fw-bold my-2">Releated Video</div>
                     <div style="height: 20px;"></div>
-                    <div class="col-12 row">
+                    <div class="col-12 row add-more">
                         @foreach($related_video as $video)
                         <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
                             <div class="position-relative" style="height: 160px;">
@@ -213,22 +198,24 @@
                         @endforeach
                     </div>
 
-                    <div class="col-12 text-center mt-3">
-                        <div class="col-11 col-md-5 btn btn-secondary btn-sm">Show More</div>
+                    <div class="col-12 text-center mt-3 @if($related_video_count <= 8) d-none @endif">
+                        <div class="col-11 col-md-5 btn btn-secondary btn-sm" onclick="showMore(this, '{{ json_encode($related_tag) }}', '{{ $related_category }}', '{{ $related_video_count }}')">Show More</div>
                     </div>
-
+                @if(count($related_search))
                     <div class="text-white fw-bold fs-4 col-md-12 col-12 mt-3 mb-2">Releated Searches:</div>
-                    <div class="carousel-second owl-carousel p-2">
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Big Tits</div>
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Cumshot</div>
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">MILF</div>
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Brunette</div>
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Rough</div>
-                        <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">Big Ass</div>
-                        <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center">Big Dick</div>
-                        <div class="border black-color text-muted mx-1 px-3 py-1 rounded-1 text-center">Step Fantasy</div>
+                        <div class="col-md-7 me-auto">
+                            <div class="carousel-second owl-carousel">
+                                @foreach($related_search as $related_search_item)
+                                    <div class="border black-color text-white mx-1 px-3 py-1 rounded-1 text-center">
+                                        <a href="{{ route('user-videos.search') }}?search={{ $video_tag_val->name }}" class="text-decoration-none text-white">
+                                            {{ $related_search_item->search }}
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
         <div style="height: 20px;"></div>
@@ -241,6 +228,8 @@
 @section('js')
 <script>
     $(document).ready(function() {
+        var related_search = '{{ count($related_search) }}';
+
         $(".close-btn").click(function(e) {
             e.preventDefault();
             $("#custom-model").fadeOut("slow");
@@ -274,18 +263,17 @@
             margin: 10,
             nav: false,
             dots: false,
-            loop: false,
             autoWidth: true,
             responsiveClass: true,
             responsive: {
                 0: {
-                    items: 4,
+                    items: related_search > 4 ? 4 : related_search,
                 },
                 600: {
-                    items: 6,
+                    items: related_search > 6 ? 6 : related_search,
                 },
                 1000: {
-                    items: 8,
+                    items: related_search > 8 ? 8 : related_search,
                 }
             }
         });
@@ -305,6 +293,64 @@
         e.preventDefault();
         $('.video').trigger('pause');
     });
+
+    function showMore(elem, rel_tag, rel_cat, related_video_count) {
+        $(elem).html(`<svg width="35" height="35" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                    <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">
+                            <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                                <animate attributeName="r"
+                                    begin="1.5s" dur="3s"
+                                    values="6;22"
+                                    calcMode="linear"
+                                    repeatCount="indefinite" />
+                                <animate attributeName="stroke-opacity"
+                                    begin="1.5s" dur="3s"
+                                    values="1;0" calcMode="linear"
+                                    repeatCount="indefinite" />
+                                <animate attributeName="stroke-width"
+                                    begin="1.5s" dur="3s"
+                                    values="2;0" calcMode="linear"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                                <animate attributeName="r"
+                                    begin="3s" dur="3s"
+                                    values="6;22"
+                                    calcMode="linear"
+                                    repeatCount="indefinite" />
+                                <animate attributeName="stroke-opacity"
+                                    begin="3s" dur="3s"
+                                    values="1;0" calcMode="linear"
+                                    repeatCount="indefinite" />
+                                <animate attributeName="stroke-width"
+                                    begin="3s" dur="3s"
+                                    values="2;0" calcMode="linear"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="22" cy="22" r="8">
+                                <animate attributeName="r"
+                 begin="0s" dur="1.5s"
+                 values="6;1;2;3;4;5;6"
+                 calcMode="linear"
+                 repeatCount="indefinite" />
+        </circle>
+    </g>
+</svg>`);
+        $.ajax({
+            type: "GET",
+            url: "{{ route('load.more') }}",
+            data: {
+                rel_tag: rel_tag,
+                rel_cat: rel_cat,
+                related_video_count: related_video_count
+            },
+            dataType: "HTML",
+            success: function(response) {
+                $(".add-more").append(response);
+                $(elem).parent().hide();
+            }
+        });
+    }
 </script>
 
 @include("videos.partials.commonjs")

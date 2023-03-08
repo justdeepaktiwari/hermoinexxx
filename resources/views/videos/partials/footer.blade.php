@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-12 col-11 mx-auto text-center d-flex flex-column justify-content-center">
-                <img src="{{ asset('assets/images/logo.webp') }}" alt="" style="height: 140px;">
+                <img src="{{ asset('assets/images/logo.webp') }}" alt="" style="height: 120px; width: 230px;">
             </div>
         </div>
     </div>
