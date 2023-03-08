@@ -321,6 +321,7 @@ class VideoController extends Controller
         $random_products_photo = Product::where("product_image", "like", "%.png%")
             ->orWhere("product_image", "like", "%.jpg%")
             ->orWhere("product_image", "like", "%.jpeg%")
+            ->orWhere("product_image", "like", "%.gif%")
             ->inRandomOrder()->limit(1)->first();
 
         $new_video = Video::orderBy("id", "desc")
