@@ -336,7 +336,7 @@ class VideoController extends Controller
         $watched_later = Video::whereIn("subscription_type_id", $this->canAccess())
             ->where(function($query) use($watched_vid_id){
                 if($watched_vid_id){
-                    $query->whereIn("id", json_encode($watched_vid_id->video_ids));
+                    $query->whereIn("id", json_decode($watched_vid_id->video_ids));
                 }
             })
             ->orderBy("id", "desc")
