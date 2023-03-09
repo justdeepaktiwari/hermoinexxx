@@ -49,6 +49,9 @@ Route::group(['prefix' => 'alpha'], function () {
 
     /**Search Query*/
     Route::get('load-more', [VideoController::class, 'loadMoreVideo'])->name("load.more");
+
+    /**Video Categories */
+    Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {

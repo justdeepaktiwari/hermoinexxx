@@ -197,7 +197,7 @@
                             </div>
                             <div class="mt-2">{{ $video->video_title }}</div>
                             <div class="d-flex justify-content-between">
-                                <span class="small text-muted">{{ $video->video_views_count ?? 200 }} views</span><span class="mt-1 small text-muted">77%</span>
+                                <span class="small text-muted">@if($video->video_views_count > 1000) {{ number_format($video->video_views_count/1000, 1) }}k @endif views</span><span class="mt-1 small text-muted">77%</span>
                             </div>
                         </a>
                         @endforeach

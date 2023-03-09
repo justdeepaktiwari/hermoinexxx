@@ -355,7 +355,7 @@ class VideoController extends Controller
         if (!$video_detail) {
             return abort(403);
         }
-
+        Video::where("id", $request->video)->update(["video_views_count" => \DB::raw('video_views_count+1')]);
         $this->watchLater($video_detail->id);
 
         $related_category = $video_detail->categories_id;
@@ -667,4 +667,26 @@ class VideoController extends Controller
             }
         })->first();
     }
+
+    /**
+     * Categories Video
+     */
+    protected $video_categories = [
+                        "recommended", 
+                        "most-viewed", 
+                        "top-rated", 
+                        "trending-now", 
+                        "most-favorited", 
+                        "newest", 
+                        "longest"
+                    ];
+
+     public function CategoriesVideo($video_for)
+     {
+        if(in_array($video_for, $this->video_categories)){
+            return "Working On this section";
+        }else{
+            return abort(404);
+        }
+     }
 }
