@@ -334,16 +334,18 @@ class VideoController extends Controller
 
         $watched_vid_id = $this->savedWatchLaterVideo();
         $watched_later = Video::whereIn("subscription_type_id", $this->canAccess())
-            ->where(function($query) use($watched_vid_id){
-                if($watched_vid_id){
+            ->where(function ($query) use ($watched_vid_id) {
+                if ($watched_vid_id) {
                     $query->whereIn("id", json_decode($watched_vid_id->video_ids));
                 }
             })
             ->orderBy("id", "desc")
             ->inRandomOrder()
             ->limit(4)->get();
-        
-        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video'));
+
+        $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
+
+        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video'));
     }
 
     public function UserVideoDetail(Request $request)
@@ -442,8 +444,8 @@ class VideoController extends Controller
         if (!$video_detail) {
             return abort(404);
         }
-
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search'));
+        $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video'));
     }
 
     public function searchQuery(Request $request)
@@ -517,8 +519,10 @@ class VideoController extends Controller
                     });
                 }
             })->whereIn("subscription_type_id", $this->canAccess())->paginate(15);
+        
+        $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
 
-        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search"));
+        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search", "sidebar_recomonded_video"));
     }
 
 
@@ -624,7 +628,7 @@ class VideoController extends Controller
                 $video_ids = [];
             }
 
-            if(!in_array($video_id, $video_ids)){
+            if (!in_array($video_id, $video_ids)) {
                 $video_ids[] = $video_id;
             }
 
@@ -644,7 +648,7 @@ class VideoController extends Controller
                 $video_ids = [];
             }
 
-            if(!in_array($video_id, $video_ids)){
+            if (!in_array($video_id, $video_ids)) {
                 $video_ids[] = $video_id;
             }
 
@@ -659,10 +663,10 @@ class VideoController extends Controller
     public function savedWatchLaterVideo()
     {
         $request_ip = request()->ip();
-        return WatchLaterVideo::where(function($query) use($request_ip){
-            if(auth()->check()){
+        return WatchLaterVideo::where(function ($query) use ($request_ip) {
+            if (auth()->check()) {
                 $query->where("user_id", auth()->user()->id);
-            }else{
+            } else {
                 $query->where("ip_address", $request_ip);
             }
         })->first();
@@ -672,21 +676,84 @@ class VideoController extends Controller
      * Categories Video
      */
     protected $video_categories = [
-                        "recommended", 
-                        "most-viewed", 
-                        "top-rated", 
-                        "trending-now", 
-                        "most-favorited", 
-                        "newest", 
-                        "longest"
-                    ];
+        "recommended",
+        "most-viewed",
+        "top-rated",
+        "trending-now",
+        "most-favorited",
+        "newest",
+        "longest"
+    ];
 
-     public function CategoriesVideo($video_for)
-     {
-        if(in_array($video_for, $this->video_categories)){
-            return "Working On this section";
-        }else{
+    public function CategoriesVideo($video_for)
+    {
+        if (in_array($video_for, $this->video_categories)) {
+            $videos = Video::select("*")->where(function ($query) use ($video_for) {
+                if ($video_for == "recommended") {
+                    $query->where("tags_id", "");
+                }
+            })
+            ->whereIn("subscription_type_id", $this->canAccess())
+            ->orderBy($this->orderByForCat($video_for), "DESC")->paginate(8);
+
+
+            $random_products_photo = Product::where("product_image", "like", "%.png%")
+                ->orWhere("product_image", "like", "%.jpg%")
+                ->orWhere("product_image", "like", "%.jpeg%")
+                ->orWhere("product_image", "like", "%.gif%")
+                ->inRandomOrder()->limit(1)->first();
+
+
+            $new_video = Video::orderBy("id", "desc")
+                ->whereIn("subscription_type_id", $this->canAccess())
+                ->limit(10)->get();
+
+            $categories_for = $video_for;
+
+
+            $trending_searches = SearchHistory::select("search", \DB::raw("count(search) as count"))->orderBy("count", "DESC")->groupBy("search")->limit(5)->get();
+
+            $recent_search = SearchHistory::where(function ($query) {
+                if (Auth::check()) {
+                    $query->where("user_id", auth()->user()->id);
+                } else {
+                    $query->where("user_id", 0);
+                }
+            })->orderBy('id', 'desc')->get();
+
+            $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
+
+            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video"));
+        } else {
             return abort(404);
         }
-     }
+    }
+
+
+    public function orderByForCat($video_for)
+    {
+        if ($video_for == "top-rated") {
+            return "video_views_count";
+        } else if ($video_for == "most-viewed") {
+            return "video_views_count";
+        } else if ($video_for == "trending-now") {
+            return "video_views_count";
+        } else if ($video_for == "most-favorited") {
+            return "video_views_count";
+        } else if ($video_for == "newest") {
+            return "id";
+        } else if ($video_for == "longest") {
+            return "video_duration";
+        } else {
+            return "id";
+        }
+    }
+
+
+    public function recomndedVideoFoSideBar()
+    {
+        return Video::whereIn("subscription_type_id", $this->canAccess())
+        ->inRandomOrder()
+        ->limit(6)->get();
+    }
 }

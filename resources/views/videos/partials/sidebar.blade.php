@@ -15,7 +15,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16">
                 <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
             </svg>
-            <span class="text-white fs-6 fw-700 d-none text-nowrap">Categories</span>
+            <span class="text-white fs-6 fw-700 d-none text-nowrap">Porn videos</span>
 
             <div class="pop-up-modal-categories bg-dark text-white font-poppins">
                 <div class="full-width row">
@@ -108,78 +108,24 @@
                         <div class="fs-4 ms-2 mb-3">
                             Recommended Videos
                         </div>
+                        @foreach($sidebar_recomonded_video as $video)
+                        <div class="col-md-4 video-hover mb-2" role="button">
+                            <div class="position-relative" style="height: 100px;">
+                                @php
+                                $type = explode(".", $video->video_url);
+                                $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
 
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
+                                $folder = isset($video->video_url) ? explode("/", $video->video_url) : "";
+                                if(isset($folder[count($folder)-2])){
+                                $folder = $folder[count($folder)-2];
+                                }
+                                @endphp
 
-                        <div class="col-md-12">
-                            <hr>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
                                 <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                                    <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/{{ $type }}">
                                 </video>
                                 <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
+                                    {{$video->video_duration ?? "4:19"}}
                                 </span>
                                 <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
@@ -188,51 +134,12 @@
                                     </svg>
                                 </span>
                             </div>
-                            <div class="mt-2">Title - Video</div>
+                            <div class="mt-2">{{ $video->video_title }}</div>
                             <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
+                                <span class="small text-muted">@if($video->video_views_count > 1000) {{ number_format($video->video_views_count/1000, 1) }}k @endif views</span><span class="mt-1 small text-muted">77%</span>
                             </div>
                         </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
+                        @endforeach 
                     </div>
                 </div>
             </div>
@@ -316,9 +223,9 @@
                         <hr>
                         <div><span class="fs-4">Most Popular Searches</span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span></div>
                         @foreach($trending_searches as $trending_search)
-                            <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 px-2 my-2" role="button" onclick="changeText(this.innerText)">
-                                {{ $trending_search->search }}
-                            </div>
+                        <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 px-2 my-2" role="button" onclick="changeText(this.innerText)">
+                            {{ $trending_search->search }}
+                        </div>
                         @endforeach()
                     </div>
 
@@ -372,10 +279,10 @@
                                 Top Cams Categories
                             </div>
                             <div class="ps-2 py-2 fs-6">
-                                @foreach($trending_searches as $trending_search) 
-                                    <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 my-2 px-2" role="button" onclick="changeText(this.innerText)">
-                                        {{ $trending_search->search }}
-                                    </div> 
+                                @foreach($trending_searches as $trending_search)
+                                <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 my-2 px-2" role="button" onclick="changeText(this.innerText)">
+                                    {{ $trending_search->search }}
+                                </div>
                                 @endforeach()
                             </div>
                         </div>
