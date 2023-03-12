@@ -448,7 +448,8 @@ class VideoController extends Controller
         }
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
         $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
-$sidebar_models_near = $this->nearModelFoSideBar();
+        $sidebar_models_near = $this->nearModelFoSideBar();
+        
         return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near'));
     }
 

@@ -24,6 +24,7 @@
 @endsection
 
 @section('content')
+@include("loader")
 <!-- HEADER SECTION STARTS -->
 <div class="bg-light text-center small py-1"><span class="badge rounded-pill bg-danger">Instant access!</span> Plans now
     start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer">Learn More ></a></div>
@@ -53,7 +54,6 @@
             <button class="btn btn-danger rounded-0 fs-2 p-2" type="button" onclick="checkOutStepOne(this.previousElementSibling.value)">Instant Access ></button>
         </div>
     </div>
-
     <div class="feature-video">
         <video width="100%" height="100%" id="vid" loop="loop" autoplay="autoplay" controls muted>
             <source src="{{ asset('assets/videos/feature-video.mp4') }}" type="video/mp4">
@@ -85,8 +85,17 @@
         <div class="col-md-6 col-12">
             <div class="right-column ms-auto">
                 <img src="{{ asset('assets/images/tv.png') }}">
+                @php
+                    $type = explode(".", $foot_fetish->video_url);
+                    $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+
+                    $folder = isset($foot_fetish->video_url) ? explode("/", $foot_fetish->video_url) : "";
+                    if(isset($folder[count($folder)-2])){
+                    $folder = $folder[count($folder)-2];
+                    }
+                @endphp
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                    <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -96,8 +105,17 @@
         <div class="col-md-6 col-12">
             <div class="right-column me-auto">
                 <img src="{{ asset('assets/images/tv.png') }}">
+                @php
+                    $type = explode(".", $bdsm_video->video_url);
+                    $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+
+                    $folder = isset($bdsm_video->video_url) ? explode("/", $bdsm_video->video_url) : "";
+                    if(isset($folder[count($folder)-2])){
+                    $folder = $folder[count($folder)-2];
+                    }
+                @endphp
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                    <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -138,69 +156,24 @@
         <div class="mx-auto col-md-6 col-12 position-relative cum-cluster-tv">
             <img src="{{ asset('assets/images/tv.png') }}">
             <div class="col-md-9 col-9 cum-cluster-video d-flex justify-content-around flex-wrap border border-dark">
+                @foreach($cum_cluster as $cum_vid)
+                @php
+                    $type = explode(".", $cum_vid->video_url);
+                    $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
+
+                    $folder = isset($cum_vid->video_url) ? explode("/", $cum_vid->video_url) : "";
+                    if(isset($folder[count($folder)-2])){
+                    $folder = $folder[count($folder)-2];
+                    }
+                @endphp
                 <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                     <a href="http://video">
                         <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
+                            <source src="{{ asset('uploads/'.$folder.'/poster.'.$type) }}" type="video/mp4">
                         </video>
                     </a>
                 </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-4 border border-dark ">
-                    <a href="http://video">
-                        <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                        </video>
-                    </a>
-                </div>
+                @endforeach
             </div>
 
         </div>

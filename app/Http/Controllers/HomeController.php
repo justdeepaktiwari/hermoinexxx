@@ -33,7 +33,28 @@ class HomeController extends Controller
     public function index()
     {
         $purchase_offer = PurchaseOffer::get();
-        return view('welcome', compact("purchase_offer"));
+        
+        $foot_fetish = Video::whereHas("rel_category.category", function ($query){
+                $query->where("name", "like", "%Feet%");
+                $query->orWhere("name", "like", "%Fetish%");
+            })->inRandomOrder()->limit(1)->first();
+        
+        $bdsm_video = Video::whereHas("rel_category.category", function ($query){
+                $query->where("name", "like", "%BDSM%");
+            })->inRandomOrder()->limit(1)->first();
+
+        $cum_cluster = Video::whereHas("rel_category.category", function ($query){
+                $query->where("name", "like", "%Cum Shot%");
+                $query->orWhere("name", "like", "%Creampie%");
+            })->orWhereHas("rel_tag.tag", function ($query){
+                $query->where("name", "like", "%cum-on-pussy%");
+                $query->orWhere("name", "like", "%cum-on-tits%");
+                $query->orWhere("name", "like", "%cum-in-pussy%");
+                $query->orWhere("name", "like", "%cum-inside%");
+                $query->orWhere("name", "like", "%cumshot%");
+            })->inRandomOrder()->limit(9)->get();
+        // dd($foot_fetish);
+        return view('welcome', compact("purchase_offer", "foot_fetish", "bdsm_video", "cum_cluster"));
     }
 
 
