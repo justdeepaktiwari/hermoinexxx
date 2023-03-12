@@ -344,8 +344,10 @@ class VideoController extends Controller
             ->limit(4)->get();
 
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
-
-        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video'));
+        $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
+        $sidebar_models_near = $this->nearModelFoSideBar();
+        
+        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near'));
     }
 
     public function UserVideoDetail(Request $request)
@@ -445,7 +447,9 @@ class VideoController extends Controller
             return abort(404);
         }
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video'));
+        $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
+$sidebar_models_near = $this->nearModelFoSideBar();
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near'));
     }
 
     public function searchQuery(Request $request)
@@ -521,8 +525,9 @@ class VideoController extends Controller
             })->whereIn("subscription_type_id", $this->canAccess())->paginate(15);
         
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
-
-        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search", "sidebar_recomonded_video"));
+        $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
+        $sidebar_models_near = $this->nearModelFoSideBar();
+        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search", "sidebar_recomonded_video",'sidebar_topcategories_video', 'sidebar_models_near'));
     }
 
 
@@ -682,7 +687,8 @@ class VideoController extends Controller
         "trending-now",
         "most-favorited",
         "newest",
-        "longest"
+        "longest", 
+        "top-categories"
     ];
 
     public function CategoriesVideo($video_for)
@@ -722,8 +728,9 @@ class VideoController extends Controller
             })->orderBy('id', 'desc')->get();
 
             $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
-
-            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video"));
+            $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
+            $sidebar_models_near = $this->nearModelFoSideBar();
+            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video", 'sidebar_topcategories_video', 'sidebar_models_near'));
         } else {
             return abort(404);
         }
@@ -744,6 +751,8 @@ class VideoController extends Controller
             return "id";
         } else if ($video_for == "longest") {
             return "video_duration";
+        } else if($video_for == "top-categories"){
+            return "video_duration";
         } else {
             return "id";
         }
@@ -753,6 +762,28 @@ class VideoController extends Controller
     public function recomndedVideoFoSideBar()
     {
         return Video::whereIn("subscription_type_id", $this->canAccess())
+        ->inRandomOrder()
+        ->limit(6)->get();
+    }
+
+    public function topCatVideoFoSideBar()
+    {
+        return Video::whereIn("subscription_type_id", $this->canAccess())
+        ->where(function($query){
+            $query->whereNotNull("categories_id")->orWhere("categories_id", "");
+        })
+        ->inRandomOrder()
+        ->limit(3)->get();
+    }
+
+
+    
+    public function nearModelFoSideBar()
+    {
+        return Video::whereIn("subscription_type_id", $this->canAccess())
+        ->where(function($query){
+            $query->whereNotNull("categories_id")->orWhere("categories_id", "");
+        })
         ->inRandomOrder()
         ->limit(6)->get();
     }
