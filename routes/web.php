@@ -87,6 +87,7 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
     /**Stripe Payment Integration*/
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
+    Route::resource('livecams', App\Http\Controllers\LiveCamController::class);
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 });
 
