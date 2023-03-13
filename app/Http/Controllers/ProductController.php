@@ -204,6 +204,6 @@ class ProductController extends Controller
 
     public function productDetail()
     {
-        return view("products.product-checkout");
+        return view("products.product-detail");
     }
 }

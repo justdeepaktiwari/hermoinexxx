@@ -53,7 +53,7 @@ class HomeController extends Controller
                 $query->orWhere("name", "like", "%cum-inside%");
                 $query->orWhere("name", "like", "%cumshot%");
             })->inRandomOrder()->limit(9)->get();
-        // dd($foot_fetish);
+            
         return view('welcome', compact("purchase_offer", "foot_fetish", "bdsm_video", "cum_cluster"));
     }
 

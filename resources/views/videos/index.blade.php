@@ -15,8 +15,8 @@
 
 @include("videos.partials.sidebar")
 
-<div class="text-white w-md-responsive ms-auto">
-    <main class="content-section">
+<div class="text-white">
+    <main class="content-section px-lg-2 px-sm-0 px-md-2">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
             <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
                 Webcam
@@ -116,7 +116,7 @@
         </div>
 
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-1">
-            <div class="col-12 row">
+            <div class="col-12 row px-2 mx-2">
                 <div class="fs-4 fw-bold my-2">Recommended</div>
                 @foreach($recomended_video as $video)
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user-videos.video-detail', $video->id) }}" role="button">
@@ -154,7 +154,7 @@
         </div>
 
         <div class="d-flex flex-wrap w-md-responsive p-2 ms-auto mt-3">
-            <div class="col-12 row">
+            <div class="col-12 row px-2 mx-2">
                 <div class="fs-4 fw-bold d-flex justify-content-between my-2">
                     <span>New Videos</span>
                 </div>
