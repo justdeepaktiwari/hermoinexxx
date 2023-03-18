@@ -1,7 +1,7 @@
-@extends('products.app-product')
 
-@section('title', 'Hermoinexxx - Product')
-@section('css')
+
+<?php $__env->startSection('title', 'Hermoinexxx - Product'); ?>
+<?php $__env->startSection('css'); ?>
 <style>
     .picZoomer {
         position: relative;
@@ -135,9 +135,9 @@
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
     }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <section style="background-color: #000; min-height: 100vh;">
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -147,33 +147,33 @@
 
                         <div class="row">
                             <div class="col-lg-7">
-                                <h5 class="mb-3"><a href="{{ route('list.product') }}" class="text-white"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                                <h5 class="mb-3"><a href="<?php echo e(route('list.product')); ?>" class="text-white"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
                                 <hr> 
                                 <div class=" _boxzoom">
                                     <div class="zoom-thumb">
                                         <ul class="piclist">
-                                            @php
+                                            <?php
                                             $product_image = json_decode($detail_product->product_image);
-                                            @endphp
-                                            @foreach($product_image as $image)
+                                            ?>
+                                            <?php $__currentLoopData = $product_image; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li>
-                                                <img src="{{ asset('uploads/products/'.$image) }}" alt="">
+                                                <img src="<?php echo e(asset('uploads/products/'.$image)); ?>" alt="">
                                             </li>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <li>
-                                                <img src="{{ asset('assets/images/info-1.png') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('assets/images/info-2.png') }}" alt="">
+                                                <img src="<?php echo e(asset('assets/images/info-1.png')); ?>" alt="">
                                             </li>
                                             <li>
-                                                <img src="{{ asset('assets/images/info-3.png') }}" alt="">
+                                                <img src="<?php echo e(asset('assets/images/info-2.png')); ?>" alt="">
+                                            </li>
+                                            <li>
+                                                <img src="<?php echo e(asset('assets/images/info-3.png')); ?>" alt="">
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="_product-images  position-relative">
                                         <div class="picZoomer">
-                                            <img class="my_img" src="{{ asset('uploads/products/'.$product_image[0]) }}" alt="">
+                                            <img class="my_img" src="<?php echo e(asset('uploads/products/'.$product_image[0])); ?>" alt="">
                                         </div>
 
                                         <div class="heart-icon position-absolute top-0 end-0 text-danger px-2 py-2" style="z-index: 99999; cursor: pointer !important; background-color: rgba(0, 0, 0, .5);">
@@ -277,9 +277,9 @@
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script>
     (function($) {
         $.fn.picZoomer = function(options) {
@@ -353,7 +353,7 @@
         };
 
         $.fn.picZoomer.defaults = {
-            picHeight: 100 * '{{$number_pic}}' + 300,
+            picHeight: 100 * '<?php echo e($number_pic); ?>' + 300,
             scale: 2.5,
             zoomerPosition: {
                 top: screen.width > 720 ? '0' : '100%',
@@ -375,4 +375,5 @@
         });
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('products.app-product', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\hermoinexxx\resources\views/products/product-detail.blade.php ENDPATH**/ ?>

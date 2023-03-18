@@ -1,7 +1,7 @@
-@extends('products.app-product')
 
-@section('title', 'Hermoinexxx - Product')
-@section('css')
+
+<?php $__env->startSection('title', 'Hermoinexxx - Product'); ?>
+<?php $__env->startSection('css'); ?>
 <style>
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -23,9 +23,9 @@
         padding: 60px 0;
     }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <section style="background-color: #000; min-height: 100vh;">
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
@@ -37,7 +37,7 @@
 
                             <div class="col-lg-7">
                                 <h5>
-                                    <a href="{{ route('list.product') }}" class="text-white">
+                                    <a href="<?php echo e(route('list.product')); ?>" class="text-white">
                                         <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
                                     </a>
                                 </h5>
@@ -132,7 +132,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-center align-items-center mb-2">
                                             <!-- <h5 class="mb-0">Card details</h5> -->
-                                            <img src="{{ asset('assets/images/logo.webp') }}" class="img-fluid rounded-3" style="width: 145px;" alt="Avatar">
+                                            <img src="<?php echo e(asset('assets/images/logo.webp')); ?>" class="img-fluid rounded-3" style="width: 145px;" alt="Avatar">
                                         </div>
 
                                         <p class="small mb-2">Card type</p>
@@ -206,7 +206,8 @@
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
-@endsection
+<?php $__env->startSection('js'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('products.app-product', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\hermoinexxx\resources\views/products/product-checkout.blade.php ENDPATH**/ ?>

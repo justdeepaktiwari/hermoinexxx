@@ -198,12 +198,27 @@ class ProductController extends Controller
 
     public function listProduct()
     {
-        $latest_product = Product::orderBy("id", "DESC")->paginate(8);
+        $latest_product = Product::orderBy("id", "DESC")->limit(8)->get();
         return view("products.index", compact("latest_product"));
     }
 
-    public function productDetail()
+    public function productDetail($id)
     {
-        return view("products.product-detail");
+        $detail_product = Product::where("id", $id)->first();
+        
+        if($detail_product->product_image){
+            $number_pic = $detail_product->product_image;
+            $number_pic = json_decode($number_pic);
+            $number_pic = count($number_pic);
+        }else{
+            $number_pic = 0;
+        }
+
+        return view("products.product-detail", compact('detail_product', 'number_pic'));
+    }
+
+    public function productCart()
+    {
+        return view("products.product-checkout");
     }
 }

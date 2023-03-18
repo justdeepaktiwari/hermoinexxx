@@ -30,8 +30,15 @@ Route::group(['prefix' => 'alpha'], function () {
     Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
     Auth::routes(["login" => true, "register" => true]);
 
-    Route::get('list-product', [App\Http\Controllers\ProductController::class, "listProduct"])->name("list.product");
-    Route::get('list-product/{id}/detail', [App\Http\Controllers\ProductController::class, "productDetail"])->name("list.product.detail");
+    Route::get('list-product', [App\Http\Controllers\ProductController::class, "listProduct"])
+    ->name("list.product");
+
+    Route::get('list-product/{id}/detail', [App\Http\Controllers\ProductController::class, "productDetail"])
+    ->name("list.product.detail");
+
+    Route::get('product/cart', [App\Http\Controllers\ProductController::class, "productCart"])
+    ->name("product.cart");
+    
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
     ->name("user-videos.video-detail");
 
