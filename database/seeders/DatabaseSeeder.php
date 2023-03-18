@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Stripe\Service\ProductService;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             UserSubscriptionSeeder::class,
             PurchaseOfferSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

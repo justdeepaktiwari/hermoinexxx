@@ -12,7 +12,7 @@
     <div class="text-center container py-3">
         <h4 class="mt-2 mb-3 py-2 text-white text-start border-bottom border-danger d-flex justify-content-between">
             <strong>Latest Products</strong> 
-            <a href="" class="btn btn-outline-danger btn-sm rounded-0">
+            <a href="{{ route('lists.product').'?type='.'latest-product' }}" class="btn btn-outline-danger btn-sm rounded-0">
                 See More
             </a>
         </h4>

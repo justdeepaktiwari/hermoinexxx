@@ -8,26 +8,16 @@
 <div class="search-bar d-flex align-items-center flex-wrap gap-2 flex-grow-1 justify-content-center">
 
     <div class="col-11 col-lg-5 col-md-6">
-        <form action="<?php echo e(route('user-videos.search')); ?>" method="get">
+        <form action="<?php echo e(route('lists.product')); ?>" method="get">
             <div class="input-group postion-relative">
-                <input type="text" name="search" class="form-control rounded-0 on-focus-show" id="on-focus-show" placeholder="Search Here" aria-describedby="button-addon2" value="<?php echo e(isset($search) ? $search : ''); ?>" autocomplete="off">
+                <?php if(Request::get('type')): ?>
+                    <input type="hidden" value="<?php echo e(Request::get('type')); ?>" name="type" class="form-control rounded-0 on-focus-show" id="on-focus-show" placeholder="Search Here" aria-describedby="button-addon2" value="<?php echo e(isset($search) ? $search : ''); ?>" autocomplete="off">
+                    
+                <?php endif; ?>
+                <input type="text" value="<?php echo e(Request::get('search')); ?>" name="search" class="form-control rounded-0 on-focus-show" id="on-focus-show" placeholder="Search Here" aria-describedby="button-addon2" value="<?php echo e(isset($search) ? $search : ''); ?>" autocomplete="off">
                 <button class="btn btn-danger rounded-0" type="submit" id="button-addon2">Search</button>
-                
             </div>
         </form>
-    </div>
-
-    <div class="dropdown">
-        <button class="btn btn-dark rounded-0 d-flex align-items-center gap-2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-sharp fa-solid fa-mars-and-venus" style="color: white; font-size: 17px; margin-right: 5px;"></i>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark rounded-0" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item py-2" href="#"><i class="fa-sharp fa-solid fa-mars-and-venus me-3"></i> Straight</a></li>
-            <li><a class="dropdown-item py-2" href="#"><i class="fa-solid fa-mars-double me-3"></i> Gay</a>
-            </li>
-            <li><a class="dropdown-item py-2" href="#"><i class="fa-sharp fa-solid fa-transgender me-3"></i>
-                    Transgender</a></li>
-        </ul>
     </div>
 </div>
 <div>

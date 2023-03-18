@@ -23,34 +23,32 @@ Route::get('/', function () {
     return redirect()->route("home");
 });
 
-Route::group(['prefix' => 'alpha'], function () {
+Route::group(['prefix' => 'alpha1'], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home');
     Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
     Auth::routes(["login" => true, "register" => true]);
 
-    Route::get('list-product', [App\Http\Controllers\ProductController::class, "listProduct"])
-    ->name("list.product");
+    Route::get('product', [App\Http\Controllers\Frontend\ProductController::class, "index"])->name("list.product");
 
-    Route::get('list-product/{id}/detail', [App\Http\Controllers\ProductController::class, "productDetail"])
-    ->name("list.product.detail");
+    Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
+    Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
 
-    Route::get('product/cart', [App\Http\Controllers\ProductController::class, "productCart"])
-    ->name("product.cart");
-    
+    Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
+
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
-    ->name("user-videos.video-detail");
+        ->name("user-videos.video-detail");
 
     Route::get('user-video', [VideoController::class, 'VideoSearch'])
-    ->name("user-videos.search");
-    
+        ->name("user-videos.search");
+
     Route::get('user-videos', [VideoController::class, 'UserVideo'])
-    ->name("user-videos");
+        ->name("user-videos");
 
     Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
-    ->name("user-photos");
-    
+        ->name("user-photos");
+
     /**Search Query*/
     Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
 
@@ -59,6 +57,8 @@ Route::group(['prefix' => 'alpha'], function () {
 
     /**Video Categories */
     Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
+    /************add to cart**********************************/
+    Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
@@ -76,39 +76,38 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
         /**Use Category And Tag*/
         Route::get('category-tag', [App\Http\Controllers\CategoryAndTagController::class, "index"])
-        ->name("category-tag.index");
+            ->name("category-tag.index");
 
         Route::get('category-tag/categories/{id}/edit', [App\Http\Controllers\CategoryAndTagController::class, "categoryEdit"])
-        ->name("categories.edit");
+            ->name("categories.edit");
         Route::get('category-tag/categories/create', [App\Http\Controllers\CategoryAndTagController::class, "categoryCreate"])
-        ->name("categories.create");
+            ->name("categories.create");
         Route::post('category-tag/categories/store', [App\Http\Controllers\CategoryAndTagController::class, "categoryStore"])
-        ->name("categories.store");
+            ->name("categories.store");
         Route::post('category-tag/categories/{id}', [App\Http\Controllers\CategoryAndTagController::class, "categoryUpdate"])
-        ->name("categories.update");
+            ->name("categories.update");
         Route::delete('category-tag/categories/{id}', [App\Http\Controllers\CategoryAndTagController::class, "categoryDestroy"])
-        ->name("categories.destroy");
+            ->name("categories.destroy");
 
         Route::get('category-tag/tags/{id}/edit', [App\Http\Controllers\CategoryAndTagController::class, "tagEdit"])
-        ->name("tags.edit");
+            ->name("tags.edit");
         Route::get('category-tag/tags/create', [App\Http\Controllers\CategoryAndTagController::class, "tagCreate"])
-        ->name("tags.create");
+            ->name("tags.create");
         Route::post('category-tag/tags/store', [App\Http\Controllers\CategoryAndTagController::class, "tagStore"])
-        ->name("tags.store");
+            ->name("tags.store");
         Route::post('category-tag/tags/{id}/update', [App\Http\Controllers\CategoryAndTagController::class, "tagStore"])
-        ->name("tags.update");
+            ->name("tags.update");
         Route::delete('category-tag/tags/{id}', [App\Http\Controllers\CategoryAndTagController::class, "tagDestroy"])
-        ->name("tags.destroy");
+            ->name("tags.destroy");
 
         /**Landing Page Videos Manage*/
         Route::resource('landing-page', App\Http\Controllers\LandinPageManageController::class);
 
         Route::get('landing/testimonials', [App\Http\Controllers\LandinPageManageController::class, "testimonials"])
-        ->name("landing-pages.testimonials");
+            ->name("landing-pages.testimonials");
 
         Route::get('landing/purchase-offer', [App\Http\Controllers\LandinPageManageController::class, "purchaseOffer"])
-        ->name("landing-pages.purchaseOffer");
-
+            ->name("landing-pages.purchaseOffer");
     });
 });
 

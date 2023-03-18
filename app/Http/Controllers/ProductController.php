@@ -1,13 +1,13 @@
 <?php
-    
+
 namespace App\Http\Controllers;
-    
+
 use App\Models\Product;
 use Illuminate\Http\Request;
 use File;
 
 class ProductController extends Controller
-{ 
+{
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +15,10 @@ class ProductController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -28,10 +28,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(5);
-        return view('admin.products.index',compact('products'))
+        return view('admin.products.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +41,7 @@ class ProductController extends Controller
     {
         return view('admin.products.create');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -62,12 +62,12 @@ class ProductController extends Controller
 
         $create_product = $request->all();
 
-        if($request->hasFile('product_image')){
+        if ($request->hasFile('product_image')) {
 
             $file = $request->file('product_image');
 
             $path = public_path("uploads/products");
-            
+
             if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
@@ -76,11 +76,11 @@ class ProductController extends Controller
 
             foreach ($file as $file_value) {
                 $extension = $file_value->getClientOriginalExtension();
-                
+
                 $randomstr = uniqid();
-                
-                $filename = $randomstr.".".$extension;
-                
+
+                $filename = $randomstr . "." . $extension;
+
                 $file_value->move($path, $filename);
 
                 $file_name_arr[] = $filename;
@@ -89,13 +89,13 @@ class ProductController extends Controller
             $create_product["product_image"] = json_encode($file_name_arr);
         }
 
-        
+
         Product::create($create_product);
-        
+
         return redirect()->route('products.index')
-                        ->with('success','Product created successfully.');
+            ->with('success', 'Product created successfully.');
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -104,9 +104,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.products.show',compact('product'));
+        return view('admin.products.show', compact('product'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -115,9 +115,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit',compact('product'));
+        return view('admin.products.edit', compact('product'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -137,15 +137,15 @@ class ProductController extends Controller
 
 
         $create_product = $request->all();
-        
+
         // dd($request->hasFile('product_image'));
 
-        if($request->hasFile('product_image')){
+        if ($request->hasFile('product_image')) {
 
             $file = $request->file('product_image');
 
             $path = public_path("uploads/products");
-            
+
             if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
@@ -154,18 +154,18 @@ class ProductController extends Controller
 
             foreach ($file as $file_value) {
                 $extension = $file_value->getClientOriginalExtension();
-                
+
                 $randomstr = uniqid();
-                
-                $filename = $randomstr.".".$extension;
-                
+
+                $filename = $randomstr . "." . $extension;
+
                 $file_value->move($path, $filename);
 
                 $file_name_arr[] = $filename;
             }
 
             $create_product["product_image"] = json_encode($file_name_arr);
-        }else{
+        } else {
             unset($create_product["product_image"]);
         }
 
@@ -175,11 +175,11 @@ class ProductController extends Controller
         // dd($create_product);
 
         Product::where("id", $id)->update($create_product);
-    
+
         return redirect()->route('products.index')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -189,36 +189,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-    
+
         return redirect()->route('products.index')
-                        ->with('success','Product deleted successfully');
-    }
-
-
-
-    public function listProduct()
-    {
-        $latest_product = Product::orderBy("id", "DESC")->limit(8)->get();
-        return view("products.index", compact("latest_product"));
-    }
-
-    public function productDetail($id)
-    {
-        $detail_product = Product::where("id", $id)->first();
-        
-        if($detail_product->product_image){
-            $number_pic = $detail_product->product_image;
-            $number_pic = json_decode($number_pic);
-            $number_pic = count($number_pic);
-        }else{
-            $number_pic = 0;
-        }
-
-        return view("products.product-detail", compact('detail_product', 'number_pic'));
-    }
-
-    public function productCart()
-    {
-        return view("products.product-checkout");
+            ->with('success', 'Product deleted successfully');
     }
 }
