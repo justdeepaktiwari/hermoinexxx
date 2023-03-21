@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductColor;
+use App\Models\ProductSize;
 use Illuminate\Http\Request;
 use File;
 
@@ -39,7 +41,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $list_color = ProductColor::get();
+        $list_size = ProductSize::get();
+        return view('admin.products.create', compact('list_color', 'list_size'));
     }
 
     /**
@@ -89,6 +93,8 @@ class ProductController extends Controller
             $create_product["product_image"] = json_encode($file_name_arr);
         }
 
+        $create_product["product_colors"] = json_encode($create_product["product_colors"]);
+        $create_product["product_sizes"] = json_encode($create_product["product_sizes"]);
 
         Product::create($create_product);
 
@@ -115,7 +121,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit', compact('product'));
+        $list_color = ProductColor::get();
+        $list_size = ProductSize::get();
+        return view('admin.products.edit', compact('product', 'list_color', 'list_size'));
     }
 
     /**
@@ -137,7 +145,6 @@ class ProductController extends Controller
 
 
         $create_product = $request->all();
-
         // dd($request->hasFile('product_image'));
 
         if ($request->hasFile('product_image')) {
@@ -172,7 +179,13 @@ class ProductController extends Controller
         unset($create_product["_token"]);
         unset($create_product["_method"]);
 
-        // dd($create_product);
+        if ($request->product_colors) {
+            $create_product["product_colors"] = json_encode($create_product["product_colors"]);
+        }
+
+        if ($request->product_sizes) {
+            $create_product["product_sizes"] = json_encode($create_product["product_sizes"]);
+        }
 
         Product::where("id", $id)->update($create_product);
 
