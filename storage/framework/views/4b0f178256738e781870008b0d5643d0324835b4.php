@@ -54,10 +54,11 @@
                             </a>
                             <div class="btn-section d-flex gap-2">
                                 <a 
-                                data-addCartType = "product" 
-                                data-addCartUrl = "<?php echo e(route('add-to-cart')); ?>" 
-                                data-itemId="<?php echo e($item->id); ?>"
-                                class="btn btn-danger rounded-0 shadow-0 addToCart">Add Cart</a>
+                                    data-addCartType = "product" 
+                                    data-addCartUrl = "<?php echo e(route('add-to-cart')); ?>" 
+                                    data-itemId="<?php echo e($item->id); ?>"
+                                    class="btn btn-danger rounded-0 shadow-0 addToCart"
+                                >Add Cart</a>
                                 <a href="<?php echo e(route('list.product.detail', $item->id)); ?>" class="btn btn-success rounded-0 shadow-0">View Detail</a>
                             </div>
                         </div>
