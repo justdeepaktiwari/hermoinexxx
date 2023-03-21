@@ -134,10 +134,27 @@
         color: #fff;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
     }
+    .roboto-family{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        text-align: center;
+    }
 </style>
 @endsection
 
 @section('content')
+<div class="position-absolute" style="top: 30px; right: 10px;">
+<div class="me-3 fs-6 rounded-0 px-3 btn-sm btn-danger btn position-relative" onclick="window.location.href = `{{ route('register') }}`">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+    </span>
+
+    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle small">
+        10
+    </span>
+</div>
+</div>
 <section style="background-color: #000; min-height: 100vh;">
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -183,6 +200,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <h2 class="fw-800 text-danger roboto-family">THANK YOU FOR YOUR SUPPORT</h2>
                             </div>
                             <div class="col-lg-5">
                                 <div class="w-100 d-flex flex-column gap-2">
@@ -194,14 +212,14 @@
                                     <form action="" class="d-flex flex-column gap-1">
                                         <div class="d-flex flex-column mb-2">
                                             <label for="size">Size<span class="fw-bold text-danger fs-5">*</span></label>
-                                            <select id="size" class="p-3 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
+                                            <select id="size" class="p-2 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
                                                 <option>Select an option</option>
                                                 <option>S US women's letter</option>
                                             </select>
                                         </div>
                                         <div class="d-flex flex-column mb-2">
                                             <label for="color">Color<span class="fw-bold text-danger fs-5">*</span></label>
-                                            <select id="color" class="p-3 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
+                                            <select id="color" class="p-2 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
                                                 <option>Red</option>
                                                 <option>White</option>
                                                 <option>Black</option>
@@ -215,7 +233,7 @@
 
                                         <div class="d-flex flex-column mb-2">
                                             <label for="personalization">Add your Personalization</label>
-                                            <textarea rows="3" class="p-3  bg-transparent text-white"></textarea>
+                                            <textarea rows="3" class="p-2  bg-transparent text-white"></textarea>
                                         </div>
 
                                         <button type="submit" class="btn btn-danger shadow-0">Add To Cart</button>
