@@ -16,7 +16,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view("products.product-checkout");
+        $all_cart = session()->get('cart');
+        $product_cart = isset($all_cart['product']) ? $all_cart['product'] : array();
+        $total_count = sizeof($product_cart);
+        return view("products.product-checkout", compact('product_cart', 'total_count'));
     }
 
     /**
@@ -28,25 +31,51 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $old_cart_data = $request->session()->get('cart') ?? array();
         $cart_data = array();
         if (trim($request->addCartType) == "product") {
-            $detail_product = Product::where("id", $request->itemId)->firstOrFail();
+            $details = Product::where("id", $request->itemId)->firstOrFail();
             $cart_data['type'] = $request->addCartType;
-            $cart_data['name'] = $detail_product->product_name;
-            $cart_data['real_amount'] = $detail_product->product_real_amount;
-            $cart_data['discounted_amount'] = $detail_product->product_discounted_amount;
+            $cart_data['name'] = $details->product_name;
+            $cart_data['id'] = $details->id;
+            $cart_data['real_amount'] = $details->product_real_amount;
+            $cart_data['discounted_amount'] = $details->product_discounted_amount;
             $cart_data['size'] = 'S';
             $cart_data['color'] = 'Blue';
             $cart_data['quantity'] = $request->quantity;
+            $old_cart_data['product'][$details->id] = $cart_data;
         }
 
+        $request->session()->put('cart', $old_cart_data);
         return response()->json([
             'success' => 'Got Simple Ajax Request.',
             'input' => $input,
             'cart_data ' => $cart_data
         ]);
     }
-
+    public function remove(Request $request)
+    {
+        $input = $request->all();
+        $old_cart_data = $request->session()->get('cart') ?? array();
+        $cart_data = array();
+        if (trim($request->removeCartType) == "product") {
+            if (isset($old_cart_data['product'][$request->itemId])) {
+                unset($old_cart_data['product'][$request->itemId]);
+            }
+        }
+        $request->session()->put('cart', $old_cart_data);
+        return response()->json([
+            'success' => 'Got Simple Ajax Request.',
+            'input' => $input,
+            'cart_data ' => $cart_data,
+            'cart_count' => $this->countCart(),
+        ]);
+    }
+    function countCart()
+    {
+        $old_cart_data = session()->get('cart') ?? array();
+        return isset($old_cart_data['product']) ? sizeof($old_cart_data['product']) : 0;
+    }
     /**
      * Display the specified resource.
      *

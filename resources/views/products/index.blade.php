@@ -48,12 +48,17 @@
                             </a>
                             <p class="text-start mb-0  small fw-400"><span class="text-danger">Color: </span> Blue</p>
                             <p  class="text-start small mb-0"><span class="text-danger">Sizes: </span> S, M, L</p>
-                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger">${{ $item->product_real_amount }}</s><strong class="ms-2 text-success">${{ $item->product_discounted_amount ?? "10" }}</strong></p>
+                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger">{{ priceFormate($item->product_real_amount) }}</s><strong class="ms-2 text-success">{{ priceFormate($item->product_discounted_amount)}}</strong></p>
                             <a href="" class="text-start text-white small">
                                 <p class="mb-2"><span class="text-danger">Detail: </span>{{ substr($item->product_detail, 0, 80) }}..</p>
                             </a>
                             <div class="btn-section d-flex gap-2">
-                                <a href="{{ auth()->check() ? route('list.product.detail', 3) : route('login') }}" class="btn btn-danger rounded-0 shadow-0">Add Cart</a>
+                                <a 
+                                    data-addCartType = "product" 
+                                    data-addCartUrl = "{{ route('add-to-cart') }}" 
+                                    data-itemId="{{$item->id}}"
+                                    class="btn btn-danger rounded-0 shadow-0 addToCart"
+                                >Add Cart</a>
                                 <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0">View Detail</a>
                             </div>
                         </div>
@@ -84,7 +89,7 @@
                                     <div class="d-flex justify-content-start align-items-end h-100">
                                         <h5 class="fs-6"><span class="rounded-0 badge bg-warning ms-2">5 &#9733;</span>
                                         @if($item->product_percentage_discount)
-                                            <span class="rounded-0 badge bg-danger ms-2">{{ $item->product_percentage_discount }}%</span>
+                                            <span class="rounded-0 badge bg-danger ms-2">-{{ $item->product_percentage_discount }}%</span>
                                         @endif
                                         </h5>
                                     </div>
@@ -96,15 +101,21 @@
                         </div>
                         <div class="card-body ">
                             <a href="" class="text-start text-white">
-                                <h5 class="card-title">{{ $item->product_name }}</h5>
+                                <h5 class="card-title fs-6">{{ $item->product_name }}</h5>
                             </a>
+                            <p class="text-start mb-0  small fw-400"><span class="text-danger">Color: </span> Blue</p>
+                            <p  class="text-start small mb-0"><span class="text-danger">Sizes: </span> S, M, L</p>
+                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger">{{ priceFormate($item->product_real_amount) }}</s><strong class="ms-2 text-success">{{ priceFormate($item->product_discounted_amount) }}</strong></p>
                             <a href="" class="text-start text-white small">
-                                <p>{{ substr($item->product_detail, 0, 80) }}..</p>
+                                <p class="mb-2"><span class="text-danger">Detail: </span>{{ substr($item->product_detail, 0, 80) }}..</p>
                             </a>
-                            <h6 class="mb-3 text-start">Amount: <s class="text-danger">${{ $item->product_real_amount }}</s><strong class="ms-2 text-success">${{ $item->product_discounted_amount ?? "10" }}</strong></h6>
                             <div class="btn-section d-flex gap-2">
-                                <a href="{{ auth()->check() ? route('list.product.detail', 3) : route('login') }}" class="btn btn-danger rounded-0 shadow-0">Add Cart</a>
-                                <a href="{{ route('list.product.detail', 3) }}" class="btn btn-success rounded-0 shadow-0">View Detail</a>
+                                <a 
+                                data-addCartType = "product" 
+                                data-addCartUrl = "{{ route('add-to-cart') }}" 
+                                data-itemId="{{$item->id}}"
+                                class="btn btn-danger rounded-0 shadow-0 addToCart">Add Cart</a>
+                                <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0">View Detail</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +148,7 @@
                                     <div class="d-flex justify-content-start align-items-end h-100">
                                         <h5 class="fs-6"><span class="rounded-0 badge bg-warning ms-2">5 &#9733;</span>
                                         @if($item->product_percentage_discount)
-                                            <span class="rounded-0 badge bg-danger ms-2">{{ $item->product_percentage_discount }}%</span>
+                                            <span class="rounded-0 badge bg-danger ms-2">-{{ $item->product_percentage_discount }}%</span>
                                         @endif
                                         </h5>
                                     </div>
@@ -149,15 +160,21 @@
                         </div>
                         <div class="card-body ">
                             <a href="" class="text-start text-white">
-                                <h5 class="card-title">{{ $item->product_name }}</h5>
+                                <h5 class="card-title fs-6">{{ $item->product_name }}</h5>
                             </a>
+                            <p class="text-start mb-0  small fw-400"><span class="text-danger">Color: </span> Blue</p>
+                            <p  class="text-start small mb-0"><span class="text-danger">Sizes: </span> S, M, L</p>
+                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger">{{priceFormate( $item->product_real_amount) }}</s><strong class="ms-2 text-success">{{ priceFormate($item->product_discounted_amount) }}</strong></p>
                             <a href="" class="text-start text-white small">
-                                <p>{{ substr($item->product_detail, 0, 80) }}..</p>
+                                <p class="mb-2"><span class="text-danger">Detail: </span>{{ substr($item->product_detail, 0, 80) }}..</p>
                             </a>
-                            <h6 class="mb-3 text-start">Amount: <s class="text-danger">${{ $item->product_real_amount }}</s><strong class="ms-2 text-success">${{ $item->product_discounted_amount ?? "10" }}</strong></h6>
                             <div class="btn-section d-flex gap-2">
-                                <a href="{{ auth()->check() ? route('list.product.detail', 3) : route('login') }}" class="btn btn-danger rounded-0 shadow-0">Add Cart</a>
-                                <a href="{{ route('list.product.detail', 3) }}" class="btn btn-success rounded-0 shadow-0">View Detail</a>
+                                <a 
+                                data-addCartType = "product" 
+                                data-addCartUrl = "{{ route('add-to-cart') }}" 
+                                data-itemId="{{$item->id}}"
+                                class="btn btn-danger rounded-0 shadow-0 addToCart">Add Cart</a>
+                                <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0">View Detail</a>
                             </div>
                         </div>
                     </div>
@@ -195,4 +212,5 @@
         }
     });
 </script>
+<script src = "{{ asset("js/add-cart.js") }}"></script>
 @endsection

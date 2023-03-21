@@ -20,6 +20,8 @@ class ProductController extends Controller
     }
     public function list(Request $request)
     {
+        // $request->session()->pull('cart');
+        // dd($request->session()->all());
         $products = Product::where('product_name', '!=', '');
         if ($request->get('type')) {
             $type_slug = $request->get('type');
@@ -58,17 +60,17 @@ class ProductController extends Controller
      */
     public function show(Product $product, $id)
     {
-        $detail_product = Product::where("id", $id)->first();
+        $product = Product::where("id", $id)->with('reviews.users')->withCount('reviews')->firstOrFail();
 
-        if ($detail_product->product_image) {
-            $number_pic = $detail_product->product_image;
+        if ($product->product_image) {
+            $number_pic = $product->product_image;
             $number_pic = json_decode($number_pic);
             $number_pic = count($number_pic);
         } else {
             $number_pic = 0;
         }
 
-        return view("products.product-detail", compact('detail_product', 'number_pic'));
+        return view("products.product-detail", compact('product', 'number_pic'));
     }
 
     /**

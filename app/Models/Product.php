@@ -24,4 +24,8 @@ class Product extends Model
         'product_sizes',
         'product_colors'
     ];
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product_id')->where('reviews.status', 'verify');
+    }
 }

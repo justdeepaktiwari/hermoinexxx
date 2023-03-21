@@ -44,83 +44,50 @@
                                 <section style="background-color: #000;">
                                     <div class="container">
                                         <div class="row d-flex justify-content-center align-items-center">
-                                            <div class="col-10">
+                                            <div class="col-12">
 
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <h3 class="fw-normal mb-0 text-white">Shopping Cart</h3>
+                                                    <h3 class="fw-normal mb-0 text-white">Shopping Cart (<span class="totalCartCount">{{$total_count}}</span>)</h3>
                                                 </div>
+                                                @foreach ($product_cart as $product)
+                                                    <div class="card rounded-3 mb-4 bg-dark itemcontainer">
+                                                        <div class="card-body px-4 py-2">
+                                                            <div class="row">
+                                                                <p class="lead fw-normal mb-2">{{$product['name']}}</p>
+                                                            </div>
+                                                            <div class="row d-flex justify-content-between align-items-center">
+                                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                                </div>
+                                                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                                                   
+                                                                    <p class="text-white"><span class="text-white">Size: </span>{{$product['size']}}<br><span class="text-white">Color: </span>{{$product['color']}}</p>
+                                                                </div>
+                                                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                                    <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
 
-                                                <div class="card rounded-3 mb-4 bg-dark">
-                                                    <div class="card-body px-4 py-2">
-                                                        <div class="row d-flex justify-content-between align-items-center">
-                                                            <div class="col-md-2 col-lg-2 col-xl-2">
-                                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                                                <p class="lead fw-normal mb-2">Basic T-shirt</p>
-                                                                <p class="text-white"><span class="text-white">Size: </span>M <span class="text-white">Color: </span>Grey</p>
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                                <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
+                                                                    <input id="form1" min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white" style="width: 40px;" />
 
-                                                                <input id="form1" min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white" style="width: 40px;" />
-
-                                                                <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                                <h5 class="mb-0 fs-6">$499.00</h5>
-                                                            </div>
-                                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                                                    <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                                    <h5 class="mb-0 fs-6">{{priceFormate($product['discounted_amount'])}}</h5>
+                                                                </div>
+                                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                                    <a style="cursor: pointer;"
+                                                                    data-removeCartType = "product" 
+                                                                    data-removeCartUrl = "{{ route('remove-to-cart') }}" 
+                                                                    data-itemId="{{$product['id']}}"
+                                                                    class="text-danger removeToCart"><i class="fas fa-trash fa-lg"></i></a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="card rounded-3 mb-4 bg-dark">
-                                                    <div class="card-body px-4 py-2">
-                                                        <div class="row d-flex justify-content-between align-items-center">
-                                                            <div class="col-md-2 col-lg-2 col-xl-2">
-                                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                                                <p class="lead fw-normal mb-2">Basic T-shirt</p>
-                                                                <p class="text-white"><span class="text-white">Size: </span>M <span class="text-white">Color: </span>Grey</p>
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                                <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-
-                                                                <input id="form1" min="0" name="quantity" value="2" type="number" class="form-control bg-transparent text-white" style="width: 40px;" />
-
-                                                                <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                                <h5 class="mb-0 fs-6">$499.00</h5>
-                                                            </div>
-                                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- <div class="card mb-4  bg-dark">
-                                                    <div class="card-body p-4 d-flex flex-row">
-                                                        <div class="form-outline flex-fill">
-                                                            <input type="text" id="form1" class="form-control form-control-lg border-white bg-transparent text-white"/>
-                                                            <label class="form-label text-white" for="form1">Discount code</label>
-                                                        </div>
-                                                        <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
-                                                    </div>
-                                                </div> -->
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -207,6 +174,7 @@
     </div>
 </section>
 @endsection
-
 @section('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src = "{{ asset("js/add-cart.js") }}"></script>
 @endsection

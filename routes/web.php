@@ -35,7 +35,6 @@ Route::group(['prefix' => 'alpha1'], function () {
     Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
     Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
 
-    Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
 
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
         ->name("user-videos.video-detail");
@@ -57,8 +56,10 @@ Route::group(['prefix' => 'alpha1'], function () {
 
     /**Video Categories */
     Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
-    /************add to cart**********************************/
+    /************cart**********************************/
+    Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
     Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
+    Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {

@@ -41,7 +41,7 @@
                             </a>
                             <p class="text-start mb-0  small fw-400"><span class="text-danger">Color: </span> Blue</p>
                             <p  class="text-start small mb-0"><span class="text-danger">Sizes: </span> S, M, L</p>
-                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger">$<?php echo e($item->product_real_amount); ?></s><strong class="ms-2 text-success">$<?php echo e($item->product_discounted_amount ?? "10"); ?></strong></p>
+                            <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger"><?php echo e(priceFormate($item->product_real_amount)); ?></s><strong class="ms-2 text-success"><?php echo e(priceFormate($item->product_discounted_amount)); ?></strong></p>
                             <a href="" class="text-start text-white small">
                                 <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..</p>
                             </a>

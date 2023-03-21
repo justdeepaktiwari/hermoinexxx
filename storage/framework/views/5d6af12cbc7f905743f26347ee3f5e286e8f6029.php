@@ -153,7 +153,7 @@
                                     <div class="zoom-thumb">
                                         <ul class="piclist">
                                             <?php
-                                            $product_image = json_decode($detail_product->product_image);
+                                            $product_image = json_decode($product->product_image);
                                             ?>
                                             <?php $__currentLoopData = $product_image; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li>
@@ -188,12 +188,9 @@
                                 <div class="w-100 d-flex flex-column gap-2">
                                     <div class="">
                                         <p class="text-danger m-0">Only Few Left</p>
-                                        <h3 class="m-0"><del class="text-danger">$15,25632</del> $15,256</h3>
+                                        <h3 class="m-0"><del class="text-danger"><?php echo e(priceFormate($product->product_real_amount)); ?></del> <?php echo e(priceFormate($product->product_discounted_amount)); ?></h3>
                                     </div>
-                                    <p style="line-height: 1.2rem">
-                                        Used High Quality Cotton Pannies. We Used Cotton To Hold Hermoine's
-                                        Sweet Residue
-                                    </p>
+                                    <p style="line-height: 1.2rem"><?php echo e($product->product_detail); ?></p>
                                     <form action="" class="d-flex flex-column gap-1">
                                         <div class="d-flex flex-column mb-2">
                                             <label for="size">Size<span class="fw-bold text-danger fs-5">*</span></label>
@@ -228,49 +225,32 @@
                         </div>
 
                         <div style="height: 20px;"></div>
-                        <div class="review-sec col-md-7 me-auto">
-                            <div class="d-flex flex-column gap-3">
-                                <h3>11762 reviews</h3>
-                                <div class="d-flex flex-column gap-4">
-                                    <div class="border p-2 border-danger">
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="50px" class="rounded rounded-circle" />
-                                            <p class="m-0">riteshmaid85@gmail.com</p>
-                                        </div>
-                                        <p class="m-0 text-secondary">14 March 2019</p>
-                                        <p class="m-0 pe-3">
-                                            Great product! Fast turn around time, great communication and
-                                            lightning fast shipping! These are grat and made our teacher
-                                            cry. Thanks ladies!
-                                        </p>
-                                        <div class="d-flex gap-1">⭐⭐⭐⭐⭐</div>
-                                        <div>
-                                            Purchased Item :
-                                            <a href="#" class="text-primary text-decoration-underline">
-                                                Custom Socks for Women, Add Your Own Custom Design or Te</a>
-                                        </div>
-                                    </div>
-                                    <div class="border p-2 border-danger">
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="50px" class="rounded rounded-circle" />
-                                            <p class="m-0">riteshmaid85@gmail.com</p>
-                                        </div>
-                                        <p class="m-0 text-secondary">14 March 2019</p>
-                                        <p class="m-0 pe-3">
-                                            Great product! Fast turn around time, great communication and
-                                            lightning fast shipping! These are grat and made our teacher
-                                            cry. Thanks ladies!
-                                        </p>
-                                        <div class="d-flex gap-1">⭐⭐⭐⭐⭐</div>
-                                        <div>
-                                            Purchased Item :
-                                            <a href="#" class="text-primary text-decoration-underline">
-                                                Custom Socks for Women, Add Your Own Custom Design or Te</a>
-                                        </div>
+                        <?php if($product->reviews_count): ?>
+                            <div class="review-sec col-md-7 me-auto">
+                                <div class="d-flex flex-column gap-3">
+                                    <h3><?php echo e($product->reviews_count); ?> reviews</h3>
+                                    <div class="d-flex flex-column gap-4">
+                                        <?php $__empty_1 = true; $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                            <div class="border p-2 border-danger">
+                                                <div class="d-flex gap-2 align-items-center">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="50px" class="rounded rounded-circle" />
+                                                    <p class="m-0" style="display: grid;"><span><?php echo e($review->users->name); ?></span> <span style="font-size: 12px;"> <?php echo e(forHumans($review->created_at)); ?></span></p>
+                                                </div>
+                                                <p class="m-0 pe-3"><?php echo e($review->description); ?></p>
+                                                <div class="d-flex gap-1">
+                                                    <?php for($i = 0; $i < $review->rating; $i++): ?>                                                    
+                                                        ⭐
+                                                    <?php endfor; ?>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                            
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
+                        
                     </div>
                 </div>
             </div>
