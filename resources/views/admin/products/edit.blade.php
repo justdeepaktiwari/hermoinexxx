@@ -41,13 +41,31 @@
         <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
             <div class="form-group">
                 <strong>Available Size</strong>
-                <textarea class="form-control" name="product_sizes" placeholder="S, M, L, XL, XXL" rows="1">{{ $product->product_sizes }}</textarea>
+                <select name="product_sizes[]" id="product_sizes" class="w-100" multiple>
+                    @php
+                        $product_sizes = $product->product_sizes ? json_decode($product->product_sizes) : [];
+                    @endphp
+
+                    @foreach($list_size as $size)
+                        <option value="{{ $size->id }}" {{ in_array($size->id, $product_sizes) ? "selected" : "" }}>{{ $size->product_size }}</option>
+                    @endforeach 
+                </select>
+                <!-- <textarea class="form-control" name="product_sizes" placeholder="S, M, L, XL, XXL" rows="1">{{ $product->product_sizes }}</textarea> -->
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
             <div class="form-group">
                 <strong>Available Color</strong>
-                <textarea class="form-control" name="product_colors" placeholder="Black, Blue, Red" rows="1">{{ $product->product_colors }}</textarea>
+                <select name="product_colors[]" id="product_colors" class="w-100" multiple>
+                    @php
+                        $product_colors = $product->product_colors ? json_decode($product->product_colors) : [];
+                    @endphp
+
+                    @foreach($list_color as $color)
+                        <option value="{{ $color->id }}" {{ in_array($color->id, $product_colors) ? "selected" : "" }}>{{ $color->color_name }}</option>
+                    @endforeach 
+                </select>
+                <!-- <textarea class="form-control" name="product_colors" placeholder="Black, Blue, Red" rows="1">{{ $product->product_colors }}</textarea> -->
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
@@ -58,11 +76,11 @@
 
             <div class="my-2">
                 @php
-                    $list_img = json_decode($product->product_image);
+                $list_img = json_decode($product->product_image);
                 @endphp
 
                 @foreach($list_img as $list_img_value)
-                    <a href="{{ asset('uploads/products/'.$list_img_value) }}" target="_blank" class="d-block">{{ $list_img_value }}</a>
+                <a href="{{ asset('uploads/products/'.$list_img_value) }}" target="_blank" class="d-block">{{ $list_img_value }}</a>
                 @endforeach
             </div>
         </div>
@@ -102,4 +120,10 @@
         </div>
     </div>
 </form>
+@endsection
+
+@section("js")
+<script>
+    $("#product_sizes, #product_colors").select2();
+</script>
 @endsection

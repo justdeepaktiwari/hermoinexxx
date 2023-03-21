@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductColorController;
+use App\Http\Controllers\ProductSizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VideoController;
@@ -69,6 +71,9 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         Route::resource('photos', App\Http\Controllers\PhotoController::class);
         Route::resource('products', App\Http\Controllers\ProductController::class);
         Route::resource('purchase', App\Http\Controllers\PurchaseOfferController::class);
+
+        Route::resource('product-color', ProductColorController::class);
+        Route::resource('product-size', ProductSizeController::class);
 
         /**Use Role And Permission*/
         Route::resource('roles', App\Http\Controllers\RoleController::class);

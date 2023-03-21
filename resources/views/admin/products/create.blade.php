@@ -41,13 +41,23 @@
                 <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
                     <div class="form-group">
                         <strong>Available Size</strong>
-                        <textarea class="form-control" name="product_sizes" placeholder="S, M, L, XL, XXL" rows="1"></textarea>
+                        <select name="product_sizes[]" id="product_sizes" class="w-100" multiple>
+                            @foreach($list_size as $size)
+                                <option value="{{ $size->id }}">{{ $size->product_size }}</option>
+                            @endforeach 
+                        </select>
+                        <!-- <textarea class="form-control" name="product_sizes" placeholder="S, M, L, XL, XXL" rows="1"></textarea> -->
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
                     <div class="form-group">
                         <strong>Available Color</strong>
-                        <textarea class="form-control" name="product_colors" placeholder="Black, Blue, Red" rows="1"></textarea>
+                        <select name="product_colors[]" id="product_colors" class="w-100" multiple>
+                            @foreach($list_color as $color)
+                                <option value="{{ $color->id }}">{{ $color->color_name }}</option>
+                            @endforeach 
+                        </select>
+                        <!-- <textarea class="form-control" name="product_colors" placeholder="Black, Blue, Red" rows="1"></textarea> -->
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
@@ -93,4 +103,10 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section("js")
+<script>
+    $("#product_sizes, #product_colors").select2();
+</script>
 @endsection
