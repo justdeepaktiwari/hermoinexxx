@@ -28,7 +28,7 @@
                     <div class="card bg-dark text-white">
                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                             <img src="<?php echo e(asset('uploads/products/'.$random_img[$random_number])); ?>" class="w-100" style="height: 170px;" />
-                            <a href="<?php echo e(route('list.product.detail', 3)); ?>">
+                            <a href="<?php echo e(route('list.product.detail', $item->id)); ?>">
                                 <div class="mask">
                                     <div class="d-flex justify-content-start align-items-end h-100">
                                         <h5 class="fs-6"><span class="rounded-0 badge bg-warning ms-2">5 &#9733;</span>
@@ -51,7 +51,7 @@
                             <a href="" class="text-start text-white small">
                                 <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..</p>
                             </a>
-                            <div class="btn-section d-flex justify-content-between mb-2">
+                            <div class="btn-section mb-2">
 
                                 <div class="info-section d-flex justify-content-between">
                                     <div class="d-flex">
@@ -59,7 +59,7 @@
                                             <i class="fas fa-minus"></i>
                                         </button>
 
-                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white            <?php echo e($product_key_randon.'quantity'); ?>" style="width: 55px;" />
+                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white  <?php echo e($product_key_randon.'quantity'); ?>" style="width: 45px;" />
 
                                         <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
@@ -108,7 +108,7 @@
                     <div class="card bg-dark text-white">
                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                             <img src="<?php echo e(asset('uploads/products/'.$random_img[$random_number])); ?>" class="w-100" style="height: 170px;" />
-                            <a href="<?php echo e(route('list.product.detail', 3)); ?>">
+                            <a href="<?php echo e(route('list.product.detail', $item->id)); ?>">
                                 <div class="mask">
                                     <div class="d-flex justify-content-start align-items-end h-100">
                                         <h5 class="fs-6"><span class="rounded-0 badge bg-warning ms-2">5 &#9733;</span>
@@ -133,7 +133,7 @@
                             <a href="" class="text-start text-white small">
                                 <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..</p>
                             </a>
-                            <div class="btn-section d-flex justify-content-between mb-2">
+                            <div class="btn-section mb-2">
 
                                 <div class="info-section d-flex justify-content-between">
                                     <div class="d-flex">
@@ -193,7 +193,7 @@
                     <div class="card bg-dark text-white">
                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                             <img src="<?php echo e(asset('uploads/products/'.$random_img[$random_number])); ?>" class="w-100" style="height: 170px;" />
-                            <a href="<?php echo e(route('list.product.detail', 3)); ?>">
+                            <a href="<?php echo e(route('list.product.detail', $item->id)); ?>">
                                 <div class="mask">
                                     <div class="d-flex justify-content-start align-items-end h-100">
                                         <h5 class="fs-6"><span class="rounded-0 badge bg-warning ms-2">5 &#9733;</span>
@@ -218,7 +218,7 @@
                             <a href="" class="text-start text-white small">
                                 <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..</p>
                             </a>
-                            <div class="btn-section d-flex justify-content-between mb-2">
+                            <div class="btn-section mb-2">
 
                                 <div class="info-section d-flex justify-content-between">
                                     <div class="d-flex">
@@ -279,9 +279,15 @@
                 items: 1,
             },
             600: {
-                items: 3,
+                items: 2,
+            },
+            800: {
+                items: 2,
             },
             1000: {
+                items: 3,
+            },
+            1300: {
                 items: 4,
             }
         }

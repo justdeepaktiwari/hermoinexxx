@@ -25,44 +25,40 @@ Route::get('/', function () {
     return redirect()->route("home");
 });
 
-Route::group(['prefix' => 'alpha1'], function () {
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
+Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
+Auth::routes(["login" => true, "register" => true]);
 
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
-        ->name('home');
-    Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
-    Auth::routes(["login" => true, "register" => true]);
-
-    Route::get('product', [App\Http\Controllers\Frontend\ProductController::class, "index"])->name("list.product");
-
-    Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
-    Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
+Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "index"])->name("list.product");
+Route::get('products-list', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
+Route::get('products/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
 
 
-    Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
-        ->name("user-videos.video-detail");
+Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
+    ->name("user-videos.video-detail");
 
-    Route::get('user-video', [VideoController::class, 'VideoSearch'])
-        ->name("user-videos.search");
+Route::get('user-video', [VideoController::class, 'VideoSearch'])
+    ->name("user-videos.search");
 
-    Route::get('user-videos', [VideoController::class, 'UserVideo'])
-        ->name("user-videos");
+Route::get('user-videos', [VideoController::class, 'UserVideo'])
+    ->name("user-videos");
 
-    Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
-        ->name("user-photos");
+Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
+    ->name("user-photos");
 
-    /**Search Query*/
-    Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
+/**Search Query*/
+Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
 
-    /**Search Query*/
-    Route::get('load-more', [VideoController::class, 'loadMoreVideo'])->name("load.more");
+/**Search Query*/
+Route::get('load-more', [VideoController::class, 'loadMoreVideo'])->name("load.more");
 
-    /**Video Categories */
-    Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
-    /************cart**********************************/
-    Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
-    Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
-    Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
-});
+/**Video Categories */
+Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
+/************cart**********************************/
+Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
+Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
+Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
 
