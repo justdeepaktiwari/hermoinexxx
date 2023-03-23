@@ -34,7 +34,7 @@ Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, 
 Route::get('products-list', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
 Route::get('products/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
 
-
+ 
 Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
     ->name("user-videos.video-detail");
 
