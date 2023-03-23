@@ -18,3 +18,8 @@ function priceFormate($number)
     // $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
     // return $formatter->formatCurrency($number, 'USD');
 }
+function countCart()
+{
+    $old_cart_data = session()->get('cart') ?? array();
+    return isset($old_cart_data['product']) ? sizeof($old_cart_data['product']) : 0;
+}

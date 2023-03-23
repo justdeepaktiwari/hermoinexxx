@@ -50,6 +50,9 @@
                                                     <h3 class="fw-normal mb-0 text-white">Shopping Cart (<span class="totalCartCount">{{$total_count}}</span>)</h3>
                                                 </div>
                                                 @foreach ($product_cart as $product)
+                                                    @php
+                                                        $product_key_randon = 'product'.$product['id'];
+                                                    @endphp
                                                     <div class="card rounded-3 mb-4 bg-dark itemcontainer">
                                                         <div class="card-body px-4 py-2">
                                                             <div class="row">
@@ -57,27 +60,35 @@
                                                             </div>
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2">
-                                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                                    <img src="{{ asset($product['img']) }}" class="img-fluid rounded-3" alt="{{$product['name']}}">
                                                                 </div>
                                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                                    
                                                                     <p class="text-white"><span class="text-white">Size: </span>{{$product['size']}}<br><span class="text-white">Color: </span>{{$product['color']}}</p>
                                                                 </div>
                                                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                                    <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                    <button class="btn btn-link text-success bg-dark px-2 updateCartQuantity" data-updateCartClass="{{"updateCart".$product_key_randon}}" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                         <i class="fas fa-minus"></i>
                                                                     </button>
 
-                                                                    <input id="form1" min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white" style="width: 40px;" />
+                                                                    <input  min="1" name="quantity" value="{{$product['quantity']}}" 
+                                                                    type="number" class="form-control form-control-sm bg-transparent text-white updateCart {{"updateCart".$product_key_randon}} {{$product_key_randon.'quantity'}}" style="width: 40px;"
+                                                                    data-addCartType = "product" 
+                                                                    data-addCartUrl = "{{ route('add-to-cart') }}" 
+                                                                    data-itemId="{{$product['id']}}"
+                                                                    data-productKey = "{{$product_key_randon}}"
+                                                                    />
 
-                                                                    <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                    <button class="btn btn-link text-success bg-dark px-2 updateCartQuantity"  data-updateCartClass="{{"updateCart".$product_key_randon}}" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                                         <i class="fas fa-plus"></i>
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                                    <h5 class="mb-0 fs-6">{{priceFormate($product['discounted_amount'])}}</h5>
+                                                                    <h5 class="mb-0 fs-6 {{$product_key_randon.'totalPrice'}}">{{priceFormate($product['total_price'])}}</h5>
                                                                 </div>
                                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                                    <input type="hidden" name="{{$product_key_randon.'size'}}" class="{{$product_key_randon.'size'}}" value="{{$product['size']}}">
+                                                                    <input type="hidden" name="{{$product_key_randon.'color'}}" class="{{$product_key_randon.'color'}}" value="{{$product['color']}}">
                                                                     <a style="cursor: pointer;"
                                                                     data-removeCartType = "product" 
                                                                     data-removeCartUrl = "{{ route('remove-to-cart') }}" 

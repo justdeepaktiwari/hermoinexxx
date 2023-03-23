@@ -13,6 +13,7 @@
         <div class="row">
             @forelse ($products as $item)
                 @php
+                    $product_key_randon = 'product'.$item['id'];
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
                 @endphp
@@ -44,25 +45,37 @@
                                 <p class="mb-2"><span class="text-danger">Detail: </span>{{ substr($item->product_detail, 0, 80) }}..</p>
                             </a>
                             <div class="btn-section d-flex justify-content-between mb-2">
-                                <div class="info-section">
-                                    <select name="" class="form-control-sm rounded-0 me-2"> 
-                                        <option value="">S</option>
-                                        <option value="">M</option>
-                                        <option value="">L</option>
+
+                                <div class="info-section d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+
+                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white {{$product_key_randon.'quantity'}}" style="width: 55px;" />
+
+                                        <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <select name="{{$product_key_randon.'size'}}" class="form-control-sm rounded-0 me-2 {{$product_key_randon.'size'}}"> 
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
                                     </select>
-                                    <select name="" class="form-control-sm rounded-0"> 
-                                        <option value="">Red</option>
-                                        <option value="">Blue</option>
-                                        <option value="">Green</option>
+                                    <select name="{{$product_key_randon.'color'}}" class="form-control-sm rounded-0 {{$product_key_randon.'color'}}"> 
+                                        <option value="Red">Red</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Green">Green</option>
                                     </select>
-                                </div>
-                                <a 
-                                    data-addCartType = "product" 
+                                </div>                                
+                            </div>
+                            <a  data-addCartType = "product" 
                                     data-addCartUrl = "{{ route('add-to-cart') }}" 
                                     data-itemId="{{$item->id}}"
-                                    class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart"
+                                    data-productKey = "{{$product_key_randon}}"
+                                    class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
                                 >Add Cart</a>
-                            </div>
                             <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>
                     </div>

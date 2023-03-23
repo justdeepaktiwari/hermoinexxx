@@ -35,22 +35,26 @@ class CartController extends Controller
         $cart_data = array();
         if (trim($request->addCartType) == "product") {
             $details = Product::where("id", $request->itemId)->firstOrFail();
+            $random_img = json_decode($details->product_image);
+            $random_number = floor(rand(0, (count($random_img) - 1)));
+            $cart_data['img'] = 'uploads/products/' . $random_img[$random_number];
             $cart_data['type'] = $request->addCartType;
             $cart_data['name'] = $details->product_name;
             $cart_data['id'] = $details->id;
             $cart_data['real_amount'] = $details->product_real_amount;
             $cart_data['discounted_amount'] = $details->product_discounted_amount;
-            $cart_data['size'] = 'S';
-            $cart_data['color'] = 'Blue';
+            $cart_data['size'] = $input['productSize'];
+            $cart_data['color'] = $input['productColor'];
             $cart_data['quantity'] = $request->quantity;
+            $cart_data['total_price'] = ($request->quantity) * ($details->product_discounted_amount);
             $old_cart_data['product'][$details->id] = $cart_data;
         }
 
         $request->session()->put('cart', $old_cart_data);
         return response()->json([
-            'success' => 'Got Simple Ajax Request.',
-            'input' => $input,
-            'cart_data ' => $cart_data
+            'success' => 'Add to cart',
+            'cart_count' => $this->countCart(),
+            'price' => priceFormate(($request->quantity) * $cart_data['discounted_amount'])
         ]);
     }
     public function remove(Request $request)
@@ -65,9 +69,7 @@ class CartController extends Controller
         }
         $request->session()->put('cart', $old_cart_data);
         return response()->json([
-            'success' => 'Got Simple Ajax Request.',
-            'input' => $input,
-            'cart_data ' => $cart_data,
+            'success' => 'Remove to cart.',
             'cart_count' => $this->countCart(),
         ]);
     }
