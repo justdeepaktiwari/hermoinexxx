@@ -1,5 +1,5 @@
 <footer class="border-top border-danger w-100">
-    <div class="footer-top col-md-10 mx-auto my-2">
+    <div class="footer-top col-md-10 mx-auto my-2 overflow-hidden">
         <div class="row">
             <div class="col-md-3 col-sm-12 col-11 mx-auto d-flex flex-column justify-content-center">
                 <div class="my-1 fs-6 text-muted fw-800">CONNECT</div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-12 col-11 mx-auto text-center d-flex flex-column justify-content-center">
-                <img src="{{ asset('assets/images/logo.webp') }}" alt="" style="height: 140px;">
+                <img src="{{ asset('assets/images/logo.webp') }}" alt="" style="height: 120px; width: 230px;">
             </div>
         </div>
     </div>

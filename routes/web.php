@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VideoController;
@@ -28,6 +29,29 @@ Route::group(['prefix' => 'alpha'], function () {
         ->name('home');
     Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
     Auth::routes(["login" => true, "register" => true]);
+
+    Route::get('list-product', [App\Http\Controllers\ProductController::class, "listProduct"])->name("list.product");
+    Route::get('list-product/{id}/detail', [App\Http\Controllers\ProductController::class, "productDetail"])->name("list.product.detail");
+    Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
+    ->name("user-videos.video-detail");
+
+    Route::get('user-video', [VideoController::class, 'VideoSearch'])
+    ->name("user-videos.search");
+    
+    Route::get('user-videos', [VideoController::class, 'UserVideo'])
+    ->name("user-videos");
+
+    Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
+    ->name("user-photos");
+    
+    /**Search Query*/
+    Route::get('search-query', [VideoController::class, 'searchQuery'])->name("search.query");
+
+    /**Search Query*/
+    Route::get('load-more', [VideoController::class, 'loadMoreVideo'])->name("load.more");
+
+    /**Video Categories */
+    Route::get('videos-categories/{video_for}', [VideoController::class, 'CategoriesVideo'])->name("categories.video");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
@@ -37,6 +61,7 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         Route::resource('videos', App\Http\Controllers\VideoController::class);
         Route::resource('photos', App\Http\Controllers\PhotoController::class);
         Route::resource('products', App\Http\Controllers\ProductController::class);
+        Route::resource('purchase', App\Http\Controllers\PurchaseOfferController::class);
 
         /**Use Role And Permission*/
         Route::resource('roles', App\Http\Controllers\RoleController::class);
@@ -78,6 +103,7 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         ->name("landing-pages.purchaseOffer");
 
     });
+<<<<<<< HEAD
 
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
     ->name("user-videos.video-detail");
@@ -89,8 +115,17 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
     Route::get('stripe', [StripePaymentController::class, 'stripe']);
     Route::resource('livecams', App\Http\Controllers\LiveCamController::class);
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+=======
+>>>>>>> c9b0ea1a49db9f477307b7bc1cb833994a30b294
 });
+
+Route::post('register-user', [StripePaymentController::class, 'processStep'])->name("payment.process");
 
 Route::post('upload-video-chunk', [VideoController::class, 'UploadVideo'])->name("upload-video");
 Route::post('upload-photo-chunk', [VideoController::class, 'UploadThumbanil'])->name("upload-thumbnail");
 Route::get('upload-file-chunk', [VideoController::class, 'ViewVideo']);
+Route::get('debug-project', [HomeController::class, 'debugAmount']);
+
+/**Stripe Payment Integration*/
+Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

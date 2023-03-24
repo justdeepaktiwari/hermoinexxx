@@ -8,9 +8,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex flex-wrap gap-4"> 
+    <div class="d-flex flex-wrap gap-2"> 
 
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card" role="button" onclick="window.location.href = `{{ route('videos.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
@@ -32,8 +32,8 @@
         </div>
 
 
-        <div class="col-md-2">
-            <div class="card" role="button" onclick="window.location.href = `{{ route('photos.index') }}`">
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="card w-100" role="button" onclick="window.location.href = `{{ route('photos.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex justify-content-around">
@@ -55,7 +55,7 @@
 
 
 
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card" role="button" onclick="window.location.href = `{{ route('users.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
@@ -67,7 +67,7 @@
                             </div>
                             <div class="media-body text-right">
                                 <h3>{{ $count_partner }}</h3>
-                                <span>Partners</span>
+                                <span>Users/Partners</span>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
 
 
 
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card" role="button" onclick="window.location.href = `{{ route('products.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
@@ -99,7 +99,7 @@
         </div>
 
 
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card" role="button" onclick="window.location.href = `{{ route('category-tag.index') }}`">
                 <div class="card-content">
                     <div class="card-body">
@@ -121,7 +121,7 @@
         </div>
 
 
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card" role="button" onclick="window.location.href = `{{ route('category-tag.index') }}`">
                 <div class="card-content">
                     <div class="card-body">

@@ -18,6 +18,10 @@ class Product extends Model
         'product_name',
         'product_detail',
         'product_image',
-        'product_amount'
+        'product_real_amount',
+        'product_percentage_discount',
+        'product_discounted_amount',
+        'product_sizes',
+        'product_colors'
     ];
 }

@@ -17,10 +17,14 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->text('product_detail');
-            $table->text('product_image');
-            $table->string('product_amount');
+            $table->string('product_name')->nullable();
+            $table->text('product_detail')->nullable();
+            $table->text('product_image')->nullable();
+            $table->string('product_real_amount')->nullable();
+            $table->string('product_percentage_discount')->nullable();
+            $table->string('product_discounted_amount')->nullable();
+            $table->string("product_sizes")->nullable();
+            $table->string("product_colors")->nullable();
             $table->timestamps();
         });
     }

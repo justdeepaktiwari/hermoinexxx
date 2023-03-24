@@ -18,6 +18,8 @@ class CreatePhotosTable extends Migration
             $table->string("photo_title")->nullable();
             $table->string("photo_url")->nullable();
             $table->string("photo_detail")->nullable();
+            $table->string("categories_id")->nullable();
+            $table->string("tags_id")->nullable();
             $table->string("subscription_type_id")->nullable();
             $table->timestamps();
         });

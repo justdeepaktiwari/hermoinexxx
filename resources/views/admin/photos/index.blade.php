@@ -35,7 +35,7 @@
             @if(isset($photo->rel_category))
                 @foreach($photo->rel_category as $rel_category)
                     @if($rel_category->category_id)
-                        <span class="badge rounded-pill bg-primary">{{ $rel_category->category->name }}</span>
+                        <span class="badge rounded-pill bg-primary">{{ isset($rel_category->category->name) ? $rel_category->category->name : "" }}</span>
                     @endif
                 @endforeach
             @else
@@ -46,7 +46,7 @@
             @if(isset($photo->rel_tag))
                 @foreach($photo->rel_tag as $rel_tag)
                     @if($rel_tag->tag_id)
-                        <span class="badge rounded-pill bg-primary">{{ $rel_tag->tag->name }}</span>
+                        <span class="badge rounded-pill bg-primary">{{ isset($rel_tag->tag->name) ? $rel_tag->tag->name : ""}}</span>
                     @endif
                 @endforeach
             @else

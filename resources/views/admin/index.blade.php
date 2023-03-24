@@ -48,7 +48,8 @@
                 </div>
             <!-- </a> -->
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <ul class="dropdown-menu me-2" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="{{ route('user-videos') }}">Visit Website</a></li>
                 <li><a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id) }}">Profile</a></li>
                 <li><a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Sign Out</a></li>
             </ul>
@@ -122,7 +123,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
                                     <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
                                 </svg>
-                                Partners
+                                Users / Partners
                             </a>
                         </li>
                         <li class="nav-item">
@@ -134,9 +135,17 @@
                                 Manage Role
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex gap-2 align-items-center fw-bold fs-6 {{ request()->is("alpha/purchase*") ? 'text-danger' : 'text-white'}}" href="{{ route('purchase.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                                    <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"/>
+                                </svg>
+                                Purchase Offer
+                            </a>
+                        </li>
                     </ul>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-light fw-bold fs-6">
+                    <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-light fw-bold fs-6">
                         <span>Landing Page</span>
                         <a class="link-secondary text-light" href="#" aria-label="Add a new report">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -175,7 +184,7 @@
                                 Purchase Offers
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </nav>
 

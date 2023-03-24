@@ -161,7 +161,6 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
                                 </svg>
-                                <input type="hidden" name="video_url" value="${file.name}"/>
                                 ${file.name} - ${plupload.formatSize(file.size)}
                             </div>`;
                 });
@@ -174,6 +173,13 @@
             FileUploaded: function(up, file, result) {
                 var responseData = result.response.replace('"{', '{').replace('}"', '}');
                 var objResponse = JSON.parse(responseData);
+                console.log(objResponse);
+                if(objResponse.result.name){
+                    tata.success("Success!", objResponse.result.message);
+                    document.getElementById('fileList').innerHTML += `<input type="hidden" name="video_url" value="${objResponse.result.name}"/>`;
+                }else{
+                    tata.error("Error!", "Caught server error!");
+                }
                 // checkUploads(true, false);
                 $(".ready-submit").removeAttr("disabled");
                 $("#uploadBtn").text("Uploaded").addClass("btn-success").removeClass("btn-primary");

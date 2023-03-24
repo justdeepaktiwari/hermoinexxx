@@ -9,19 +9,13 @@
 @endsection
 
 @section('content')
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
-@endif
-
-
 <table class="table table-bordered">
  <tr>
    <th>No</th>
    <th>Name</th>
    <th>Email</th>
    <th>Roles</th>
+   <th>User Type</th>
    <th width="280px" class="text-center">Action</th>
  </tr>
  @foreach ($data as $key => $user)
@@ -30,12 +24,16 @@
     <td>{{ $user->name }}</td>
     <td>{{ $user->email }}</td>
     <td>
-      @if(!empty($user->getRoleNames()))
+      @if(count($user->getRoleNames()))
         @foreach($user->getRoleNames() as $v)
            <label class="badge badge-success text-danger">{{ $v }}</label>
         @endforeach
+      @else
+        ----
       @endif
     </td>
+    
+    <td class="align-middle">{!! !count($user->getRoleNames()) ? 'User - '.(isset($user->subscription->name) ? $user->subscription->name : "NA") : '<span class="badge bg-success text-light p-2 rounded-0">Partner</span>' !!}</td>
     <td class="d-flex justify-content-evenly">
        <a class="btn btn-sm rounded-0 btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
        <a class="btn btn-sm rounded-0 btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
@@ -49,4 +47,12 @@
 
 
 {!! $data->render() !!}
+@endsection
+
+@section("js")
+  @if ($message = Session::get('success'))
+    <script>
+      tata.success("Success!", '{{ $message }}')
+    </script>
+  @endif
 @endsection
