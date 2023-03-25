@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Session;
@@ -19,7 +20,8 @@ class CartController extends Controller
         $all_cart = session()->get('cart');
         $product_cart = isset($all_cart['product']) ? $all_cart['product'] : array();
         $total_count = sizeof($product_cart);
-        return view("products.product-checkout", compact('product_cart', 'total_count'));
+        $addresses = Address::where('user_id', auth()->user()->id)->get();
+        return view("products.product-checkout", compact('product_cart', 'total_count', 'addresses'));
     }
 
     /**
@@ -30,6 +32,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->session()->put('cart', []);
         $input = $request->all();
         $old_cart_data = $request->session()->get('cart') ?? array();
         $cart_data = array();

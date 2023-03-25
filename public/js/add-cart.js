@@ -124,3 +124,61 @@ $("body").on("click", ".updateCartQuantity", function (e) {
         },
     });
 });
+
+$("body").on("click", ".proceedToCheckOut", function (e) {
+    e.preventDefault();
+
+    let proceedToCheckOutUrl = $(this).attr("data-proceedToCheckOutUrl");
+    let addressid = $('input[name="addressid"]').val();
+    $.ajax({
+        type: "POST",
+        url: proceedToCheckOutUrl,
+        data: {
+            addressid: addressid,
+        },
+        success: function (data) {
+            $(".productCheckOutCard").html(data.checkoutform);
+            $(".add-card").addClass("hide");
+            $(".payment-card").removeClass("hide");
+        },
+    });
+});
+$("body").on("click", ".checkout", function (e) {
+    e.preventDefault();
+    console.log("Click");
+    let form = $("#" + $(this).attr("data-formId"))[0];
+    let formData = new FormData(form);
+    let afterPaymentredirectUrl = $(this).attr("data-afterPaymentredirectUrl");
+    console.log(afterPaymentredirectUrl);
+    $(".payment-error").remove();
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("data-checkoutUrl"),
+        data: formData,
+        dataType: "JSON",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            // tata.success("Success!", "Payment completed successfullly!");
+            window.location.href = afterPaymentredirectUrl;
+        },
+        error: function (err, xhr) {
+            console.log(err);
+            if (err.responseJSON.message === undefined) {
+                // tata.error("Error!", err.responseJSON);
+            } else {
+                // tata.error("Error!", err.responseJSON.message);
+            }
+
+            var errors = err.responseJSON.errors;
+
+            $.each(errors, function (indexInArray, valueOfElement) {
+                console.log(indexInArray);
+                $("[name='" + indexInArray + "']").after(
+                    `<div class="small text-danger payment-error">${valueOfElement[0]}</div>`
+                );
+            });
+        },
+    });
+});

@@ -62,6 +62,7 @@ Route::group(['prefix' => 'alpha1'], function () {
     Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
     Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
     Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
+    Route::post('add-address', [App\Http\Controllers\Frontend\AddressController::class, "store"])->name("add-address");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
@@ -126,4 +127,6 @@ Route::get('debug-project', [HomeController::class, 'debugAmount']);
 
 /**Stripe Payment Integration*/
 Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('product-checkout-form', [StripePaymentController::class, 'product_checkout_form'])->name('product-checkout-form');
+Route::post('product-checkout-submit', [StripePaymentController::class, 'product_checkout'])->name('product-checkout');
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
