@@ -32,7 +32,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->session()->put('cart', []);
+        $request->session()->put('cart', []);
         $input = $request->all();
         $old_cart_data = $request->session()->get('cart') ?? array();
         $cart_data = array();

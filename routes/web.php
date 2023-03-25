@@ -80,6 +80,8 @@ Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
         /**Use Role And Permission*/
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::resource('users', App\Http\Controllers\UserController::class);
+        Route::get('payments', [App\Http\Controllers\PaymentController::class, "index"])
+            ->name("payments");
 
         /**Use Category And Tag*/
         Route::get('category-tag', [App\Http\Controllers\CategoryAndTagController::class, "index"])

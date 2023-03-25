@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Payment;
 use App\Models\User;
 use Session;
 use Stripe;
@@ -76,12 +77,25 @@ class StripePaymentController extends Controller
                     'source' => $res->id,
                     'description' => $request->description,
                 ]);
-
+                $payment_details = [
+                    'user_id' => auth()->user()->id,
+                    'payment_id' => $response->id,
+                    'amount' => ($response->amount) / 100,
+                    'billing_details' => '',
+                    'balance_transaction' => $response->balance_transaction,
+                    'payment_method' => $response->payment_method,
+                    'fingerprint' => $response->source->fingerprint,
+                    'cvc_check' => $response->source->cvc_check,
+                    'last4' => $response->source->last4,
+                    'receipt_url' => $response->receipt_url,
+                    'payment_method_details' => $response->payment_method_details,
+                    'status' => $response->status,
+                    'type' => 'subscription',
+                ];
+                Payment::create($payment_details);
                 if ($response->status == "succeeded") {
                     User::where("email", $user_info["email"])->update(["subscription_id" => $subscription_id]);
                 }
-                print_r($response);
-                die();
                 return response()->json($response, 201);
             } catch (\Throwable $e) {
                 return response()->json($e->getMessage(), 500);
@@ -178,6 +192,22 @@ class StripePaymentController extends Controller
                 'source' => $res->id,
                 'description' => $user_details . ' ' . $total_product,
             ]);
+            $payment_details = [
+                'user_id' => auth()->user()->id,
+                'payment_id' => $response->id,
+                'amount' => ($response->amount) / 100,
+                'billing_details' => $user_details,
+                'balance_transaction' => $response->balance_transaction,
+                'payment_method' => $response->payment_method,
+                'fingerprint' => $response->source->fingerprint,
+                'cvc_check' => $response->source->cvc_check,
+                'last4' => $response->source->last4,
+                'receipt_url' => $response->receipt_url,
+                'payment_method_details' => $response->payment_method_details,
+                'status' => $response->status,
+                'type' => 'product',
+            ];
+            Payment::create($payment_details);
             $request->session()->put('cart', []);
             return response()->json($response, 201);
         } catch (\Throwable $e) {
