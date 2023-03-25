@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="<?php echo e(asset("owlcarousel/owl.carousel.min.css")); ?>">
     <link rel="stylesheet" href="<?php echo e(asset("owlcarousel/owl.theme.default.min.css")); ?>">
     <?php echo $__env->yieldContent("css"); ?>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
