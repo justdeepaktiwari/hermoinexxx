@@ -39,7 +39,7 @@ Route::group(['prefix' => 'alpha1'], function () {
 
     Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])
         ->name("lists.product");
-        
+
     Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])
         ->name("list.product.detail");
 
@@ -69,6 +69,7 @@ Route::group(['prefix' => 'alpha1'], function () {
     Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
     Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
     Route::post('add-address', [App\Http\Controllers\Frontend\AddressController::class, "store"])->name("add-address");
+    Route::get('dashboard', [App\Http\Controllers\Frontend\DashboardController::class, "index"])->name("user-dashboard");
 });
 
 Route::group(['prefix' => 'alpha', 'middleware' => ['auth']], function () {
