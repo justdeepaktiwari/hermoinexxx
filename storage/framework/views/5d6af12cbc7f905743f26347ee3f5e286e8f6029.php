@@ -156,6 +156,13 @@
     </div>
 </div>
 <section style="background-color: #000; min-height: 100vh;">
+    <?php
+        $p_id = $product->id;
+        $product_key_randon = 'product'.$p_id;
+        $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
+        $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
+        $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
+    ?>
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
@@ -209,26 +216,27 @@
                                         <h3 class="m-0"><del class="text-danger"><?php echo e(priceFormate($product->product_real_amount)); ?></del> <?php echo e(priceFormate($product->product_discounted_amount)); ?></h3>
                                     </div>
                                     <p style="line-height: 1.2rem"><?php echo e($product->product_detail); ?></p>
-                                    <form action="" class="d-flex flex-column gap-1">
+                                    <div class="d-flex flex-column gap-1">
                                         <div class="d-flex flex-column mb-2">
                                             <label for="size">Size<span class="fw-bold text-danger fs-5">*</span></label>
-                                            <select id="size" class="p-2 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
-                                                <option>Select an option</option>
-                                                <option>S US women's letter</option>
+                                            <select id="size" name="<?php echo e($product_key_randon.'size'); ?>" class="p-2 bg-transparent text-white  <?php echo e($product_key_randon.'size'); ?>" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
                                             </select>
                                         </div>
                                         <div class="d-flex flex-column mb-2">
                                             <label for="color">Color<span class="fw-bold text-danger fs-5">*</span></label>
-                                            <select id="color" class="p-2 bg-transparent text-white" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
-                                                <option>Red</option>
-                                                <option>White</option>
-                                                <option>Black</option>
+                                            <select id="color" name="<?php echo e($product_key_randon.'color'); ?>"  class="p-2 bg-transparent text-white  <?php echo e($product_key_randon.'color'); ?>" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
+                                                <option value="Red">Red</option>
+                                                <option value="Blue">Blue</option>
+                                                <option value="Green">Green</option>
                                             </select>
                                         </div>
 
                                         <div class="d-flex flex-column mb-2">
                                             <label class="my-auto" for="personalization">Quantity</label>
-                                            <input type="number" min="1" class="p-2 bg-transparent text-white" placeholder="1" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)" />
+                                            <input type="number" value="<?php echo e($quantity); ?>" name="<?php echo e($product_key_randon.'quantity'); ?>" min="1" class="p-2 bg-transparent text-white <?php echo e($product_key_randon.'quantity'); ?>" placeholder="1" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)" />
                                         </div>
 
                                         <div class="d-flex flex-column mb-2">
@@ -236,8 +244,14 @@
                                             <textarea rows="3" class="p-2  bg-transparent text-white"></textarea>
                                         </div>
 
-                                        <button type="submit" class="btn btn-danger shadow-0">Add To Cart</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-danger shadow-0 addToCart"
+                                            data-addCartType = "product" 
+                                            data-addCartUrl = "<?php echo e(route('add-to-cart')); ?>" 
+                                            data-itemId="<?php echo e($p_id); ?>"
+                                            data-productKey = "<?php echo e($product_key_randon); ?>"
+                                            data-actionMsg ="<?php echo e($actionMsg); ?>"
+                                        ><?php echo e($buttonText); ?></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -373,5 +387,6 @@
         });
     });
 </script>
+<script src = "<?php echo e(asset("js/add-cart.js")); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('products.app-product', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\hermoinexxx\resources\views/products/product-detail.blade.php ENDPATH**/ ?>

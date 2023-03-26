@@ -77,8 +77,12 @@ class ProductController extends Controller
         } else {
             $number_pic = 0;
         }
+        $add_cart_msg = "Product added into cart successfullly!";
+        $update_cart_msg = "Cart updated successfullly!";
+        $all_cart = session()->get('cart') ?? array();
+        $product_cart = isset($all_cart['product']) ? $all_cart['product'] : array();
 
-        return view("products.product-detail", compact('product', 'number_pic'));
+        return view("products.product-detail", compact('product', 'number_pic', 'product_cart', "add_cart_msg", "update_cart_msg"));
     }
 
     /**
