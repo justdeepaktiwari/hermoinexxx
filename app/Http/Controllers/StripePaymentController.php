@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Payment;
+use App\Models\PaymentPurchase;
+use App\Models\Product;
 use App\Models\User;
 use Session;
 use Stripe;
@@ -159,6 +161,46 @@ class StripePaymentController extends Controller
         }
         return 'Products : ' . $total_product . ' Final Price=' . priceFormate(total_price_of_cart() + 50);
     }
+    private function productPurchases($payment_id)
+    {
+        $old_cart_data = session()->get('cart') ?? array();
+        $total_product = '';
+        if (isset($old_cart_data['product'])) {
+            foreach ($old_cart_data['product'] as $product) {
+                $product_details = Product::where('id', $product['id'])->firstOrFail();
+                $product_purchase = [
+                    'payment_id' => $payment_id,
+                    'user_id' => auth()->user()->id,
+                    'product_name' => $product_details->product_name,
+                    'product_detail' => $product_details->product_detail,
+                    'product_image' => $product['img'],
+                    'product_real_amount' => $product_details->product_real_amount,
+                    'product_percentage_discount' => $product_details->product_percentage_discount,
+                    'product_discounted_amount' => $product_details->product_discounted_amount,
+                    'purchase_amount' => $product['discounted_amount'],
+                    'purchase_total_amount' => $product['total_price'],
+                    'product_sizes' => $product['size'],
+                    'product_colors' => $product['color'],
+                    'quantity' => $product['quantity'],
+                ];
+                PaymentPurchase::create([
+                    'payment_id' => $payment_id,
+                    'user_id' => auth()->user()->id,
+                    'product_name' => $product_details->product_name,
+                    'product_detail' => $product_details->product_detail,
+                    'product_image' => $product['img'],
+                    'product_real_amount' => $product_details->product_real_amount,
+                    'product_percentage_discount' => $product_details->product_percentage_discount,
+                    'product_discounted_amount' => $product_details->product_discounted_amount,
+                    'purchase_amount' => $product['discounted_amount'],
+                    'purchase_total_amount' => $product['total_price'],
+                    'product_sizes' => $product['size'],
+                    'product_colors' => $product['color'],
+                    'quantity' => $product['quantity'],
+                ]);
+            }
+        }
+    }
     public function product_checkout(Request $request)
     {
         // dd($request->all());
@@ -207,7 +249,8 @@ class StripePaymentController extends Controller
                 'status' => $response->status,
                 'type' => 'product',
             ];
-            Payment::create($payment_details);
+            $payment =  Payment::create($payment_details);
+            $this->productPurchases($payment->id);
             $request->session()->put('cart', []);
             return response()->json($response, 201);
         } catch (\Throwable $e) {
