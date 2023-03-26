@@ -13,15 +13,23 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $add_cart_msg = "Product added into cart successfullly!";
+        $update_cart_msg = "Cart updated successfullly!";
+        $all_cart = $request->session()->get('cart') ?? array();
+        $product_cart = isset($all_cart['product']) ? $all_cart['product'] : array();
         $latest_product = Product::orderBy("id", "DESC")->limit(8)->get();
-        return view("products.index", compact("latest_product"));
+        return view("products.index", compact("latest_product", "product_cart", "add_cart_msg", "update_cart_msg"));
     }
     public function list(Request $request)
     {
         // $request->session()->pull('cart');
         // dd($request->session()->all());
+        $add_cart_msg = "Product added into cart successfullly!";
+        $update_cart_msg = "Cart updated successfullly!";
+        $all_cart = $request->session()->get('cart') ?? array();
+        $product_cart = isset($all_cart['product']) ? $all_cart['product'] : array();
         $products = Product::where('product_name', '!=', '');
         if ($request->get('type')) {
             $type_slug = $request->get('type');
@@ -38,7 +46,7 @@ class ProductController extends Controller
 
         $products = $products->paginate(8)->withQueryString();
 
-        return view("products.list", compact("products"));
+        return view("products.list", compact("products", 'product_cart', "add_cart_msg", "update_cart_msg"));
     }
 
     /**

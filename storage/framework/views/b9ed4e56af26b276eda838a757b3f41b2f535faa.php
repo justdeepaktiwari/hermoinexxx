@@ -16,6 +16,9 @@
                     $product_key_randon = 'product'.$item['id'];
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
+                    $p_id = $item->id;
+                    $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
+                    $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
                 ?>
                 <div class="col-sm-3">
                     <div class="card bg-dark text-white">
@@ -42,7 +45,8 @@
                             </a>
                             <p class="mb-1 text-start"><span class="text-info">Amt: </span> <s class="text-danger"><?php echo e(priceFormate($item->product_real_amount)); ?></s><strong class="ms-2 text-success"><?php echo e(priceFormate($item->product_discounted_amount)); ?></strong></p>
                             <a href="" class="text-start text-white small">
-                                <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..</p>
+                                <p class="mb-2"><span class="text-danger">Detail: </span><?php echo e(substr($item->product_detail, 0, 80)); ?>..
+                                </p>
                             </a>
                             <div class="btn-section d-flex justify-content-between mb-2">
 
@@ -52,7 +56,7 @@
                                             <i class="fas fa-minus"></i>
                                         </button>
 
-                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white <?php echo e($product_key_randon.'quantity'); ?>" style="width: 55px;" />
+                                        <input min="1" name="quantity" value="<?php echo e($quantity); ?>" type="number" class="form-control form-control-sm bg-transparent text-white <?php echo e($product_key_randon.'quantity'); ?>" style="width: 55px;" />
 
                                         <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
@@ -74,8 +78,14 @@
                                     data-addCartUrl = "<?php echo e(route('add-to-cart')); ?>" 
                                     data-itemId="<?php echo e($item->id); ?>"
                                     data-productKey = "<?php echo e($product_key_randon); ?>"
+                                    data-actionMsg ="<?php echo e($actionMsg); ?>"
                                     class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
-                                >Add Cart</a>
+                                ><?php if($quantity>1): ?>
+                                    Update Cart
+                                <?php else: ?>
+                                    Add Cart
+                                <?php endif; ?>
+                                </a>
                             <a href="<?php echo e(route('list.product.detail', $item->id)); ?>" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>
                     </div>
