@@ -11,9 +11,9 @@
 
 @include("loader")
 
-@include("models.partials.header")
+@include("members.partials.header")
 
-@include("models.partials.sidebar")
+@include("members.partials.sidebar")
 
 <div class="text-white">
     <main class="content-section px-lg-2 px-sm-0 px-md-2">
@@ -50,7 +50,7 @@
                 @endforeach
             </div>
         </div>
-        @include("models.partials.footer")
+        @include("members.partials.footer")
     </main>
 </div>
 @endsection
@@ -58,7 +58,6 @@
 @section('js')
 <script>
 
-</script>
-@include("models.partials.commonjs")
+</script> 
 <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 @endsection

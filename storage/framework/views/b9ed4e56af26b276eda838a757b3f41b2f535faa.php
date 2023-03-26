@@ -20,6 +20,8 @@
                     $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
                     $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
                     $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
+                    $product_cart_size = isset($product_cart[$p_id])? $product_cart[$p_id]['size']:'';
+                    $product_cart_color = isset($product_cart[$p_id])? $product_cart[$p_id]['color']:'';
                     $size_list = json_decode($item->product_sizes);
                     $color_list = json_decode($item->product_colors);
                 ?>
@@ -67,12 +69,20 @@
                                     </div>
                                     <select name="<?php echo e($product_key_randon.'size'); ?>" class="form-control-sm rounded-0 me-2 <?php echo e($product_key_randon.'size'); ?>"> 
                                         <?php $__currentLoopData = $size_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($size); ?>"><?php echo e($size); ?></option>
+                                            <option value="<?php echo e($size); ?>"
+                                            <?php if($product_cart_size==$size): ?>
+                                                            selected
+                                                        <?php endif; ?>
+                                            ><?php echo e($size); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <select name="<?php echo e($product_key_randon.'color'); ?>" class="form-control-sm rounded-0 <?php echo e($product_key_randon.'color'); ?>"> 
                                         <?php $__currentLoopData = $color_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($color); ?>"><?php echo e($color); ?></option>
+                                            <option value="<?php echo e($color); ?>"
+                                            <?php if($product_cart_color==$color): ?>
+                                                      selected  
+                                                    <?php endif; ?>
+                                            ><?php echo e($color); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>                                
