@@ -65,7 +65,7 @@
 
     <button type="button" class="btn btn-danger shadow-0 btn-block btn-lg checkout"
      data-checkoutUrl = "{{route('product-checkout')}}" 
-     data-afterPaymentredirectUrl = "{{route('list.product')}}" 
+     data-afterPaymentredirectUrl = "{{route('user-dashboard')}}" 
      data-formId="checkoutFrom">
         <div class="d-flex justify-content-between">
             <span>{{priceFormate(total_price_of_cart()+50)}}</span>

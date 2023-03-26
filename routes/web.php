@@ -26,7 +26,7 @@ Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');
-
+ 
 Route::get('product', [App\Http\Controllers\Frontend\ProductController::class, "index"])
     ->name("list.product");
 
@@ -34,7 +34,7 @@ Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, 
     ->name("lists.product");
 
 Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])
-    ->name("list.product.detail");
+    ->name("list.product.detail"); 
 
 
 Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
@@ -64,9 +64,11 @@ Route::get('videos-categories/{video_for}', [VideoController::class, 'Categories
 
 Route::post('add-cart', [App\Http\Controllers\Frontend\CartController::class, "store"])->name("add-to-cart");
 Route::post('remove-cart', [App\Http\Controllers\Frontend\CartController::class, "remove"])->name("remove-to-cart");
+
 Route::group(['middleware' => ['auth']], function () {
     Route::post('add-address', [App\Http\Controllers\Frontend\AddressController::class, "store"])->name("add-address");
     Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
+    Route::get('dashboard', [App\Http\Controllers\Frontend\DashboardController::class, "index"])->name("user-dashboard");
 });
 
 Auth::routes(["login" => true, "register" => true]);
