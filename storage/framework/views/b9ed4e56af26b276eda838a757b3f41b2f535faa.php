@@ -17,6 +17,7 @@
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
                     $p_id = $item->id;
+                    $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
                     $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
                     $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
                 ?>
@@ -80,11 +81,8 @@
                                     data-productKey = "<?php echo e($product_key_randon); ?>"
                                     data-actionMsg ="<?php echo e($actionMsg); ?>"
                                     class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
-                                ><?php if($quantity>1): ?>
-                                    Update Cart
-                                <?php else: ?>
-                                    Add Cart
-                                <?php endif; ?>
+                                ><?php echo e($buttonText); ?>
+
                                 </a>
                             <a href="<?php echo e(route('list.product.detail', $item->id)); ?>" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>

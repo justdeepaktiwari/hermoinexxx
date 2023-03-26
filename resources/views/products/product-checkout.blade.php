@@ -250,7 +250,7 @@
                                             </div>
                                             <div class="row mb-4">
                                                 <div class="col-md-12 text-center">
-                                                    <button class="btn btn-light ">ADD THIS ADDRESS</button>
+                                                    <button class="btn btn-primary shadow-0">ADD THIS ADDRESS</button>
                                                 </div>
                                             </div>
 
