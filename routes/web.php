@@ -25,17 +25,23 @@ Route::get('/', function () {
     return redirect()->route("home");
 });
 
+Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
+
 Route::group(['prefix' => 'alpha1'], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home');
-    Route::get("/redirect-on", [App\Http\Controllers\UrlManager::class, 'index']);
+
     Auth::routes(["login" => true, "register" => true]);
 
-    Route::get('product', [App\Http\Controllers\Frontend\ProductController::class, "index"])->name("list.product");
+    Route::get('product', [App\Http\Controllers\Frontend\ProductController::class, "index"])
+        ->name("list.product");
 
-    Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])->name("lists.product");
-    Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])->name("list.product.detail");
+    Route::get('products', [App\Http\Controllers\Frontend\ProductController::class, "list"])
+        ->name("lists.product");
+        
+    Route::get('product/{id}', [App\Http\Controllers\Frontend\ProductController::class, "show"])
+        ->name("list.product.detail");
 
 
     Route::get('user-videos/{video}', [VideoController::class, 'UserVideoDetail'])
