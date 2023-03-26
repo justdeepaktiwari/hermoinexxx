@@ -39,6 +39,10 @@
     .hide{
         display: none !important;
     }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
 </style>
 @endsection
 

@@ -14,32 +14,32 @@
         @csrf
         <div class="form-outline form-white mb-4">
             <input type="hidden" name="addressid" value="{{$addressid}}">
-            <input type="text" name="card_name" id="typeName" class="form-control form-control-lg card_name"  placeholder="Cardholder's Name" />
+            <input type="text" name="card_name" id="typeName" class="form-control form-control-lg border border-light card_name" />
             <label class="form-label" for="typeName">Cardholder's Name</label>
         </div>
 
         <div class="form-outline form-white mb-4">
-            <input type="text" name="number" id="cardNumber" class="form-control form-control-lg card-number"  placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+            <input type="text" name="number" id="cardNumber" class="form-control form-control-lg card-number  border border-light" minlength="19" maxlength="19" />
             <label class="form-label" for="cardNumber">Card Number</label>
         </div>
 
         <div class="row mb-4">
             <div class="col-md-6">
-                <div class="form-outline form-white">
-                    <input type="text" name="exp_month" id="typeExpMonth" class="form-control form-control-lg card-expiry-month" placeholder="MM" size="2"  minlength="2" maxlength="2" />
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="exp_month" id="typeExpMonth" class="form-control form-control-lg card-expiry-month  border border-light" size="2"  minlength="2" maxlength="2" />
                     <label class="form-label" for="typeExpMonth">Expiration Month</label>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-outline form-white">
-                    <input type="text" name="exp_year" id="typeExpYear" class="form-control form-control-lg card-expiry-year" placeholder="YYYY" size="4"  minlength="4" maxlength="4" />
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="exp_year" id="typeExpYear" class="form-control form-control-lg card-expiry-year  border border-light"  size="4"  minlength="4" maxlength="4" />
                     <label class="form-label" for="typeExpYear">Expiration Year</label>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-outline form-white">
-                    <input type="password" name="cvc" id="typeCvv" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                    <label class="form-label" for="typeCvv">Cvv</label>
+                <div class="form-outline form-white mb-4">
+                    <input type="password" name="cvc" id="typeCvv" class="form-control form-control-lg  border border-light"  size="1" minlength="3" maxlength="3" />
+                    <label class="form-label" for="typeCvv">CVV</label>
                 </div>
             </div>
         </div>
