@@ -9,6 +9,7 @@ $("body").on("click", ".addToCart", function (e) {
     let productKey = buttonPosition.attr("data-productKey");
     let addCartUrl = buttonPosition.attr("data-addCartUrl");
     let addCartType = buttonPosition.attr("data-addCartType");
+    let actionMsg = buttonPosition.attr("data-actionmsg");
     let itemId = buttonPosition.attr("data-itemId");
     let quantity = $("." + productKey + "quantity").val();
     let productSize = $("." + productKey + "size").val();
@@ -25,8 +26,11 @@ $("body").on("click", ".addToCart", function (e) {
             productColor: productColor,
         },
         success: function (data) {
-            buttonPosition.html("ADD CART");
+            buttonPosition.html("Update CART");
             $(".totalCart").html(data.cart_count);
+            tata.success("Success!", actionMsg);
+            console.log("actionMsg" + actionMsg);
+            buttonPosition.attr("data-actionmsg", data.actionMsg);
         },
     });
 });
@@ -61,6 +65,10 @@ $("body").on("click", ".removeToCart", function (e) {
                     //     icon: "success",
                     // });
                     console.log(data.success);
+                    tata.success(
+                        "Success!",
+                        "Product remove form cart successfullly!"
+                    );
                 },
             });
         } else {
@@ -93,6 +101,7 @@ $("body").on("change", ".updateCart", function (e) {
         success: function (data) {
             $(".totalCart").html(data.cart_count);
             $("." + productKey + "totalPrice").html(data.price);
+            tata.success("Success!", "Cart updated successfullly!");
         },
     });
 });
@@ -121,6 +130,7 @@ $("body").on("click", ".updateCartQuantity", function (e) {
         success: function (data) {
             $(".totalCart").html(data.cart_count);
             $("." + productKey + "totalPrice").html(data.price);
+            tata.success("Success!", "Cart updated successfullly!");
         },
     });
 });
@@ -160,15 +170,15 @@ $("body").on("click", ".checkout", function (e) {
         contentType: false,
         processData: false,
         success: function (response) {
-            // tata.success("Success!", "Payment completed successfullly!");
+            tata.success("Success!", "Payment completed successfullly!");
             window.location.href = afterPaymentredirectUrl;
         },
         error: function (err, xhr) {
             console.log(err);
             if (err.responseJSON.message === undefined) {
-                // tata.error("Error!", err.responseJSON);
+                tata.error("Error!", err.responseJSON);
             } else {
-                // tata.error("Error!", err.responseJSON.message);
+                tata.error("Error!", err.responseJSON.message);
             }
 
             var errors = err.responseJSON.errors;

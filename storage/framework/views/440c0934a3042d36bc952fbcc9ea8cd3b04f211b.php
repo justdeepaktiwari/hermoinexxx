@@ -39,6 +39,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
     <script src="<?php echo e(asset('js/jquery-3.6.3.min.js')); ?>"></script>
     <script src="<?php echo e(asset("owlcarousel/owl.carousel.min.js")); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/tata.js')); ?>"></script>
     <?php echo $__env->yieldContent("js"); ?>
 </body>
 

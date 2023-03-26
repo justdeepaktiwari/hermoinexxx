@@ -21,10 +21,15 @@ class PaymentPurchase extends Model
         'purchase_total_amount',
         'product_sizes',
         'product_colors',
-        'quantity'
+        'quantity',
+        'status'
     ];
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function payments()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 }

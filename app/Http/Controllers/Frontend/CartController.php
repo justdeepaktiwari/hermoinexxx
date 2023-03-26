@@ -32,7 +32,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $request->session()->put('cart', []);
+        // $request->session()->put('cart', []);
         $input = $request->all();
         $old_cart_data = $request->session()->get('cart') ?? array();
         $cart_data = array();
@@ -57,7 +57,8 @@ class CartController extends Controller
         return response()->json([
             'success' => 'Add to cart',
             'cart_count' => $this->countCart(),
-            'price' => priceFormate(($request->quantity) * $cart_data['discounted_amount'])
+            'price' => priceFormate(($request->quantity) * $cart_data['discounted_amount']),
+            'actionMsg' => "Cart updated successfullly!",
         ]);
     }
     public function remove(Request $request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PaymentPurchase;
 use App\Http\Requests\StorePaymentPurchaseRequest;
 use App\Http\Requests\UpdatePaymentPurchaseRequest;
+use Illuminate\Http\Request;
 
 class PaymentPurchaseController extends Controller
 {
@@ -15,7 +16,13 @@ class PaymentPurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $order_status = [
+            'Confirmed' => 'Confirmed',
+            'Delivered' => 'Delivered',
+        ];
+
+        $orders = PaymentPurchase::with(['users', 'payments'])->get();
+        return view('admin.orders.index', compact('orders', 'order_status'));
     }
 
     /**
@@ -68,9 +75,13 @@ class PaymentPurchaseController extends Controller
      * @param  \App\Models\PaymentPurchase  $paymentPurchase
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaymentPurchaseRequest $request, PaymentPurchase $paymentPurchase)
+    public function update(Request $request, $id)
     {
-        //
+        $order = PaymentPurchase::where('id', $id)->firstOrFail();
+        $order_updated = $order->update([
+            'status' => $request->status,
+        ]);
+        return back()->with('success', 'Order updated successfully.');
     }
 
     /**

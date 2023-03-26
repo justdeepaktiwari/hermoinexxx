@@ -23,6 +23,10 @@
                     $product_key_randon = 'product'.$item['id'];
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
+                    $p_id = $item->id;
+                    $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
+                    $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
+                    $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
                 @endphp
                 <div>
                     <div class="card bg-dark text-white">
@@ -59,7 +63,7 @@
                                             <i class="fas fa-minus"></i>
                                         </button>
 
-                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white  {{$product_key_randon.'quantity'}}" style="width: 45px;" />
+                                        <input min="0" name="quantity" value="{{$quantity}}" type="number" class="form-control form-control-sm bg-transparent text-white  {{$product_key_randon.'quantity'}}" style="width: 45px;" />
 
                                         <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
@@ -80,9 +84,10 @@
                             <a  data-addCartType = "product" 
                                     data-addCartUrl = "{{ route('add-to-cart') }}" 
                                     data-itemId="{{$item->id}}"
+                                    data-actionMsg ="{{$actionMsg}}"
                                     data-productKey = "{{$product_key_randon}}"
                                     class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
-                                >Add Cart</a>
+                                >{{$buttonText}}</a>
                             <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>
                     </div>
@@ -103,6 +108,10 @@
                     $product_key_randon = 'product'.$item['id'];
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
+                    $p_id = $item->id;
+                    $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
+                    $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
+                    $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
                 @endphp
                 <div>
                     <div class="card bg-dark text-white">
@@ -141,7 +150,7 @@
                                             <i class="fas fa-minus"></i>
                                         </button>
 
-                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white            {{$product_key_randon.'quantity'}}" style="width: 55px;" />
+                                        <input min="0" name="quantity" value="{{$quantity}}" type="number" class="form-control form-control-sm bg-transparent text-white            {{$product_key_randon.'quantity'}}" style="width: 55px;" />
 
                                         <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
@@ -162,9 +171,10 @@
                             <a  data-addCartType = "product" 
                                     data-addCartUrl = "{{ route('add-to-cart') }}" 
                                     data-itemId="{{$item->id}}"
+                                    data-actionMsg ="{{$actionMsg}}"
                                     data-productKey = "{{$product_key_randon}}"
                                     class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
-                                >Add Cart</a>
+                                >{{$buttonText}}</a>
                             <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>
                     </div>
@@ -188,6 +198,10 @@
                     $product_key_randon = 'product'.$item['id'];
                     $random_img = json_decode($item->product_image);
                     $random_number = floor(rand(0, (count($random_img)-1)));
+                    $p_id = $item->id;
+                    $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
+                    $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
+                    $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
                 @endphp
                 <div>
                     <div class="card bg-dark text-white">
@@ -226,7 +240,7 @@
                                             <i class="fas fa-minus"></i>
                                         </button>
 
-                                        <input min="0" name="quantity" value="2" type="number" class="form-control form-control-sm bg-transparent text-white            {{$product_key_randon.'quantity'}}" style="width: 55px;" />
+                                        <input min="0" name="quantity" value="{{$quantity}}" type="number" class="form-control form-control-sm bg-transparent text-white            {{$product_key_randon.'quantity'}}" style="width: 55px;" />
 
                                         <button class="btn btn-link text-success bg-dark px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
@@ -247,9 +261,10 @@
                             <a  data-addCartType = "product" 
                                     data-addCartUrl = "{{ route('add-to-cart') }}" 
                                     data-itemId="{{$item->id}}"
+                                    data-actionMsg ="{{$actionMsg}}"
                                     data-productKey = "{{$product_key_randon}}"
                                     class="btn btn-danger rounded-0 shadow-0 btn-sm addToCart mt-2 mb-2 w-100"
-                                >Add Cart</a>
+                                >{{$buttonText}}</a>
                             <a href="{{ route('list.product.detail', $item->id) }}" class="btn btn-success rounded-0 shadow-0 btn-sm w-100">View Detail</a>
                         </div>
                     </div>
