@@ -164,6 +164,10 @@
         $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
         $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
         $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
+        $size_list = json_decode($product->product_sizes);
+        $color_list = json_decode($product->product_colors);
+        $product_cart_size = isset($product_cart[$p_id])? $product_cart[$p_id]['size']:'';
+        $product_cart_color = isset($product_cart[$p_id])? $product_cart[$p_id]['color']:'';
     @endphp
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -222,17 +226,25 @@
                                         <div class="d-flex flex-column mb-2">
                                             <label for="size">Size<span class="fw-bold text-danger fs-5">*</span></label>
                                             <select id="size" name="{{$product_key_randon.'size'}}" class="p-2 bg-transparent text-white  {{$product_key_randon.'size'}}" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
+                                                @foreach ($size_list as $key=> $size)
+                                                    <option value="{{$size}}" 
+                                                        @if ($product_cart_size==$size)
+                                                            selected
+                                                        @endif
+                                                    >{{$size}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="d-flex flex-column mb-2">
                                             <label for="color">Color<span class="fw-bold text-danger fs-5">*</span></label>
                                             <select id="color" name="{{$product_key_randon.'color'}}"  class="p-2 bg-transparent text-white  {{$product_key_randon.'color'}}" style="box-shadow: 0 1px 6px 0 rgba(34, 34, 34, 0.15)">
-                                                <option value="Red">Red</option>
-                                                <option value="Blue">Blue</option>
-                                                <option value="Green">Green</option>
+                                                @foreach ($color_list as $key=> $color)
+                                                    <option value="{{$color}}"
+                                                    @if ($product_cart_color==$color)
+                                                      selected  
+                                                    @endif
+                                                    >{{$color}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 

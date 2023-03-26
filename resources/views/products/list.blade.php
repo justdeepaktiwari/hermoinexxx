@@ -20,6 +20,10 @@
                     $buttonText = isset($product_cart[$p_id])? "Update Cart":"Add Cart";
                     $actionMsg = isset($product_cart[$p_id])? $update_cart_msg:$add_cart_msg;
                     $quantity = isset($product_cart[$p_id])? $product_cart[$p_id]['quantity']:1;
+                    $product_cart_size = isset($product_cart[$p_id])? $product_cart[$p_id]['size']:'';
+                    $product_cart_color = isset($product_cart[$p_id])? $product_cart[$p_id]['color']:'';
+                    $size_list = json_decode($item->product_sizes);
+                    $color_list = json_decode($item->product_colors);
                 @endphp
                 <div class="col-sm-3">
                     <div class="card bg-dark text-white">
@@ -64,14 +68,22 @@
                                         </button>
                                     </div>
                                     <select name="{{$product_key_randon.'size'}}" class="form-control-sm rounded-0 me-2 {{$product_key_randon.'size'}}"> 
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
+                                        @foreach ($size_list as $key=> $size)
+                                            <option value="{{$size}}"
+                                            @if ($product_cart_size==$size)
+                                                            selected
+                                                        @endif
+                                            >{{$size}}</option>
+                                        @endforeach
                                     </select>
                                     <select name="{{$product_key_randon.'color'}}" class="form-control-sm rounded-0 {{$product_key_randon.'color'}}"> 
-                                        <option value="Red">Red</option>
-                                        <option value="Blue">Blue</option>
-                                        <option value="Green">Green</option>
+                                        @foreach ($color_list as $key=> $color)
+                                            <option value="{{$color}}"
+                                            @if ($product_cart_color==$color)
+                                                      selected  
+                                                    @endif
+                                            >{{$color}}</option>
+                                        @endforeach
                                     </select>
                                 </div>                                
                             </div>

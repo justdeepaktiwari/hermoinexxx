@@ -23,8 +23,8 @@ class ProductFactory extends Factory
             'product_real_amount' => $price,
             'product_percentage_discount' => $discount,
             'product_discounted_amount' => $after_discount,
-            'product_sizes' => $this->faker->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
-            'product_colors' => $this->faker->randomElement(['Black', 'Blue', 'Red']),
+            'product_sizes' => '{"1":"S","2":"M","3":"XL"}',
+            'product_colors' => '{"1":"Red","2":"Black","3":"Yellow"}',
             'product_image' => '["6408b44016c96.gif"]',
             'product_detail' => $this->faker->paragraph(rand(3, 8)),
         ];
