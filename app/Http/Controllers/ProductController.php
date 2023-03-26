@@ -93,8 +93,12 @@ class ProductController extends Controller
             $create_product["product_image"] = json_encode($file_name_arr);
         }
 
-        $create_product["product_colors"] = json_encode($create_product["product_colors"]);
-        $create_product["product_sizes"] = json_encode($create_product["product_sizes"]);
+        
+        $list_color = ProductColor::whereIn("id", $create_product["product_colors"])->pluck("color_name", "id")->toArray();
+        $list_size = ProductSize::whereIn("id", $create_product["product_sizes"])->pluck("product_size", "id")->toArray();
+
+        $create_product["product_colors"] = json_encode($list_color);
+        $create_product["product_sizes"] = json_encode($list_size);
 
         Product::create($create_product);
 
@@ -179,12 +183,15 @@ class ProductController extends Controller
         unset($create_product["_token"]);
         unset($create_product["_method"]);
 
+
         if ($request->product_colors) {
-            $create_product["product_colors"] = json_encode($create_product["product_colors"]);
+            $list_color = ProductColor::whereIn("id", $create_product["product_colors"])->pluck("color_name", "id")->toArray();
+            $create_product["product_colors"] = json_encode($list_color);
         }
 
         if ($request->product_sizes) {
-            $create_product["product_sizes"] = json_encode($create_product["product_sizes"]);
+            $list_size = ProductSize::whereIn("id", $create_product["product_sizes"])->pluck("product_size", "id")->toArray();
+            $create_product["product_sizes"] = json_encode($list_size);
         }
 
         Product::where("id", $id)->update($create_product);

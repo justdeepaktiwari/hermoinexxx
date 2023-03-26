@@ -270,6 +270,7 @@ class PhotoController extends Controller
 
     public function UserPhoto()
     {
-        return view("photos.index");
+        $photos = Photo::get();
+        return view("photos.index", compact('photos'));
     }
 }

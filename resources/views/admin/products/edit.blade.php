@@ -43,11 +43,11 @@
                 <strong>Available Size</strong>
                 <select name="product_sizes[]" id="product_sizes" class="w-100" multiple>
                     @php
-                        $product_sizes = $product->product_sizes ? json_decode($product->product_sizes) : [];
+                        $product_sizes = $product->product_sizes ? (array) json_decode($product->product_sizes) : [];
                     @endphp
 
                     @foreach($list_size as $size)
-                        <option value="{{ $size->id }}" {{ in_array($size->id, $product_sizes) ? "selected" : "" }}>{{ $size->product_size }}</option>
+                        <option value="{{ $size->id }}" {{ isset($product_sizes[$size->id]) ? "selected" : "" }}>{{ $size->product_size }}</option>
                     @endforeach 
                 </select>
                 <!-- <textarea class="form-control" name="product_sizes" placeholder="S, M, L, XL, XXL" rows="1">{{ $product->product_sizes }}</textarea> -->
@@ -58,11 +58,11 @@
                 <strong>Available Color</strong>
                 <select name="product_colors[]" id="product_colors" class="w-100" multiple>
                     @php
-                        $product_colors = $product->product_colors ? json_decode($product->product_colors) : [];
+                        $product_colors = $product->product_colors ? (array) json_decode($product->product_colors) : [];
                     @endphp
 
                     @foreach($list_color as $color)
-                        <option value="{{ $color->id }}" {{ in_array($color->id, $product_colors) ? "selected" : "" }}>{{ $color->color_name }}</option>
+                        <option value="{{ $color->id }}" {{ isset($product_colors[$color->id]) ? "selected" : "" }}>{{ $color->color_name }}</option>
                     @endforeach 
                 </select>
                 <!-- <textarea class="form-control" name="product_colors" placeholder="Black, Blue, Red" rows="1">{{ $product->product_colors }}</textarea> -->
