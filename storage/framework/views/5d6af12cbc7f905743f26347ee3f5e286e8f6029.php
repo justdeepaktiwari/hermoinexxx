@@ -2,6 +2,9 @@
 
 <?php $__env->startSection('title', 'Hermoinexxx - Product'); ?>
 <?php $__env->startSection('css'); ?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
 <style>
     .picZoomer {
         position: relative;
@@ -135,7 +138,7 @@
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
     }
     .roboto-family{
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: 'Delicious Handrawn', cursive;
         text-align: center;
     }
 </style>
@@ -200,7 +203,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h2 class="fw-800 text-danger roboto-family">THANK YOU FOR YOUR SUPPORT</h2>
+                                <h2 class="fw-800 text-danger roboto-family my-2">THANK YOU FOR YOUR SUPPORT</h2>
                             </div>
                             <div class="col-lg-5">
                                 <div class="w-100 d-flex flex-column gap-2">

@@ -338,86 +338,49 @@
                     </div>
                     <div class="col-md-8 row  p-3">
                         <div class="fs-5 mb-3">
-                            <span class="fs-5">Models Near You </span> <span
-                                class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span>
+                            <span class="fs-5">Models Near You </span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0" onclick="window.location.href = `{{ route('models') }}`">See All</span>
                         </div>
 
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
+                            </div>
+                        </div>
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
+                            </div>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
                             </div>
                         </div>
                         <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
                             </div>
                         </div>
 
@@ -426,85 +389,49 @@
                         </div>
 
                         <div class="fs-5 mb-3">
-                            <span class="fs-5">Models Online Now </span> <span
-                                class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span>
+                            <span class="fs-5">Models Online Now </span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span>
                         </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
+
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
                             </div>
                         </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
                             </div>
                         </div>
                         <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative" style="height: 100px;">
-                                <video class="video" onmouseover="this.play()"
-                                    onmouseout="this.pause();this.currentTime=0;" playsinline muted loop>
-                                    <source src="{{ asset('assets/videos/welcome.mp4') }}" type="video/mp4">
-                                </video>
-                                <span class="position-absolute bottom-0 end-0 bg-dark text-white px-2 z-index-9">
-                                    4:19
-                                </span>
-                                <span
-                                    class="position-absolute top-0 end-0 text-white bg-dark z-index-9 onhover-show p-1  fw-bold">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                        <path
-                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                                    </svg>
-                                </span>
+                            <div class="position-relative  border bg-dark " style="height: 120px;">
+                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
-                            <div class="mt-2">Title - Video</div>
-                            <div class="d-flex justify-content-between">
-                                <span class="small text-muted">276 views</span><span
-                                    class="mt-1 small text-muted">77%</span>
+                            <div class="pt-2 text-center bg-dark small">Alina</div>
+                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="py-1 text-center bg-dark small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                United States, San Francisco
                             </div>
                         </div>
                     </div>
