@@ -18,7 +18,7 @@
 <div class="text-white">
     <main class="content-section px-lg-2 px-sm-0 px-md-2">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
-            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `<?php echo e(route('models')); ?>`">
                 Webcam
             </div>
             <div class=" border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `<?php echo e(route('list.product')); ?>`">

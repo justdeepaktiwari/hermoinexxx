@@ -1,7 +1,7 @@
 <?php
-    
+
 namespace App\Http\Controllers;
-    
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -9,18 +9,18 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
-    
-class UserController extends Controller
+
+class PartnerController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $data = User::with("subscription")->orderBy('id','DESC')->where('is_partner', 0)->paginate(5);
-        return view('admin.users.index',compact('data'))
+        $data = User::with("subscription")->orderBy('id','DESC')->where('is_partner', 1)->paginate(5);
+        return view('admin.models.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
@@ -32,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('admin.users.create',compact('roles'));
+        return view('admin.models.create',compact('roles'));
     }
     
     /**
@@ -50,12 +50,16 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+
+        
         $input['password'] = Hash::make($input['password']);
-    
+        
+        unset($input["_token"]);
+        unset($input["confirm-password"]);
+
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-    
-        return redirect()->route('users.index')
+
+        return redirect()->route('models.index')
                         ->with('success','User created successfully');
     }
     
@@ -68,7 +72,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('admin.users.show',compact('user'));
+        return view('admin.models.show',compact('user'));
     }
     
     /**
@@ -83,7 +87,7 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('admin.users.edit',compact('user','roles','userRole'));
+        return view('admin.models.edit',compact('user','roles','userRole'));
     }
     
     /**
@@ -109,12 +113,13 @@ class UserController extends Controller
         }
     
         $user = User::find($id);
+                
+        unset($input["_token"]);
+        unset($input["confirm-password"]);
+        
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
     
-        $user->assignRole($request->input('roles'));
-    
-        return redirect()->route('users.index')
+        return redirect()->route('models.index')
                         ->with('success','User updated successfully');
     }
     
@@ -127,7 +132,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('models.index')
                         ->with('success','User deleted successfully');
     }
 }

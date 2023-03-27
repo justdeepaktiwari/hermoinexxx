@@ -12,7 +12,7 @@
         <h5 class="text-start p-2 border-bottom border-danger mb-3 text-white">Photo Gallery</h5>
         <div class="row">
             
-            @foreach($photos as $photo)
+            @forelse($photos as $photo)
                 <div class="col-md-4 overflow-hidden">
                     <div class="bg-image border hover-zoom ripple ripple-surface ripple-surface-light  rounded w-100 h-100"
                         data-mdb-ripple-color="light">
@@ -25,7 +25,11 @@
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="colm-d-12 text-white fs-3">
+                    No Photo available! Please Choose proper plan
+                </div>
+            @endforelse
         </div>
         <!-- Gallery -->
     </div>

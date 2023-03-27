@@ -1,10 +1,10 @@
 @extends('admin.index')
 
-@section('title', 'Edit Partner')
+@section('title', 'Create New Partner')
 
 @section('action-btn')
   <div class="pull-right">
-    <a class="btn btn-outline-primary btn-sm rounded-0" href="{{ route('users.index') }}"> Back</a>
+    <a class="btn btn-outline-primary btn-sm rounded-0" href="{{ route('models.index') }}"> Back</a>
   </div>
 @endsection
 
@@ -21,8 +21,10 @@
 @endif
 
 
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+
+{!! Form::open(array('route' => 'models.store','method'=>'POST')) !!}
 <div class="row">
+    <input type="hidden" name="is_partner" value="1">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>
@@ -50,7 +52,7 @@
     {{-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
         </div>
     </div> --}}
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

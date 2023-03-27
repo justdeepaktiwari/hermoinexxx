@@ -18,7 +18,7 @@
 <div class="text-white">
     <main class="content-section px-lg-2 px-sm-0 px-md-2">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
-            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('models') }}`">
                 Webcam
             </div>
             <div class=" border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('list.product') }}`">
@@ -33,13 +33,13 @@
                 <div class="fs-4 fw-bold d-flex justify-content-between my-2">
                     <span>Models</span>
                 </div>
-                @foreach($new_video as $video)
-                <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="#" role="button">
+                @foreach($models as $model)
+                <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user', $model->id) }}" role="button">
                     <div class="position-relative  border bg-dark " style="height: 200px;">
                        <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                     </div>
-                    <div class="pt-2 text-center bg-dark ">Alina</div>
-                    <div class="pt-1 text-center bg-dark ">Online</div>
+                    <div class="pt-2 text-center bg-dark ">{{ $model->name }}</div>
+                    <div class="pt-1 text-center bg-dark ">{{ $model->active_status ? "Online" : "Offline"}}</div>
                     <div class="py-1 text-center bg-dark ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>

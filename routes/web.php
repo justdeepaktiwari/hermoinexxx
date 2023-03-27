@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         /**Use Role And Permission*/
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::resource('users', App\Http\Controllers\UserController::class);
+        Route::resource('models', App\Http\Controllers\PartnerController::class);
         Route::resource('orders', App\Http\Controllers\PaymentPurchaseController::class);
         Route::get('payments', [App\Http\Controllers\PaymentController::class, "index"])
             ->name("payments");

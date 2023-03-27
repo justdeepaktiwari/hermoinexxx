@@ -117,7 +117,7 @@
 <div class="text-white w-md-responsive ms-auto" style="background: #000;">
     <main class="content-section">
         <div class="user-tab border-bottom border-dark text-uppercase d-flex flex-wrap">
-            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button">
+            <div class="border-end  border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('models') }}`">
                 Webcam
             </div>
             <div class=" border-dark col-4 py-2 text-center fs-6" role="button" onclick="window.location.href = `{{ route('list.product') }}`">

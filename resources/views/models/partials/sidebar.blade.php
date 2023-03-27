@@ -231,7 +231,7 @@
                             Live Cam
                         </div>
                         <div class="tabs my-2">
-                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button">
+                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button" onclick="window.location.href = `{{ route('models') }}`">
                                 <span class="mx-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
                                         <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
@@ -240,7 +240,7 @@
                                 </span>
                                 All Cam
                             </div>
-                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button">
+                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button" onclick="window.location.href = `{{ route('models') }}`">
                                 <span class="mx-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
                                         <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z" />
@@ -250,7 +250,7 @@
                                 </span>
                                 Most Recent Viewed
                             </div>
-                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button">
+                            <div class="ps-4 py-2 fs-6 fw-800 on-hover-tab" role="button" onclick="window.location.href = `{{ route('models') }}`">
                                 <span class="mx-2">
                                     <i class="fa-solid fa-mars-double" style="font-size: 20px;"></i>
                                 </span>
@@ -265,7 +265,7 @@
                                 <div class="tags py-1 rounded-1 border text-white d-inline-block mx-2 my-2 px-2" role="button" onclick="changeText(this.innerText)">
                                     {{ $trending_search->search }}
                                 </div>
-                                @endforeach()
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -273,8 +273,8 @@
                         <div class="fs-5 mb-3">
                             <span class="fs-5">Models Near You </span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0" onclick="window.location.href = `{{ route('models') }}`">See All</span>
                         </div>
-
-                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                        @foreach($sidebar_models_near as $model)
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('user', $model->id) }}`">
                             <div class="position-relative  border bg-dark " style="height: 120px;">
                                 <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
@@ -287,45 +287,17 @@
                                 </svg>
                                 United States, San Francisco
                             </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
-                            <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
-                            </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
-                            <div class="py-1 text-center bg-dark small">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                </svg>
-                                United States, San Francisco
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
-                            </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
-                            <div class="py-1 text-center bg-dark small">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                </svg>
-                                United States, San Francisco
-                            </div>
-                        </div>
-
+                        </div> 
+                        @endforeach
                         <div class="col-md-12">
                             <hr>
                         </div>
 
-                        <div class="fs-5 mb-3">
+                        <div class="fs-5 mb-3 {{ count($sidebar_active_models) ? '' : 'd-none'}}">
                             <span class="fs-5">Models Online Now </span> <span class="btn btn-outline-secondary btn-sm float-end px-3 py-0">See All</span>
                         </div>
-
-                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
+                        @foreach($sidebar_active_models as $model)
+                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('user', $model->id) }}`">
                             <div class="position-relative  border bg-dark " style="height: 120px;">
                                 <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
                             </div>
@@ -339,34 +311,7 @@
                                 United States, San Francisco
                             </div>
                         </div>
-                        <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `{{ route('models') }}`">
-                            <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
-                            </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
-                            <div class="py-1 text-center bg-dark small">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                </svg>
-                                United States, San Francisco
-                            </div>
-                        </div>
-                        <div class="col-md-4 video-hover mb-2" role="button">
-                            <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
-                            </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
-                            <div class="py-1 text-center bg-dark small">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                </svg>
-                                United States, San Francisco
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

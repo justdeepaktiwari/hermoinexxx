@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\Video;
 use App\Models\UserSubscrption;
 use App\Models\SearchHistory;
+use App\Models\User;
 use App\Models\WatchLaterVideo;
 use App\Models\WebsiteModels;
 use Illuminate\Http\Request;
@@ -22,8 +23,18 @@ class WebsiteModelsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+        $this->middleware('auth');
+     }
+
     public function index()
     {
+        if(auth()->user()->subscription_id == 4){
+            return abort(403, "Please Chose proper plan to access");
+        }
+
         $premium_video = Video::where("subscription_type_id", 1)
         ->inRandomOrder()
         ->limit(4)->get();
@@ -47,8 +58,8 @@ class WebsiteModelsController extends Controller
             ->orWhere("product_image", "like", "%.gif%")
             ->inRandomOrder()->limit(1)->first();
 
-        $new_video = Video::orderBy("id", "desc")
-            ->whereIn("subscription_type_id", $this->canAccess())
+        $models = User::orderBy("id", "desc")
+            ->where("is_partner", 1)
             ->paginate(10);
 
         $recomended_video = Video::whereIn("subscription_type_id", $this->canAccess())
@@ -69,8 +80,9 @@ class WebsiteModelsController extends Controller
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
         $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
         $sidebar_models_near = $this->nearModelFoSideBar();
+        $sidebar_active_models  = $this->activeModelFoSideBar();
 
-        return view("models.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near'));
+        return view("models.index", compact('models', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
     }
 
     /**
@@ -174,12 +186,17 @@ class WebsiteModelsController extends Controller
     
     public function nearModelFoSideBar()
     {
-        return Video::whereIn("subscription_type_id", $this->canAccess())
-        ->where(function($query){
-            $query->whereNotNull("categories_id")->orWhere("categories_id", "");
-        })
+        return User::where("is_partner", 1)
         ->inRandomOrder()
-        ->limit(6)->get();
+        ->limit(3)->get();
+    }
+
+    public function activeModelFoSideBar()
+    {
+        return User::where("is_partner", 1)
+        ->where("active_status", 1)
+        ->inRandomOrder()
+        ->limit(3)->get();
     }
 
     

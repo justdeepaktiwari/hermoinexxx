@@ -12,6 +12,7 @@ use App\Models\Tag;
 use App\Models\UserSubscrption;
 use Illuminate\Http\Request;
 use File;
+use Auth;
 
 class PhotoController extends Controller
 {
@@ -268,9 +269,34 @@ class PhotoController extends Controller
         die('{"jsonrpc" : "2.0", "result" : {"status": 200, "message": "The file has been uploaded successfully!"}}');
     }
 
-    public function UserPhoto()
+    public function UserPhoto(Request $req)
     {
-        $photos = Photo::get();
+        $photos = Photo::whereIn("subscription_type_id", $this->canAccess())
+        ->where(function($query) use($req){
+            $query->where("photo_title", "like", "%$req->search%");
+            $query->orWhere("photo_detail", "like", "%$req->search%");
+        })->get();
         return view("photos.index", compact('photos'));
+    }
+
+        
+    public function canAccess()
+    {
+        $array_subs_id = [];
+        $can_access = UserSubscrption::where(function ($query) {
+            if (Auth::check()) {
+                $query->where("id", auth()->user()->subscription_id);
+            } else {
+                $query->where("id", 4);
+            }
+        })->get();
+
+        foreach ($can_access as $access_value) {
+            if ($access_value->can_access) {
+                $array_subs_id = json_decode($access_value->can_access);
+            }
+        }
+
+        return $array_subs_id;
     }
 }

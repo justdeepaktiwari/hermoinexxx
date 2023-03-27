@@ -4,7 +4,7 @@
 
 @section('action-btn')
   <div class="pull-right">
-    <a class="btn btn-outline-primary btn-sm rounded-0" href="{{ route('users.index') }}"> Back</a>
+    <a class="btn btn-outline-primary btn-sm rounded-0" href="{{ route('models.index') }}"> Back</a>
   </div>
 @endsection
 
@@ -21,8 +21,9 @@
 @endif
 
 
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+{!! Form::model($user, ['method' => 'PATCH','route' => ['models.update', $user->id]]) !!}
 <div class="row">
+    <input type="hidden" name="is_partner" value="1">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>

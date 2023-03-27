@@ -10,6 +10,7 @@ use App\Models\Tag;
 use App\Models\Video;
 use App\Models\UserSubscrption;
 use App\Models\SearchHistory;
+use App\Models\User;
 use App\Models\WatchLaterVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -346,8 +347,9 @@ class VideoController extends Controller
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
         $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
         $sidebar_models_near = $this->nearModelFoSideBar();
+        $sidebar_active_models  = $this->activeModelFoSideBar();
         
-        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near'));
+        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
     }
 
     public function UserVideoDetail(Request $request)
@@ -449,8 +451,9 @@ class VideoController extends Controller
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
         $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
         $sidebar_models_near = $this->nearModelFoSideBar();
+        $sidebar_active_models  = $this->activeModelFoSideBar();
         
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near'));
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
     }
 
     public function searchQuery(Request $request)
@@ -528,7 +531,9 @@ class VideoController extends Controller
         $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
         $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
         $sidebar_models_near = $this->nearModelFoSideBar();
-        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search", "sidebar_recomonded_video",'sidebar_topcategories_video', 'sidebar_models_near'));
+        $sidebar_active_models  = $this->activeModelFoSideBar();
+
+        return view("videos.search-video", compact("new_video", "search", "trending_searches", "recent_search", "sidebar_recomonded_video",'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
     }
 
 
@@ -731,7 +736,9 @@ class VideoController extends Controller
             $sidebar_recomonded_video = $this->recomndedVideoFoSideBar();
             $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
             $sidebar_models_near = $this->nearModelFoSideBar();
-            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video", 'sidebar_topcategories_video', 'sidebar_models_near'));
+            $sidebar_active_models  = $this->activeModelFoSideBar();
+
+            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video", 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
         } else {
             return abort(404);
         }
@@ -778,14 +785,19 @@ class VideoController extends Controller
     }
 
 
-    
     public function nearModelFoSideBar()
     {
-        return Video::whereIn("subscription_type_id", $this->canAccess())
-        ->where(function($query){
-            $query->whereNotNull("categories_id")->orWhere("categories_id", "");
-        })
+        return User::where("is_partner", 1)
         ->inRandomOrder()
-        ->limit(6)->get();
+        ->limit(3)->get();
+    }
+
+    
+    public function activeModelFoSideBar()
+    {
+        return User::where("is_partner", 1)
+        ->where("active_status", 1)
+        ->inRandomOrder()
+        ->limit(3)->get();
     }
 }
