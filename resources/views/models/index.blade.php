@@ -36,7 +36,7 @@
                 @foreach($models as $model)
                 <a class="col-md-3 col-12 video-hover mb-2 text-decoration-none text-white" href="{{ route('user', $model->id) }}" role="button">
                     <div class="position-relative  border bg-dark " style="height: 200px;">
-                       <img src="{{ asset('assets/images/models.jpg') }}" alt="" class="w-100 h-100">
+                       <img src="{{ asset('storage/users-avatar/'.$model->avatar) }}" alt="" class="w-100 h-100">
                     </div>
                     <div class="pt-2 text-center bg-dark ">{{ $model->name }}</div>
                     <div class="pt-1 text-center bg-dark ">{{ $model->active_status ? "Online" : "Offline"}}</div>

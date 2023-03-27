@@ -347,10 +347,10 @@
                         <?php $__currentLoopData = $sidebar_models_near; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $model): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `<?php echo e(route('user', $model->id)); ?>`">
                             <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="<?php echo e(asset('assets/images/models.jpg')); ?>" alt="" class="w-100 h-100">
+                                <img src="<?php echo e(asset('storage/users-avatar/'.$model->avatar)); ?>" alt="" class="w-100 h-100">
                             </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="pt-2 text-center bg-dark "><?php echo e($model->name); ?></div>
+                            <div class="pt-1 text-center bg-dark "><?php echo e($model->active_status ? "Online" : "Offline"); ?></div>
                             <div class="py-1 text-center bg-dark small">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
@@ -370,10 +370,10 @@
                         <?php $__currentLoopData = $sidebar_active_models; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $model): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-4 video-hover mb-2" role="button" onclick="window.location.href = `<?php echo e(route('user', $model->id)); ?>`">
                             <div class="position-relative  border bg-dark " style="height: 120px;">
-                                <img src="<?php echo e(asset('assets/images/models.jpg')); ?>" alt="" class="w-100 h-100">
+                                <img src="<?php echo e(asset('storage/users-avatar/'.$model->avatar)); ?>" alt="" class="w-100 h-100">
                             </div>
-                            <div class="pt-2 text-center bg-dark small">Alina</div>
-                            <div class="pt-1 text-center bg-dark small">Online</div>
+                            <div class="pt-2 text-center bg-dark "><?php echo e($model->name); ?></div>
+                            <div class="pt-1 text-center bg-dark "><?php echo e($model->active_status ? "Online" : "Offline"); ?></div>
                             <div class="py-1 text-center bg-dark small">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
