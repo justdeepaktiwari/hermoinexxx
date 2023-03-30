@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductSizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VideoController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::get('user-videos', [VideoController::class, 'UserVideo'])
 Route::get('user-photos', [App\Http\Controllers\PhotoController::class, 'UserPhoto'])
     ->name("user-photos");
 
+Route::get("meeting-recorded", function(){
+    Product::where("id", 1)->update(["product_name" => "success"]);
+})->name("meeting-recorded");
 
 Route::get('models', [App\Http\Controllers\WebsiteModelsController::class, 'index'])
     ->name("models");
@@ -69,6 +73,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('add-address', [App\Http\Controllers\Frontend\AddressController::class, "store"])->name("add-address");
     Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, "index"])->name("product.cart");
     Route::get('dashboard', [App\Http\Controllers\Frontend\DashboardController::class, "index"])->name("user-dashboard");
+    Route::get("connect-meet", function(){
+        return view("video-cam.index");
+    });
 });
 
 Auth::routes(["login" => true, "register" => true]);

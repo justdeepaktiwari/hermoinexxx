@@ -526,7 +526,7 @@ function sendMessage() {
   temporaryMsgId += 1;
   let tempID = `temp_${temporaryMsgId}`;
   let hasFile = !!$(".upload-attachment").val();
-  let join_video_button = `<a class="btn btn-danger text-white text-decoration-none rounded-pill">Join Meet Call</a>`;
+  let join_video_button = `<a class="btn btn-danger text-white text-decoration-none rounded-pill" href="${createVideoMeeting()}">Join Meet Call</a>`;
   const inputValue = join_video_button;
   if (inputValue.length > 0 || hasFile) {
     const formData = new FormData($("#message-form")[0]);
@@ -601,6 +601,14 @@ function sendMessage() {
     });
   }
   return false;
+}
+
+function createVideoMeeting() {
+  let meetingId =  'xxxxyxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+  });
+  return "/connect-meet?meetingId="+meetingId;
 }
 /**
  *-------------------------------------------------------------
