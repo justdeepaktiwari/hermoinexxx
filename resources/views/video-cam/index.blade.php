@@ -437,6 +437,6 @@
         meeting.init(config);
     });
 
-    script.src = "https://sdk.videosdk.live/rtc-js-prebuilt/0.3.29/rtc-js-prebuilt.js";
+    script.src = "{{ asset('js/rtc-js-prebuilt.js') }}";
     document.getElementsByTagName("head")[0].appendChild(script);
 </script>
