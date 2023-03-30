@@ -65,6 +65,7 @@
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                     <a href="/"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    <a href="#" class="request-video"><i class="fas fa-video"></i></a>
                 </nav>
             </nav>
             {{-- Internet connection --}}

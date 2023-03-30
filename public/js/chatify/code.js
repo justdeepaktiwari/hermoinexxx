@@ -516,6 +516,92 @@ function sendMessage() {
   return false;
 }
 
+
+/**
+ *-------------------------------------------------------------
+ * Send message function
+ *-------------------------------------------------------------
+ */
+ function sendVideoRequest() {
+  temporaryMsgId += 1;
+  let tempID = `temp_${temporaryMsgId}`;
+  let hasFile = !!$(".upload-attachment").val();
+  let join_video_button = `<a class="btn btn-danger text-white text-decoration-none rounded-pill">Join Meet Call</a>`;
+  const inputValue = join_video_button;
+  if (inputValue.length > 0 || hasFile) {
+    const formData = new FormData($("#message-form")[0]);
+    formData.append("id", getMessengerId());
+    formData.append("temporaryMsgId", tempID);
+    formData.append("_token", csrfToken);
+    formData.append("message", inputValue);
+
+    $.ajax({
+      url: $("#message-form").attr("action"),
+      method: "POST",
+      data: formData,
+      dataType: "JSON",
+      processData: false,
+      contentType: false,
+      beforeSend: () => {
+        // remove message hint
+        $(".messages").find(".message-hint").hide();
+        // append a temporary message card
+        if (hasFile) {
+          messagesContainer
+            .find(".messages")
+            .append(
+              sendTempMessageCard(
+                inputValue + "\n" + loadingSVG("28px"),
+                tempID
+              )
+            );
+        } else {
+          messagesContainer
+            .find(".messages")
+            .append(sendTempMessageCard(inputValue, tempID));
+        }
+        // scroll to bottom
+        scrollToBottom(messagesContainer);
+        messageInput.css({ height: "42px" });
+        // form reset and focus
+        $("#message-form").trigger("reset");
+        cancelAttachment();
+        messageInput.focus();
+      },
+      success: (data) => {
+        if (data.error > 0) {
+          // message card error status
+          errorMessageCard(tempID);
+          console.error(data.error_msg);
+        } else {
+          // update contact item
+          updateContactItem(getMessengerId());
+          // temporary message card
+          const tempMsgCardElement = messagesContainer.find(
+            `.message-card[data-id=${data.tempID}]`
+          );
+          // add the message card coming from the server before the temp-card
+          tempMsgCardElement.before(data.message);
+          // then, remove the temporary message card
+          tempMsgCardElement.remove();
+          // scroll to bottom
+          scrollToBottom(messagesContainer);
+          // send contact item updates
+          sendContactItemUpdates(true);
+        }
+      },
+      error: () => {
+        // message card error status
+        errorMessageCard(tempID);
+        // error log
+        console.error(
+          "Failed sending the message! Please, check your server response."
+        );
+      },
+    });
+  }
+  return false;
+}
 /**
  *-------------------------------------------------------------
  * Fetch messages from database
@@ -1363,6 +1449,12 @@ $(document).ready(function () {
         triggered = isTyping(false);
         sendMessage();
       }
+    }
+  });
+
+  $(".request-video").click(function (e) { 
+    if(confirm("Are you sure to want send meet request ?")){
+      sendVideoRequest()
     }
   });
 
