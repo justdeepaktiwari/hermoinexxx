@@ -88,14 +88,9 @@
                 <?php
                     $type = explode(".", $foot_fetish->video_url);
                     $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
-
-                    $folder = isset($foot_fetish->video_url) ? explode("/", $foot_fetish->video_url) : "";
-                    if(isset($folder[count($folder)-2])){
-                    $folder = $folder[count($folder)-2];
-                    }
                 ?>
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                    <source src="<?php echo e(asset('uploads/'.$folder.'/poster.'.$type)); ?>" type="video/mp4">
+                    <source src="<?php echo e(asset('uploads/'.$foot_fetish->video_url)); ?>" type="video/mp4">
                 </video>
             </div>
         </div>
