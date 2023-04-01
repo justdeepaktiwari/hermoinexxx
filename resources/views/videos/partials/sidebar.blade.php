@@ -1,6 +1,6 @@
 <aside class="toggle-with-button d-md-block d-none position-fixed top-0 left-0 col-12 h-100  z-index-99"
     style="width: 100px;">
-    <div class="position-sticky top-change text-white">
+    <div class="position-relative top-change text-white">
         <div class="f-4  fw-bold text-danger py-2 px-3 d-flex justify-content-center align-items-center"><span
                 class=" d-none">MAIN</span></div>
 

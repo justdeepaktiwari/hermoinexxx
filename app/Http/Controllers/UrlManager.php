@@ -17,6 +17,8 @@ class UrlManager extends Controller
         // dd(auth()->user());
         if(auth()->user()->hasAnyRole('super-admin', 'admin')){
             return redirect()->route("dashboard.index");
+        }else if(auth()->user()->hasAnyRole('models')){
+            return redirect()->route("user", auth()->user()->id);
         }else{
             return redirect()->route("user-videos");
         }

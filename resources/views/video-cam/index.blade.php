@@ -411,6 +411,7 @@
             waitingScreen: {
                 text: "Connecting to the Call...",
             },
+            @if(auth()->user()->hasAnyRole('models'))
             recording: {
                 enabled: true,
                 webhookUrl: "{{ route('meeting-recorded') }}",
@@ -422,14 +423,17 @@
                     gridSize: 3,
                 },
             },
+            @endif
             joinScreen: {
                 visible: true
             },
+            @if(auth()->user()->hasAnyRole('models'))
             permissions: {
                 pin: true,
                 endMeeting: true,
                 toggleRecording: false,
             },
+            @endif
             redirectOnLeave: "{{ url()->previous() }}",
         };
 

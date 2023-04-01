@@ -56,8 +56,10 @@ class PartnerController extends Controller
         
         unset($input["_token"]);
         unset($input["confirm-password"]);
+        unset($input["roles"]);
 
         $user = User::create($input);
+        $user->assignRole($request->input('roles'));
 
         return redirect()->route('models.index')
                         ->with('success','User created successfully');

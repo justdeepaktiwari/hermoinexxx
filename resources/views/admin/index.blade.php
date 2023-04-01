@@ -61,6 +61,7 @@
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
+                        @can("dashboard")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/dashboard*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6 active" aria-current="page" href="{{ route('dashboard.index') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
@@ -69,6 +70,9 @@
                                 Dashboard
                             </a>
                         </li>
+                        @endcan
+
+                        @can("videos")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/videos*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('videos.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels" viewBox="0 0 16 16">
@@ -79,6 +83,9 @@
                                 Videos
                             </a>
                         </li>
+                        @endcan
+
+                        @can("Photos")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/photos*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('photos.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
@@ -88,6 +95,9 @@
                                 Photos
                             </a>
                         </li>
+                        @endcan
+
+                        @can("category-tag")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/category-tag*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('category-tag.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
@@ -97,6 +107,9 @@
                                 Categories & Tags
                             </a>
                         </li>
+                        @endcan
+
+                        @can("products")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/products*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('products.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -106,6 +119,9 @@
                                 Products
                             </a>
                         </li>
+                        @endcan
+
+                        @can("product-color")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/product-color*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('product-color.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -115,6 +131,9 @@
                                 Product Color
                             </a>
                         </li>
+                        @endcan
+
+                        @can("product-size")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/product-size*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('product-size.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -124,6 +143,9 @@
                                 Product Size
                             </a>
                         </li>
+                        @endcan
+
+                        @can("payments")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/payments*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('payments') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -133,6 +155,9 @@
                                Payments
                             </a>
                         </li>
+                        @endcan
+
+                        @can("orders")
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is("alpha/orders*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('orders.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
@@ -142,8 +167,21 @@
                                Orders
                             </a>
                         </li>
-                    </ul>
+                        @endcan
 
+                        @can("user-chat")
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is("premium/models*") ? 'text-danger' : 'text-white'}} d-flex gap-2 align-items-center fw-bold fs-6" href="{{ route('user', auth()->user()->id) }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12ZM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Z"/>
+                            <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+                            </svg>
+                               Chats
+                            </a>
+                        </li>
+                        @endcan
+                    </ul>
+                    @can("manage-data")
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-light fw-bold fs-6">
                         <span>Manage Partners</span>
                         <a class="link-secondary text-light" href="#" aria-label="Add a new report">
@@ -188,7 +226,7 @@
                             </a>
                         </li>
                     </ul>
-
+                    @endcan
                     <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-light fw-bold fs-6">
                         <span>Landing Page</span>
                         <a class="link-secondary text-light" href="#" aria-label="Add a new report">

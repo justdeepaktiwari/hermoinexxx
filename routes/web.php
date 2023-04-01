@@ -82,7 +82,7 @@ Auth::routes(["login" => true, "register" => true]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
-    Route::group(['middleware' => ['role:super-admin|Admin']], function () {
+    Route::group(['middleware' => ['role:super-admin|Admin|models']], function () {
         Route::resource('dashboard', App\Http\Controllers\DashBoardController::class);
         Route::resource('videos', App\Http\Controllers\VideoController::class);
         Route::resource('photos', App\Http\Controllers\PhotoController::class);
