@@ -26,8 +26,8 @@
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make("loader", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- HEADER SECTION STARTS -->
-<div class="bg-light text-center small py-1"><span class="badge rounded-pill bg-danger">Instant access!</span> Plans now
-    start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer">Learn More ></a></div>
+<!-- <div class="bg-light text-center small py-1"><span class="badge rounded-pill bg-danger">Instant access!</span> Plans now
+    start at $6.99 &nbsp;<a href="http://" class="text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer">Learn More ></a></div> -->
 <header class="showcase">
     <!-- NAVBAR -->
     <nav class="showcase-top d-flex justify-content-between align-items-center">
@@ -284,9 +284,9 @@
             <span class="fs-2">What are you waiting for ? </span><span class="text-white negative-margin fs-2 close-btn" role="button">&#10006;</span>
         </div>
         <?php $__currentLoopData = $purchase_offer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $offer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative">
+        <a class="border border-danger border-2 my-2 p-2 d-flex align-items-center justify-content-around cursor-pointer position-relative text-decoration-none text-white"  href="<?php echo e(route('register')); ?>">
             <div class="radio-btn me-1">
-                <input class="form-check-input" type="radio" onchange="checkOutStepOne('', '<?php echo e($offer->subscription_id); ?>')" name="flexRadioDefault" id="flexRadioDefault<?php echo e($offer->subscription_id); ?>">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault<?php echo e($offer->subscription_id); ?>" onchange="window.location.href = `<?php echo e(route('register')); ?>`">
             </div>
             <div class="content me-1 cursor-pointer">
                 <label for="flexRadioDefault<?php echo e($offer->subscription_id); ?>" class="cursor-pointer">
@@ -298,11 +298,11 @@
                 <label for="flexRadioDefault<?php echo e($offer->subscription_id); ?>" class="cursor-pointer fs-3">
                     $19<span class="fs-5"><sup>.98</sup><sub>/month</sub></span>
                 </label>
-                <div class="offer-div px-2 shadow position-absolute text-center">
+                <div class="offer-div px-2 shadow position-absolute text-center <?php echo e(!$offer->percentage_off ? 'invisible' : ''); ?>">
                     <?php echo e($offer->percentage_off); ?>% OFF
                 </div>
             </div>
-        </div>
+        </a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </div>
@@ -376,7 +376,6 @@
 
     $(document).ready(function() {
         $(".close-btn").click(function(e) {
-            e.preventDefault();
             $("#custom-model").fadeOut("slow");
         });
 
@@ -406,7 +405,6 @@
 
     $(document).ready(function() {
         $(".radio-btn input").change(function(e) {
-            e.preventDefault();
             $(".background-change-click").removeClass("background-change-click");
 
             if ($(this).is(":checked")) {
@@ -422,7 +420,6 @@
     });
 
     $("body").on("submit", "#step-one-process", function (e) { 
-        e.preventDefault();
         var form = $(this)[0];
 
         var that = $(this).find("input, select");
@@ -532,13 +529,16 @@
     });
     
     function checkOutStepOne(email = '', subscription_id = '') {
-        if (email) {
-            $("#email-name").val(email);
-        }
-        if (subscription_id) {
-            $("#Membership").find("option[value='" + subscription_id + "']").attr("selected", "selected");
-        }
-        $("#checkOutStepOne").modal('toggle');
+
+        window.location.href = `<?php echo e(route("register")); ?>?user_email=${email}`
+
+        // if (email) {
+        //     $("#email-name").val(email);
+        // }
+        // if (subscription_id) {
+        //     $("#Membership").find("option[value='" + subscription_id + "']").attr("selected", "selected");
+        // }
+        // $("#checkOutStepOne").modal('toggle');
     }
 </script>
 <script src="<?php echo e(asset('assets/js/script.js')); ?>"></script>

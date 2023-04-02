@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Payment;
 use App\Models\PaymentPurchase;
 use App\Models\Product;
+use App\Models\PurchaseOffer;
 use App\Models\User;
 use Session;
 use Stripe;
@@ -23,7 +24,8 @@ class StripePaymentController extends Controller
      */
     public function stripe()
     {
-        return view('payment.stripe');
+        $purchase_offer = PurchaseOffer::get();
+        return view('payment.stripe', compact("purchase_offer"));
     }
 
     /**
@@ -36,30 +38,15 @@ class StripePaymentController extends Controller
         // dd($request->all());
         $request->validate([
             'card_name' => ['required', 'string', 'max:20'],
-            'amount' => ['required', 'numeric'],
             'number' => ['required', 'numeric'],
             'cvc' => ['required', 'numeric'],
             'exp_month' => ['required', 'numeric', 'lt:13', 'gt:0'],
             'exp_year' => ['required', 'numeric', 'gt:' . date("Y")],
-            'description' => ['required', 'string'],
         ]);
 
-        $user_info = (array)json_decode($request->user_info);
-        // dd($user_info);
-        $password = $user_info["password"];
-        $email = $user_info['email'];
-        $credentials = ['email' => $email, 'password' => $password];
-        $subscription_id = $user_info["subscription_id"];
-
-        unset($user_info["_token"]);
-        if (!User::where("email", $user_info["email"])->exists()) {
-            $user_info["password"] = Hash::make($user_info["password"]);
-            $user_info["subscription_id"] = 4;
-            User::create($user_info);
-        }
-
-        if (Auth::attempt($credentials)) {
+        if (auth()->user()->id) {
             try {
+                $purchase_offer = PurchaseOffer::where('id', $request->subscription_id)->firstOrFail();
                 $stripe = new \Stripe\StripeClient(env("STRIPE_SECRET"));
 
                 $res = $stripe->tokens->create([
@@ -74,10 +61,10 @@ class StripePaymentController extends Controller
                 Stripe\Stripe::setApiKey(env("STRIPE_KEY"));
 
                 $response = $stripe->charges->create([
-                    'amount' => $request->amount * 100,
+                    'amount' => ($purchase_offer->discounted_amount) * 100,
                     'currency' => 'usd',
                     'source' => $res->id,
-                    'description' => $request->description,
+                    'description' => 'Subscription',
                 ]);
                 $payment_details = [
                     'user_id' => auth()->user()->id,
@@ -96,7 +83,7 @@ class StripePaymentController extends Controller
                 ];
                 Payment::create($payment_details);
                 if ($response->status == "succeeded") {
-                    User::where("email", $user_info["email"])->update(["subscription_id" => $subscription_id]);
+                    User::where("id", auth()->user()->id)->update(["subscription_id" => $request->subscription_id]);
                 }
                 return response()->json($response, 201);
             } catch (\Throwable $e) {

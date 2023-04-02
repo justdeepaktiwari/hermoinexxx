@@ -32,7 +32,7 @@ class WebsiteModelsController extends Controller
     public function index()
     {
         if(auth()->user()->subscription_id == 4){
-            return abort(403, "Please Chose proper plan to access");
+            return redirect()->route("stripe");
         }
 
         $premium_video = Video::where("subscription_type_id", 1)

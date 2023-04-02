@@ -61,10 +61,10 @@
                 <i class="fa-sharp fa-solid fa-mars-and-venus" style="color: white; font-size: 17px; margin-right: 5px;"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-dark rounded-0" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item py-2" href="#"><i class="fa-sharp fa-solid fa-mars-and-venus me-3"></i> Straight</a></li>
-                <li><a class="dropdown-item py-2" href="#"><i class="fa-solid fa-mars-double me-3"></i> Gay</a>
+                <li><a class="dropdown-item py-2" href="{{ route('user-videos.search') }}?search=straight"><i class="fa-sharp fa-solid fa-mars-and-venus me-3"></i> Straight</a></li>
+                <li><a class="dropdown-item py-2" href="{{ route('user-videos.search') }}?search=straight"><i class="fa-solid fa-mars-double me-3"></i> Gay</a>
                 </li>
-                <li><a class="dropdown-item py-2" href="#"><i class="fa-sharp fa-solid fa-transgender me-3"></i>
+                <li><a class="dropdown-item py-2" href="{{ route('user-videos.search') }}?search=straight"><i class="fa-sharp fa-solid fa-transgender me-3"></i>
                         Transgender</a></li>
             </ul>
         </div>

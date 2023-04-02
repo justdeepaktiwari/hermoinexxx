@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Models\UserSubscrption;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +43,10 @@ class MessagesController extends Controller
      */
     public function index( $id = null)
     {
+        if(Auth::user()->subscription_id != 1){
+            return redirect()->route("stripe");
+        }
+
         $messenger_color = Auth::user()->messenger_color;
         return view('Chatify::pages.app', [
             'id' => $id ?? 0,
@@ -480,5 +485,25 @@ class MessagesController extends Controller
         return Response::json([
             'status' => $status,
         ], 200);
+    }
+
+    public function canAccess()
+    {
+        $array_subs_id = [];
+        $can_access = UserSubscrption::where(function ($query) {
+            if (Auth::check()) {
+                $query->where("id", auth()->user()->subscription_id);
+            } else {
+                $query->where("id", 4);
+            }
+        })->get();
+
+        foreach ($can_access as $access_value) {
+            if ($access_value->can_access) {
+                $array_subs_id = json_decode($access_value->can_access);
+            }
+        }
+
+        return $array_subs_id;
     }
 }

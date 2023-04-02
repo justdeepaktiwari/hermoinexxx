@@ -67,7 +67,7 @@
                             </a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-
+                <?php if(count($watched_later)): ?>
                 <div class="row mb-2 px-0 mx-0">
                     <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
                     <?php $__currentLoopData = $watched_later; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $video): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -104,6 +104,7 @@
                     </a>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
+                <?php endif; ?>
             </div>
             <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `<?php echo e($ads_video_list->ads_redirect_url); ?>`">
                 <div class="p-3 overflow-hidden" style="max-width: 400px;">

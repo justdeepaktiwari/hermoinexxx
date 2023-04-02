@@ -149,7 +149,10 @@ Route::get('upload-file-chunk', [VideoController::class, 'ViewVideo']);
 Route::get('debug-project', [HomeController::class, 'debugAmount']);
 
 /**Stripe Payment Integration*/
-Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::get('stripe', [StripePaymentController::class, 'stripe'])->name("stripe");
 Route::post('product-checkout-form', [StripePaymentController::class, 'product_checkout_form'])->name('product-checkout-form');
 Route::post('product-checkout-submit', [StripePaymentController::class, 'product_checkout'])->name('product-checkout');
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+Route::get('term-and-condition', function(){
+    return view("others.term-condition");
+})->name('term-condition');
