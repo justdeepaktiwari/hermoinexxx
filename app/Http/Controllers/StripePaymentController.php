@@ -25,7 +25,8 @@ class StripePaymentController extends Controller
     public function stripe()
     {
         $purchase_offer = PurchaseOffer::get();
-        return view('payment.stripe', compact("purchase_offer"));
+        $ads_video_register = \DB::table("ads_sections")->where("ads_for", "register")->first();
+        return view('payment.stripe', compact("purchase_offer", "ads_video_register"));
     }
 
     /**
