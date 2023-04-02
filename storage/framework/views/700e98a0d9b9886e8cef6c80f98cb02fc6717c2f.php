@@ -436,7 +436,7 @@
 
         <div style="height: 15px;"></div>
 
-        <div class="py-2 px-3 history-video-icon d-flex justify-content-center gap-3" role="button">
+        <div class="py-2 px-3 history-video-icon d-flex justify-content-center gap-3" role="button"  onclick="window.location.href = `<?php echo e(route('term-condition')); ?>`">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-award" viewBox="0 0 16 16">
                 <path

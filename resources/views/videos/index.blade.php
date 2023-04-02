@@ -66,7 +66,7 @@
                             </a>
                         @endforeach
                 </div>
-
+                @if(count($watched_later))
                 <div class="row mb-2 px-0 mx-0">
                     <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
                     @foreach($watched_later as $video)
@@ -102,6 +102,7 @@
                     </a>
                     @endforeach
                 </div>
+                @endif
             </div>
             <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `{{ $ads_video_list->ads_redirect_url }}`">
                 <div class="p-3 overflow-hidden" style="max-width: 400px;">

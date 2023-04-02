@@ -67,7 +67,7 @@
                             </a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-
+                <?php if(count($watched_later)): ?>
                 <div class="row mb-2 px-0 mx-0">
                     <div class="fs-4 fw-bold  my-2">Videos Being Watched</div>
                     <?php $__currentLoopData = $watched_later; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $video): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -104,15 +104,11 @@
                     </a>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
+                <?php endif; ?>
             </div>
-            <?php
-                if($random_products_photo->product_image){
-                    $product_image = json_decode($random_products_photo->product_image);
-                }
-            ?>
-            <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `<?php echo e(route('list.product.detail', 2)); ?>`">
+            <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `<?php echo e($ads_video_list->ads_redirect_url); ?>`">
                 <div class="p-3 overflow-hidden" style="max-width: 400px;">
-                    <img src="<?php echo e(asset('uploads/products/'.$product_image[0])); ?>" class="img-fluid" alt="<?php echo e($product_image[0]); ?>">
+                    <img src="<?php echo e(asset('uploads/ads/'.$ads_video_list->ads_gif)); ?>" class="img-fluid" alt="<?php echo e($ads_video_list->ads_gif); ?>">
                 </div>
             </div>
         </div>

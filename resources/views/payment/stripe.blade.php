@@ -18,6 +18,12 @@
     .z-index-9{
         z-index: 9;
     }
+    select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
 </style>
 @endsection
 
@@ -32,10 +38,27 @@
     <div class="col-md-5 col-11 border-dark login-section text-white">
         <div style="height: 20px;"></div>
         <div class="col-md-10 mx-auto">
-            <h2 class="fs-4 mb-2">Proceed Next to access!</h2>
             <form role="form" action="{{ route('stripe.post') }}" method="post" id="payment-form">
                 @csrf
                 <div class='form-row row mb-2'>
+                    <div class="mb-3">
+                        <label for="Membership" class="form-label">Membership</label>
+                        @php
+                            $amount = "";
+                        @endphp
+                        <select name="subscription_id" class="form-select bg-transparent text-white rounded-0 border-danger" id="Membership" required>
+                            @forelse($purchase_offer as $offer)
+                                @php
+                                    if(!$amount){
+                                        $amount = $offer->discounted_amount;
+                                    }
+                                @endphp
+                            <option value="{{ $offer->subscription_id }}" data-amount="{{$offer->discounted_amount}}">{{ $offer->name." - ".$offer->percentage_off."% OFF - ".$offer->discounted_amount."$ for ".$offer->duration." Days" }}</option>
+                            @empty
+                            <option value="">No Offer Available</option>
+                            @endforelse
+                        </select>
+                    </div>
                     <div class='col-xs-12 form-group col-md-8'>
                         <label class='control-label'>Name on Card</label>
                         <input class='form-control border-danger rounded-0 text-white bg-transparent' size='4' type='text'>
@@ -44,7 +67,7 @@
                         <label class='control-label'>Amount</label>
                         <div class="input-group disable-after">
                             <span class="input-group-text border-danger bg-danger rounded-0 z-index-9 text-white fw-bold" id="basic-addon2">$</span>
-                            <input type="text" class="form-control border-danger rounded-0 text-white bg-transparent" value="200" disabled>
+                            <input type="text" class="form-control border-danger rounded-0 text-white bg-transparent" name="amount" value="{{ $amount }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -105,6 +128,11 @@
 
             }
         });
+    });
+
+    $('[name="subscription_id"]').change(function (e) { 
+        e.preventDefault();
+        $('[name="amount"]').val($(this).find("option:selected").data("amount"));
     });
 </script>
 @endsection

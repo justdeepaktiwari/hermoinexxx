@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Payment;
 use App\Models\PaymentPurchase;
 use App\Models\Product;
+use App\Models\PurchaseOffer;
 use App\Models\User;
 use Session;
 use Stripe;
@@ -23,7 +24,8 @@ class StripePaymentController extends Controller
      */
     public function stripe()
     {
-        return view('payment.stripe');
+        $purchase_offer = PurchaseOffer::get();
+        return view('payment.stripe', compact("purchase_offer"));
     }
 
     /**

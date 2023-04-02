@@ -743,8 +743,9 @@ class VideoController extends Controller
             $sidebar_topcategories_video = $this->topCatVideoFoSideBar();
             $sidebar_models_near = $this->nearModelFoSideBar();
             $sidebar_active_models  = $this->activeModelFoSideBar();
+            $ads_video_list = AdsSection::where("ads_for", "video-list")->inRandomOrder()->first();
 
-            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video", 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
+            return view("videos.video-categories", compact("videos", "categories_for", "random_products_photo", "new_video", "trending_searches", "recent_search", "sidebar_recomonded_video", 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models', 'ads_video_list'));
         } else {
             return abort(404);
         }

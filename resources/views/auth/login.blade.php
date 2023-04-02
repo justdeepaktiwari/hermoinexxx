@@ -10,9 +10,7 @@
         <img id="logo" src="{{ asset('assets/images/logo.webp') }}">
 
         <div class="right-side-button pe-2">
-            <button class="btn btn-outline-light rounded-0">Instant Access</button>
-
-            <a class="btn btn-danger rounded-0" href="{{ route('register') }}">Sign Up</a>
+            <a class="btn btn-outline-danger rounded-0" href="{{ route('register') }}">Instant Access</a>
         </div>
     </nav>
     <div class="d-flex justify-content-center align-items-center ">
