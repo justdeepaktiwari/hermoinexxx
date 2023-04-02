@@ -103,14 +103,9 @@
                 <?php
                     $type = explode(".", $bdsm_video->video_url);
                     $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
-
-                    $folder = isset($bdsm_video->video_url) ? explode("/", $bdsm_video->video_url) : "";
-                    if(isset($folder[count($folder)-2])){
-                    $folder = $folder[count($folder)-2];
-                    }
                 ?>
                 <video class="video-1" autoplay="" playsinline="" muted="" loop="">
-                    <source src="<?php echo e(asset('uploads/'.$folder.'/poster.'.$type)); ?>" type="video/mp4">
+                    <source src="<?php echo e(asset('uploads/'.$bdsm_video->video_url)); ?>" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -155,16 +150,11 @@
                 <?php
                     $type = explode(".", $cum_vid->video_url);
                     $type = isset($type[count($type)-1]) ? $type[count($type)-1] : "mp4";
-
-                    $folder = isset($cum_vid->video_url) ? explode("/", $cum_vid->video_url) : "";
-                    if(isset($folder[count($folder)-2])){
-                    $folder = $folder[count($folder)-2];
-                    }
                 ?>
                 <div class="col-md-4 col-sm-4 col-4 border border-dark ">
                     <a href="http://video">
                         <video class="w-100 h-100" autoplay="" playsinline="" muted="" loop="">
-                            <source src="<?php echo e(asset('uploads/'.$folder.'/poster.'.$type)); ?>" type="video/mp4">
+                            <source src="<?php echo e(asset('uploads/'.$cum_vid->video_url)); ?>" type="video/mp4">
                         </video>
                     </a>
                 </div>
