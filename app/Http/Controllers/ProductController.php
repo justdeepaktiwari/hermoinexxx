@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductColor;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
@@ -43,7 +44,8 @@ class ProductController extends Controller
     {
         $list_color = ProductColor::get();
         $list_size = ProductSize::get();
-        return view('admin.products.create', compact('list_color', 'list_size'));
+        $list_category = ProductCategory::get();
+        return view('admin.products.create', compact('list_color', 'list_size', 'list_category'));
     }
 
     /**
@@ -96,9 +98,11 @@ class ProductController extends Controller
         
         $list_color = ProductColor::whereIn("id", $create_product["product_colors"])->pluck("color_name", "id")->toArray();
         $list_size = ProductSize::whereIn("id", $create_product["product_sizes"])->pluck("product_size", "id")->toArray();
-
+        $list_category = ProductCategory::whereIn("id", $create_product["product_categories"])->pluck("name", "id")->toArray();
+        
         $create_product["product_colors"] = json_encode($list_color);
         $create_product["product_sizes"] = json_encode($list_size);
+        $create_product["product_categories"] = json_encode($list_category);
 
         Product::create($create_product);
 
@@ -127,7 +131,8 @@ class ProductController extends Controller
     {
         $list_color = ProductColor::get();
         $list_size = ProductSize::get();
-        return view('admin.products.edit', compact('product', 'list_color', 'list_size'));
+        $list_category = ProductCategory::get();
+        return view('admin.products.edit', compact('product', 'list_color', 'list_size', 'list_category'));
     }
 
     /**
@@ -194,6 +199,11 @@ class ProductController extends Controller
             $create_product["product_sizes"] = json_encode($list_size);
         }
 
+        if ($request->product_categories) {
+            $list_category = ProductCategory::whereIn("id", $create_product["product_categories"])->pluck("name", "id")->toArray();
+            $create_product["product_categories"] = json_encode($list_size);
+        }
+        
         Product::where("id", $id)->update($create_product);
 
         return redirect()->route('products.index')

@@ -97,6 +97,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('users', App\Http\Controllers\UserController::class);
         Route::resource('models', App\Http\Controllers\PartnerController::class);
         Route::resource('orders', App\Http\Controllers\PaymentPurchaseController::class);
+        Route::resource('ads', App\Http\Controllers\AdsSectionController::class);
+        Route::resource('product-categories', App\Http\Controllers\ProductCategoryController::class);
+
+        
         Route::get('payments', [App\Http\Controllers\PaymentController::class, "index"])
             ->name("payments");
 

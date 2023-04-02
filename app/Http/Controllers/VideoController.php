@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdsSection;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\RelCategory;
@@ -349,7 +350,9 @@ class VideoController extends Controller
         $sidebar_models_near = $this->nearModelFoSideBar();
         $sidebar_active_models  = $this->activeModelFoSideBar();
         
-        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
+        $ads_video_list = AdsSection::where("ads_for", "video-list")->inRandomOrder()->first();
+
+        return view("videos.index", compact('new_video', 'watched_later', 'recomended_video', 'trending_searches', 'recent_search', 'random_products_video', 'random_products_photo', 'premium_video', 'sidebar_recomonded_video', 'sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models', 'ads_video_list'));
     }
 
     public function UserVideoDetail(Request $request)
@@ -453,7 +456,10 @@ class VideoController extends Controller
         $sidebar_models_near = $this->nearModelFoSideBar();
         $sidebar_active_models  = $this->activeModelFoSideBar();
         
-        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models'));
+
+        $ads_video_detail = AdsSection::where("ads_for", "video-detail")->inRandomOrder()->first();
+
+        return view("videos.video-detail", compact('video_detail', 'related_video', 'trending_searches', 'recent_search', 'random_products_photo', 'video_tag', 'related_tag', 'related_category', 'related_video_count', 'related_search', 'sidebar_recomonded_video','sidebar_topcategories_video', 'sidebar_models_near', 'sidebar_active_models', 'ads_video_detail'));
     }
 
     public function searchQuery(Request $request)

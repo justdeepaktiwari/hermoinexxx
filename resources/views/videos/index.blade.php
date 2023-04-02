@@ -103,14 +103,9 @@
                     @endforeach
                 </div>
             </div>
-            @php
-                if($random_products_photo->product_image){
-                    $product_image = json_decode($random_products_photo->product_image);
-                }
-            @endphp
-            <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `{{ route('list.product.detail', 2) }}`">
+            <div class="col-md-4 col-12 p-4 bg-dark my-auto mx-auto" role="button" onclick="window.location.href = `{{ $ads_video_list->ads_redirect_url }}`">
                 <div class="p-3 overflow-hidden" style="max-width: 400px;">
-                    <img src="{{ asset('uploads/products/'.$product_image[0]) }}" class="img-fluid" alt="{{ $product_image[0] }}">
+                    <img src="{{ asset('uploads/ads/'.$ads_video_list->ads_gif) }}" class="img-fluid" alt="{{ $ads_video_list->ads_gif }}">
                 </div>
             </div>
         </div>
